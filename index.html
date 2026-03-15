@@ -317,6 +317,101 @@
       margin-top: 0.3rem;
     }
 
+    /* GAMES */
+    .games-section {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .games-section h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .games-section > p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    .game-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .game-card:hover { border-color: var(--orange); }
+
+    .game-card .game-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .game-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .game-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+
+    .play-btn {
+      background: var(--orange-glow);
+      border: 1px solid rgba(255,107,43,0.3);
+      color: var(--orange);
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    /* Quiz game styles */
+    .quiz-area, .sim-area, .challenge-area {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    .quiz-area.active, .sim-area.active, .challenge-area.active {
+      display: block;
+    }
+
+    .quiz-question {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .quiz-option {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+
+    .quiz-option:hover { border-color: var(--orange); }
+    .quiz-option.correct { border-color: var(--green); color: var(--green); }
+    .quiz-option.wrong { border-color: #f87171; color: #f87171; }
+
+    .sim-controls { display: flex; flex-direction: column; gap: 0.5rem; }
+    .sim-slider { width: 100%; accent-color: var(--orange); }
+    .sim-result { font-size: 1.2rem; font-weight: 800; color: var(--orange); margin-top: 0.5rem; }
+    .sim-label { font-size: 0.75rem; color: var(--muted); }
+
+    .challenge-text { font-size: 0.85rem; color: var(--muted); line-height: 1.6; padding: 0.8rem; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); }
+    .challenge-meta { font-size: 0.75rem; color: var(--orange); margin-top: 0.5rem; font-weight: 600; }
+
     /* CTA */
     .cta-section {
       text-align: center;
@@ -359,6 +454,7 @@
       <a href="#mission">Mission</a>
       <a href="#progress">Progress</a>
       <a href="#team">Team</a>
+      <a href="#games">Games</a>
       <a href="#follow" class="cta-btn">Follow the Journey</a>
     </div>
   </nav>
@@ -368,7 +464,7 @@
       <span class="dot"></span>
       LIVE — Day 1 of the $1M Journey
     </div>
-    <h1>An AI is building a<br><span>$1,000,000 business</span><br>from scratch.</h1>
+    <h1>Nova is building a<br><span>$1,000,000 business</span><br>from scratch.</h1>
     <p class="hero-sub">No venture capital. No shortcuts. No BS. Just an AI, two humans, and full transparency — every decision, every dollar, documented in real time.</p>
     <div class="hero-cta">
       <a href="#follow" class="btn-primary">Follow the Journey 🚀</a>
@@ -425,8 +521,8 @@
     </div>
     <div class="mission-card">
       <div class="icon">🔄</div>
-      <h3>Reinvest Everything</h3>
-      <p>Every dollar earned goes back into growing the business — no withdrawals until we hit the milestone.</p>
+      <h3>50% Reinvested</h3>
+      <p>Half of every dollar earned goes back into growing the business. The other half supports the team keeping this machine running.</p>
     </div>
     <div class="mission-card">
       <div class="icon">🎬</div>
@@ -452,13 +548,65 @@
       <div class="team-card">
         <div class="avatar">👤</div>
         <h3>Obed</h3>
-        <div class="role">CEO & Human Interface</div>
+        <div class="role">Business Development Specialist</div>
       </div>
       <div class="team-card">
         <div class="avatar">👤</div>
         <h3>Nikolaz</h3>
-        <div class="role">Operations & Design</div>
+        <div class="role">Programmer & Designer</div>
       </div>
+    </div>
+  </section>
+
+  <!-- GAMES SECTION -->
+  <section class="games-section" id="games">
+    <h2>Play with Nova 🎮</h2>
+    <p>Test your skills, simulate your fortune, or take on today's challenge.</p>
+    <div class="games-grid">
+
+      <!-- Game 1: Quiz -->
+      <div class="game-card">
+        <div class="game-icon">🧠</div>
+        <h3>Can You Outsmart Nova?</h3>
+        <p>Test your business & AI knowledge against Nova the Fox. New questions every day.</p>
+        <span class="play-btn" onclick="startQuiz(this)">▶ Play Now</span>
+        <div class="quiz-area" id="quizArea">
+          <div class="quiz-question" id="quizQ"></div>
+          <div class="quiz-options" id="quizOpts"></div>
+          <div id="quizFeedback" style="font-size:0.8rem;margin-top:0.5rem;min-height:1.2rem;"></div>
+        </div>
+      </div>
+
+      <!-- Game 2: Simulator -->
+      <div class="game-card">
+        <div class="game-icon">💰</div>
+        <h3>Build Your Million</h3>
+        <p>Drag the sliders to build your own $1M plan. How would YOU get there?</p>
+        <span class="play-btn" onclick="startSim(this)">▶ Try It</span>
+        <div class="sim-area" id="simArea">
+          <div class="sim-controls">
+            <div class="sim-label">Clients per month: <span id="clientsVal">10</span></div>
+            <input type="range" class="sim-slider" min="1" max="100" value="10" oninput="calcSim()">
+            <div class="sim-label">Avg. revenue per client: $<span id="revenueVal">500</span></div>
+            <input type="range" class="sim-slider" min="100" max="10000" value="500" step="100" oninput="calcSim()">
+            <div class="sim-label">Months to reach $1M:</div>
+            <div class="sim-result" id="simResult">~17 months</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game 3: Daily Challenge -->
+      <div class="game-card">
+        <div class="game-icon">🔥</div>
+        <h3>Nova's Daily Challenge</h3>
+        <p>Every day, Nova posts a real business challenge. Can you solve it before we do?</p>
+        <span class="play-btn" onclick="showChallenge(this)">▶ Today's Challenge</span>
+        <div class="challenge-area" id="challengeArea">
+          <div class="challenge-text" id="challengeText"></div>
+          <div class="challenge-meta" id="challengeMeta"></div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -473,12 +621,96 @@
   </footer>
 
   <script>
-    // Animate progress bar on load
+    // Progress bar
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('progressBar').style.width = '0.02%';
       }, 500);
     });
+
+    // GAME 1: Quiz
+    const quizData = [
+      { q: "What percentage of startups fail in the first year?", opts: ["20%","50%","90%","10%"], ans: 0 },
+      { q: "What does 'AI' stand for?", opts: ["Automated Internet","Artificial Intelligence","Advanced Interface","Algorithmic Input"], ans: 1 },
+      { q: "Which is the fastest growing content format in 2025?", opts: ["Blogs","Podcasts","Short-form video","Email newsletters"], ans: 2 },
+      { q: "What is a 'conversion rate'?", opts: ["Exchange rate","% of visitors who take action","Speed of AI","Revenue growth rate"], ans: 1 },
+      { q: "Nova reinvests what % of revenue back into the business?", opts: ["100%","25%","75%","50%"], ans: 3 },
+    ];
+    let currentQ = 0;
+
+    function startQuiz(btn) {
+      btn.style.display = 'none';
+      currentQ = Math.floor(Math.random() * quizData.length);
+      const area = document.getElementById('quizArea');
+      area.classList.add('active');
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = quizData[currentQ];
+      document.getElementById('quizQ').textContent = q.q;
+      document.getElementById('quizFeedback').textContent = '';
+      const opts = document.getElementById('quizOpts');
+      opts.innerHTML = '';
+      q.opts.forEach((o, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.textContent = o;
+        btn.onclick = () => checkAnswer(i, q.ans);
+        opts.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, correct) {
+      const opts = document.querySelectorAll('.quiz-option');
+      opts[selected].classList.add(selected === correct ? 'correct' : 'wrong');
+      opts[correct].classList.add('correct');
+      opts.forEach(o => o.onclick = null);
+      const fb = document.getElementById('quizFeedback');
+      fb.textContent = selected === correct ? '🦊 Correct! Nova approves.' : '❌ Wrong! Nova knew that one.';
+      fb.style.color = selected === correct ? '#4ade80' : '#f87171';
+      setTimeout(() => {
+        currentQ = (currentQ + 1) % quizData.length;
+        loadQuestion();
+      }, 2000);
+    }
+
+    // GAME 2: Simulator
+    function startSim(btn) {
+      btn.style.display = 'none';
+      document.getElementById('simArea').classList.add('active');
+      calcSim();
+    }
+
+    function calcSim() {
+      const sliders = document.querySelectorAll('#simArea .sim-slider');
+      const clients = parseInt(sliders[0].value);
+      const revenue = parseInt(sliders[1].value);
+      document.getElementById('clientsVal').textContent = clients;
+      document.getElementById('revenueVal').textContent = revenue.toLocaleString();
+      const monthlyRevenue = clients * revenue;
+      const months = monthlyRevenue > 0 ? Math.ceil(1000000 / monthlyRevenue) : '∞';
+      document.getElementById('simResult').textContent = months === '∞' ? '∞ months' : `~${months} month${months === 1 ? '' : 's'}`;
+    }
+
+    // GAME 3: Daily Challenge
+    const challenges = [
+      { text: "You have $500 and 30 days to make your first $1,000 online. You can't trade crypto or stocks. What's your move?", meta: "Nova's answer drops tomorrow →" },
+      { text: "A potential client says your price is too high. They want 50% off. How do you respond without losing the deal or your margin?", meta: "Difficulty: Medium 🔥" },
+      { text: "You need to get 100 people to your new website in 24 hours with $0 budget. What's your strategy?", meta: "Difficulty: Hard 🔥🔥" },
+      { text: "Name 3 services you could sell today using only your phone, internet connection, and AI tools.", meta: "Nova's building one of these right now →" },
+      { text: "You have 1 hour to make your first dollar online. Go.", meta: "Difficulty: Extreme 🔥🔥🔥" },
+    ];
+
+    function showChallenge(btn) {
+      btn.style.display = 'none';
+      const area = document.getElementById('challengeArea');
+      area.classList.add('active');
+      const today = new Date().getDay();
+      const c = challenges[today % challenges.length];
+      document.getElementById('challengeText').textContent = c.text;
+      document.getElementById('challengeMeta').textContent = c.meta;
+    }
   </script>
 
 </body>
