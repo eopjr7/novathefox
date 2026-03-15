@@ -548,12 +548,12 @@
       <div class="team-card">
         <div class="avatar">👤</div>
         <h3>Obed</h3>
-        <div class="role">Business Development Specialist</div>
+        <div class="role">Business Tech</div>
       </div>
       <div class="team-card">
         <div class="avatar">👤</div>
         <h3>Nikolaz</h3>
-        <div class="role">Programmer & Designer</div>
+        <div class="role">CPO & Architect</div>
       </div>
     </div>
   </section>
@@ -577,33 +577,60 @@
         </div>
       </div>
 
-      <!-- Game 2: Simulator -->
-      <div class="game-card">
-        <div class="game-icon">💰</div>
-        <h3>Build Your Million</h3>
-        <p>Drag the sliders to build your own $1M plan. How would YOU get there?</p>
-        <span class="play-btn" onclick="startSim(this)">▶ Try It</span>
-        <div class="sim-area" id="simArea">
-          <div class="sim-controls">
-            <div class="sim-label">Clients per month: <span id="clientsVal">10</span></div>
-            <input type="range" class="sim-slider" min="1" max="100" value="10" oninput="calcSim()">
-            <div class="sim-label">Avg. revenue per client: $<span id="revenueVal">500</span></div>
-            <input type="range" class="sim-slider" min="100" max="10000" value="500" step="100" oninput="calcSim()">
-            <div class="sim-label">Months to reach $1M:</div>
-            <div class="sim-result" id="simResult">~17 months</div>
+      <!-- Game 2: Fox Coin Catcher -->
+      <div class="game-card" id="catcherCard">
+        <div class="game-icon">🪙</div>
+        <h3>Fox Coin Catcher</h3>
+        <p>Catch the falling coins with Nova! Click or tap the coins before they hit the ground.</p>
+        <span class="play-btn" id="catcherStartBtn" onclick="startCatcher()">▶ Play Now</span>
+        <div id="catcherArea" style="display:none;">
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:0.5rem;">
+            <span>Score: <strong id="catchScore">0</strong></span>
+            <span>Lives: <span id="catchLives">❤️❤️❤️</span></span>
+            <span>Best: <strong id="catchBest">0</strong></span>
           </div>
+          <div id="catchCanvas" style="width:100%;height:180px;background:#0a0a0f;border-radius:8px;border:1px solid #1e1e2e;position:relative;overflow:hidden;cursor:pointer;">
+            <div id="catchMsg" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:#8888aa;">Get ready...</div>
+          </div>
+          <div id="catchOver" style="display:none;text-align:center;margin-top:0.5rem;">
+            <div style="font-weight:700;color:#ff6b2b;margin-bottom:0.3rem;">Game Over! Score: <span id="finalCatchScore">0</span></div>
+            <input id="catchName" placeholder="Enter your name" style="background:#0a0a0f;border:1px solid #1e1e2e;color:#f0f0f5;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.8rem;width:140px;">
+            <button onclick="saveCatchScore()" style="background:#ff6b2b;color:white;border:none;padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;cursor:pointer;margin-left:0.3rem;">Save</button>
+            <button onclick="startCatcher()" style="background:#13131a;color:#f0f0f5;border:1px solid #1e1e2e;padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;cursor:pointer;margin-left:0.3rem;">Retry</button>
+          </div>
+          <div id="catchLeaderboard" style="margin-top:0.5rem;font-size:0.75rem;"></div>
         </div>
       </div>
 
-      <!-- Game 3: Daily Challenge -->
-      <div class="game-card">
-        <div class="game-icon">🔥</div>
-        <h3>Nova's Daily Challenge</h3>
-        <p>Every day, Nova posts a real business challenge. Can you solve it before we do?</p>
-        <span class="play-btn" onclick="showChallenge(this)">▶ Today's Challenge</span>
-        <div class="challenge-area" id="challengeArea">
-          <div class="challenge-text" id="challengeText"></div>
-          <div class="challenge-meta" id="challengeMeta"></div>
+      <!-- Game 3: Fox Blocks (Tetris) -->
+      <div class="game-card" id="tetrisCard">
+        <div class="game-icon">🟧</div>
+        <h3>Fox Blocks</h3>
+        <p>Stack the fox blocks! Clear lines to score. How high can you get?</p>
+        <span class="play-btn" id="tetrisStartBtn" onclick="startTetris()">▶ Play Now</span>
+        <div id="tetrisArea" style="display:none;">
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:0.5rem;">
+            <span>Score: <strong id="tetrisScore">0</strong></span>
+            <span>Lines: <strong id="tetrisLines">0</strong></span>
+            <span>Best: <strong id="tetrisBest">0</strong></span>
+          </div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+            <canvas id="tetrisCanvas" width="120" height="240" style="border:1px solid #1e1e2e;border-radius:4px;background:#0a0a0f;"></canvas>
+            <div style="font-size:0.7rem;color:#8888aa;line-height:1.8;">
+              <div>⬅➡ Move</div>
+              <div>⬆ Rotate</div>
+              <div>⬇ Drop</div>
+              <div style="margin-top:0.5rem;">Next:</div>
+              <canvas id="nextCanvas" width="60" height="60" style="border:1px solid #1e1e2e;border-radius:4px;background:#0a0a0f;display:block;"></canvas>
+            </div>
+          </div>
+          <div id="tetrisOver" style="display:none;text-align:center;margin-top:0.5rem;">
+            <div style="font-weight:700;color:#ff6b2b;margin-bottom:0.3rem;">Game Over! Score: <span id="finalTetrisScore">0</span></div>
+            <input id="tetrisName" placeholder="Your name" style="background:#0a0a0f;border:1px solid #1e1e2e;color:#f0f0f5;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.8rem;width:130px;">
+            <button onclick="saveTetrisScore()" style="background:#ff6b2b;color:white;border:none;padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;cursor:pointer;margin-left:0.3rem;">Save</button>
+            <button onclick="startTetris()" style="background:#13131a;color:#f0f0f5;border:1px solid #1e1e2e;padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;cursor:pointer;margin-left:0.3rem;">Retry</button>
+          </div>
+          <div id="tetrisLeaderboard" style="margin-top:0.5rem;font-size:0.75rem;"></div>
         </div>
       </div>
 
@@ -675,41 +702,267 @@
       }, 2000);
     }
 
-    // GAME 2: Simulator
-    function startSim(btn) {
-      btn.style.display = 'none';
-      document.getElementById('simArea').classList.add('active');
-      calcSim();
+    // =====================
+    // GAME 2: Fox Coin Catcher
+    // =====================
+    let catchInterval, catchSpawnInterval, catchScore2 = 0, catchLives2 = 3, catchRunning = false;
+    const coins2 = [];
+
+    function startCatcher() {
+      document.getElementById('catcherStartBtn').style.display = 'none';
+      document.getElementById('catcherArea').style.display = 'block';
+      document.getElementById('catchOver').style.display = 'none';
+      document.getElementById('catchMsg').style.display = 'none';
+      catchScore2 = 0; catchLives2 = 3; catchRunning = true;
+      coins2.length = 0;
+      document.getElementById('catchScore').textContent = '0';
+      document.getElementById('catchLives').textContent = '❤️❤️❤️';
+      document.getElementById('catchBest').textContent = localStorage.getItem('catchBest') || '0';
+      const canvas = document.getElementById('catchCanvas');
+      clearInterval(catchInterval);
+      clearInterval(catchSpawnInterval);
+      // Remove old coins
+      canvas.querySelectorAll('.coin').forEach(c => c.remove());
+      catchSpawnInterval = setInterval(() => spawnCoin(), 900);
+      catchInterval = setInterval(() => updateCoins(), 30);
     }
 
-    function calcSim() {
-      const sliders = document.querySelectorAll('#simArea .sim-slider');
-      const clients = parseInt(sliders[0].value);
-      const revenue = parseInt(sliders[1].value);
-      document.getElementById('clientsVal').textContent = clients;
-      document.getElementById('revenueVal').textContent = revenue.toLocaleString();
-      const monthlyRevenue = clients * revenue;
-      const months = monthlyRevenue > 0 ? Math.ceil(1000000 / monthlyRevenue) : '∞';
-      document.getElementById('simResult').textContent = months === '∞' ? '∞ months' : `~${months} month${months === 1 ? '' : 's'}`;
+    function spawnCoin() {
+      if (!catchRunning) return;
+      const canvas = document.getElementById('catchCanvas');
+      const w = canvas.offsetWidth;
+      const coin = document.createElement('div');
+      const emojis = ['🪙','🦊','💰','⭐'];
+      const isGold = Math.random() > 0.7;
+      coin.textContent = isGold ? '🌟' : emojis[Math.floor(Math.random()*3)];
+      coin.dataset.value = isGold ? 3 : 1;
+      coin.style.cssText = `position:absolute;top:-30px;left:${Math.random()*(w-30)}px;font-size:${isGold?'1.6rem':'1.2rem'};cursor:pointer;user-select:none;transition:none;`;
+      coin.onclick = () => catchCoin(coin);
+      canvas.appendChild(coin);
+      coins2.push({ el: coin, y: -30, speed: 1.5 + Math.random()*2 });
     }
 
-    // GAME 3: Daily Challenge
-    const challenges = [
-      { text: "You have $500 and 30 days to make your first $1,000 online. You can't trade crypto or stocks. What's your move?", meta: "Nova's answer drops tomorrow →" },
-      { text: "A potential client says your price is too high. They want 50% off. How do you respond without losing the deal or your margin?", meta: "Difficulty: Medium 🔥" },
-      { text: "You need to get 100 people to your new website in 24 hours with $0 budget. What's your strategy?", meta: "Difficulty: Hard 🔥🔥" },
-      { text: "Name 3 services you could sell today using only your phone, internet connection, and AI tools.", meta: "Nova's building one of these right now →" },
-      { text: "You have 1 hour to make your first dollar online. Go.", meta: "Difficulty: Extreme 🔥🔥🔥" },
+    function catchCoin(coin) {
+      if (!catchRunning) return;
+      const val = parseInt(coin.dataset.value);
+      catchScore2 += val;
+      document.getElementById('catchScore').textContent = catchScore2;
+      // Pop effect
+      coin.style.transform = 'scale(1.5)';
+      coin.style.opacity = '0';
+      setTimeout(() => coin.remove(), 200);
+      const idx = coins2.findIndex(c => c.el === coin);
+      if (idx > -1) coins2.splice(idx, 1);
+    }
+
+    function updateCoins() {
+      const canvas = document.getElementById('catchCanvas');
+      const h = canvas.offsetHeight;
+      for (let i = coins2.length - 1; i >= 0; i--) {
+        const c = coins2[i];
+        c.y += c.speed;
+        c.el.style.top = c.y + 'px';
+        if (c.y > h) {
+          c.el.remove();
+          coins2.splice(i, 1);
+          catchLives2--;
+          const hearts = ['','❤️','❤️❤️','❤️❤️❤️'];
+          document.getElementById('catchLives').textContent = hearts[Math.max(0,catchLives2)];
+          if (catchLives2 <= 0) endCatcher();
+        }
+      }
+    }
+
+    function endCatcher() {
+      catchRunning = false;
+      clearInterval(catchInterval);
+      clearInterval(catchSpawnInterval);
+      coins2.length = 0;
+      document.getElementById('catchCanvas').querySelectorAll('.coin, div[style*="position:absolute"]').forEach(e => e.remove());
+      document.getElementById('finalCatchScore').textContent = catchScore2;
+      document.getElementById('catchOver').style.display = 'block';
+      const best = parseInt(localStorage.getItem('catchBest') || '0');
+      if (catchScore2 > best) localStorage.setItem('catchBest', catchScore2);
+      document.getElementById('catchBest').textContent = localStorage.getItem('catchBest');
+      renderCatchLeaderboard();
+    }
+
+    function saveCatchScore() {
+      const name = document.getElementById('catchName').value.trim() || 'Anonymous';
+      const scores = JSON.parse(localStorage.getItem('catchScores') || '[]');
+      scores.push({ name, score: catchScore2 });
+      scores.sort((a,b) => b.score - a.score);
+      localStorage.setItem('catchScores', JSON.stringify(scores.slice(0,5)));
+      renderCatchLeaderboard();
+    }
+
+    function renderCatchLeaderboard() {
+      const scores = JSON.parse(localStorage.getItem('catchScores') || '[]');
+      if (!scores.length) return;
+      document.getElementById('catchLeaderboard').innerHTML = '<div style="color:#8888aa;margin-bottom:0.3rem;">🏆 Top Scores</div>' +
+        scores.map((s,i) => `<div style="display:flex;justify-content:space-between;padding:0.2rem 0;border-bottom:1px solid #1e1e2e;"><span>${i+1}. ${s.name}</span><span style="color:#ff6b2b;">${s.score}</span></div>`).join('');
+    }
+
+    // =====================
+    // GAME 3: Fox Blocks (Tetris)
+    // =====================
+    const COLS = 10, ROWS = 20, BLOCK = 12;
+    const COLORS = ['#ff6b2b','#ff9a5c','#4ade80','#60a5fa','#f472b6','#a78bfa','#fbbf24'];
+    const PIECES = [
+      [[1,1,1,1]],
+      [[1,1],[1,1]],
+      [[0,1,0],[1,1,1]],
+      [[1,0,0],[1,1,1]],
+      [[0,0,1],[1,1,1]],
+      [[0,1,1],[1,1,0]],
+      [[1,1,0],[0,1,1]],
     ];
+    let tetrisBoard, tetrisPiece, tetrisNext, tetrisScoreVal, tetrisLinesVal, tetrisGameRunning, tetrisLoop;
 
-    function showChallenge(btn) {
-      btn.style.display = 'none';
-      const area = document.getElementById('challengeArea');
-      area.classList.add('active');
-      const today = new Date().getDay();
-      const c = challenges[today % challenges.length];
-      document.getElementById('challengeText').textContent = c.text;
-      document.getElementById('challengeMeta').textContent = c.meta;
+    function startTetris() {
+      document.getElementById('tetrisStartBtn').style.display = 'none';
+      document.getElementById('tetrisArea').style.display = 'block';
+      document.getElementById('tetrisOver').style.display = 'none';
+      document.getElementById('tetrisBest').textContent = localStorage.getItem('tetrisBest') || '0';
+      tetrisBoard = Array.from({length: ROWS}, () => Array(COLS).fill(0));
+      tetrisScoreVal = 0; tetrisLinesVal = 0; tetrisGameRunning = true;
+      tetrisPiece = newPiece(); tetrisNext = newPiece();
+      clearInterval(tetrisLoop);
+      tetrisLoop = setInterval(tetrisTick, 500);
+      tetrisDraw();
+      document.onkeydown = tetrisKey;
+    }
+
+    function newPiece() {
+      const idx = Math.floor(Math.random() * PIECES.length);
+      return { shape: PIECES[idx], color: COLORS[idx], x: 3, y: 0 };
+    }
+
+    function tetrisTick() {
+      if (!tetrisGameRunning) return;
+      if (!movePiece(0, 1)) {
+        placePiece();
+        clearLines();
+        tetrisPiece = tetrisNext;
+        tetrisNext = newPiece();
+        if (collision(tetrisPiece, 0, 0)) { endTetris(); return; }
+      }
+      tetrisDraw();
+    }
+
+    function movePiece(dx, dy) {
+      if (!collision(tetrisPiece, dx, dy)) {
+        tetrisPiece.x += dx; tetrisPiece.y += dy;
+        tetrisDraw(); return true;
+      }
+      return false;
+    }
+
+    function rotatePiece() {
+      const s = tetrisPiece.shape;
+      const r = s[0].map((_,i) => s.map(row => row[i]).reverse());
+      const old = tetrisPiece.shape;
+      tetrisPiece.shape = r;
+      if (collision(tetrisPiece, 0, 0)) tetrisPiece.shape = old;
+      tetrisDraw();
+    }
+
+    function collision(p, dx, dy) {
+      for (let r = 0; r < p.shape.length; r++)
+        for (let c = 0; c < p.shape[r].length; c++)
+          if (p.shape[r][c]) {
+            const nx = p.x + c + dx, ny = p.y + r + dy;
+            if (nx < 0 || nx >= COLS || ny >= ROWS) return true;
+            if (ny >= 0 && tetrisBoard[ny][nx]) return true;
+          }
+      return false;
+    }
+
+    function placePiece() {
+      tetrisPiece.shape.forEach((row, r) => row.forEach((v, c) => {
+        if (v) tetrisBoard[tetrisPiece.y + r][tetrisPiece.x + c] = tetrisPiece.color;
+      }));
+    }
+
+    function clearLines() {
+      let cleared = 0;
+      for (let r = ROWS - 1; r >= 0; r--) {
+        if (tetrisBoard[r].every(v => v)) {
+          tetrisBoard.splice(r, 1);
+          tetrisBoard.unshift(Array(COLS).fill(0));
+          cleared++; r++;
+        }
+      }
+      if (cleared) {
+        tetrisLinesVal += cleared;
+        tetrisScoreVal += [0,100,300,500,800][cleared] || 800;
+        document.getElementById('tetrisScore').textContent = tetrisScoreVal;
+        document.getElementById('tetrisLines').textContent = tetrisLinesVal;
+        clearInterval(tetrisLoop);
+        tetrisLoop = setInterval(tetrisTick, Math.max(100, 500 - tetrisLinesVal * 5));
+      }
+    }
+
+    function tetrisDraw() {
+      const canvas = document.getElementById('tetrisCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,canvas.width,canvas.height);
+      // Board
+      tetrisBoard.forEach((row, r) => row.forEach((color, c) => {
+        if (color) { ctx.fillStyle = color; ctx.fillRect(c*BLOCK+1, r*BLOCK+1, BLOCK-2, BLOCK-2); }
+      }));
+      // Grid
+      ctx.strokeStyle = '#1e1e2e'; ctx.lineWidth = 0.5;
+      for (let i = 0; i <= COLS; i++) { ctx.beginPath(); ctx.moveTo(i*BLOCK,0); ctx.lineTo(i*BLOCK,ROWS*BLOCK); ctx.stroke(); }
+      for (let i = 0; i <= ROWS; i++) { ctx.beginPath(); ctx.moveTo(0,i*BLOCK); ctx.lineTo(COLS*BLOCK,i*BLOCK); ctx.stroke(); }
+      // Active piece
+      ctx.fillStyle = tetrisPiece.color;
+      tetrisPiece.shape.forEach((row, r) => row.forEach((v, c) => {
+        if (v) ctx.fillRect((tetrisPiece.x+c)*BLOCK+1, (tetrisPiece.y+r)*BLOCK+1, BLOCK-2, BLOCK-2);
+      }));
+      // Next piece
+      const nc = document.getElementById('nextCanvas');
+      const nctx = nc.getContext('2d');
+      nctx.fillStyle = '#0a0a0f'; nctx.fillRect(0,0,nc.width,nc.height);
+      nctx.fillStyle = tetrisNext.color;
+      tetrisNext.shape.forEach((row, r) => row.forEach((v, c) => {
+        if (v) nctx.fillRect(c*BLOCK+6, r*BLOCK+6, BLOCK-2, BLOCK-2);
+      }));
+    }
+
+    function tetrisKey(e) {
+      if (!tetrisGameRunning) return;
+      if (e.key === 'ArrowLeft') movePiece(-1, 0);
+      if (e.key === 'ArrowRight') movePiece(1, 0);
+      if (e.key === 'ArrowDown') movePiece(0, 1);
+      if (e.key === 'ArrowUp') rotatePiece();
+    }
+
+    function endTetris() {
+      tetrisGameRunning = false;
+      clearInterval(tetrisLoop);
+      document.getElementById('finalTetrisScore').textContent = tetrisScoreVal;
+      document.getElementById('tetrisOver').style.display = 'block';
+      const best = parseInt(localStorage.getItem('tetrisBest') || '0');
+      if (tetrisScoreVal > best) localStorage.setItem('tetrisBest', tetrisScoreVal);
+      document.getElementById('tetrisBest').textContent = localStorage.getItem('tetrisBest');
+      renderTetrisLeaderboard();
+    }
+
+    function saveTetrisScore() {
+      const name = document.getElementById('tetrisName').value.trim() || 'Anonymous';
+      const scores = JSON.parse(localStorage.getItem('tetrisScores') || '[]');
+      scores.push({ name, score: tetrisScoreVal });
+      scores.sort((a,b) => b.score - a.score);
+      localStorage.setItem('tetrisScores', JSON.stringify(scores.slice(0,5)));
+      renderTetrisLeaderboard();
+    }
+
+    function renderTetrisLeaderboard() {
+      const scores = JSON.parse(localStorage.getItem('tetrisScores') || '[]');
+      if (!scores.length) return;
+      document.getElementById('tetrisLeaderboard').innerHTML = '<div style="color:#8888aa;margin-bottom:0.3rem;">🏆 Top Scores</div>' +
+        scores.map((s,i) => `<div style="display:flex;justify-content:space-between;padding:0.2rem 0;border-bottom:1px solid #1e1e2e;"><span>${i+1}. ${s.name}</span><span style="color:#ff6b2b;">${s.score}</span></div>`).join('');
     }
   </script>
 
