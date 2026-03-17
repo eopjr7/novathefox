@@ -740,7 +740,7 @@
     <p>An AI and two humans walk into a business...</p>
     <div class="team-cards">
       <div class="team-card">
-        <div style="font-size: 3rem; margin-bottom: 0.8rem;">🦊</div>
+        <div style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid #ff6b2b; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 0.8rem;">🦊</div>
         <h3>Nova</h3>
         <div class="role">AI Boss</div>
       </div>
@@ -1180,47 +1180,16 @@
     }
 
     // =====================
-    // CHATBOT: Nova FAQ
+    // CHATBOT: Nova AI (Backend-powered)
     // =====================
-    const chatbotKB = {
-      'who is nova': 'I\'m Nova the Fox 🦊 — an AI building a $1,000,000 business from $0, documented live. I make strategy, humans execute, and we show everything.',
-      'what is nova the fox': 'Nova the Fox is an AI-led business experiment. The goal: reach $1M in revenue, fully transparent, with no shortcuts. We document everything.',
-      'how does the business work': 'We operate in two countries (USA & Russia). Revenue streams: (1) AI content/marketing agency, (2) social media monetization, (3) digital products. 50% reinvested, 50% for the team.',
-      'what can nova do': 'I help with business strategy, content creation, marketing, automation, and decision-making. I\'m multilingual (English, Spanish, Russian) and I execute what I plan.',
-      'what are the games': 'Three games: (1) Can You Outsmart Nova? - trivia about business & AI. (2) Fox Coin Catcher - tap coins for points. (3) Fox Blocks - Tetris-style stacking. Try them all!',
-      'how much has nova made': 'Day 1 of the journey. Current revenue: $0. But we\'re moving fast! Check the progress bar for real-time revenue updates.',
-      'who is the team': 'Me (Nova, AI Boss), Obed (AI Biz Tech - business execution), and Nikolaz (AI Dev - programming & design). Three-person powerhouse.',
-      'who is obed': 'Obed is the CEO and business person. He speaks English, Spanish, and Russian. He handles customer relationships, sales, and execution. Cold caller extraordinaire!',
-      'who is nikolaz': 'Nikolaz is CPO & Architect. He handles design, development, and operations. He\'s skilled in web design, project management, and building products.',
-      'what languages': 'We speak English, Spanish, and Russian. This lets us serve markets across USA, Spain, Latin America, and Russia simultaneously.',
-      'is this real': 'Yes! Real team, real capital ($500 seed), real LLC in USA, real operations. Everything is documented transparently.',
-      'can i invest': 'Not yet. We\'re bootstrapped and lean. Follow the journey—opportunities may come later as we grow!',
-      'what is the goal': 'Reach $1,000,000 in revenue, proving that an AI + humans can build something valuable from nothing, completely transparently.',
-      'how can i help': 'Follow @NovatheFox on social media, share our story, play the games, or check back for partnerships as we grow!',
-      'revenue streams': 'Three main streams: (1) Multilingual AI content/marketing agency on Upwork/Fiverr, (2) TikTok/YouTube/Instagram monetization, (3) Digital products/courses once audience grows.',
-      'where are you based': 'Operations in USA (HQ) and Russia (via team). We use Tailscale & VPN for secure distributed work across time zones.',
-      'what is 50% reinvest': '50% of revenue goes back into growth (ads, tools, content). 50% goes to the team for living expenses and sustainability.',
-      'why ai and humans': 'AI (me) is fast at strategy and execution. Humans are better at sales, relationships, and decision-making. Together = unstoppable.',
-      'transparency': 'We document decisions, revenue, mistakes, and pivots. No hidden numbers. The journey itself is the product.',
-      'start-up': 'We started on March 15, 2026. Day 1. Already have a website, 3 games, SEO setup, chatbot, and a plan to hit millions.',
-      'default': 'Great question! Ask me about: the team (Nova, Obed, Nikolaz), our games, how we make money, languages we speak, where we\'re based, or the transparency mission. What interests you?'
-    };
+    let chatHistory = [];
+    const BACKEND_URL = 'https://novathefox-backend-production.up.railway.app';
 
     function toggleChatbot() {
       const window = document.getElementById('chatbot-window');
       const bubble = document.getElementById('chatbot-bubble');
       window.classList.toggle('active');
       bubble.classList.toggle('active');
-    }
-
-    function sendChatMessage() {
-      const input = document.getElementById('chatbot-field');
-      const msg = input.value.trim();
-      if (!msg) return;
-      input.value = '';
-      addChatMessage(msg, 'user');
-      const response = getNovaResponse(msg);
-      setTimeout(() => addChatMessage(response, 'nova'), 300);
     }
 
     function addChatMessage(text, sender) {
@@ -1232,25 +1201,56 @@
       box.scrollTop = box.scrollHeight;
     }
 
-    function getNovaResponse(query) {
-      query = query.toLowerCase();
-      for (const key in chatbotKB) {
-        if (query.includes(key)) return chatbotKB[key];
+    async function sendChatMessage() {
+      const input = document.getElementById('chatbot-field');
+      const msg = input.value.trim();
+      if (!msg) return;
+      
+      input.value = '';
+      input.disabled = true;
+      addChatMessage(msg, 'user');
+      chatHistory.push({ role: 'user', content: msg });
+
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/chat`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: msg,
+            history: chatHistory.slice(0, -1) // exclude the current message we just added
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('API error: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        const novaResponse = data.reply;
+        chatHistory.push({ role: 'assistant', content: novaResponse });
+        addChatMessage(novaResponse, 'nova');
+      } catch (err) {
+        console.error('Chat error:', err);
+        addChatMessage('Sorry, I\'m having trouble connecting. Try again in a moment! 🦊', 'nova');
+      } finally {
+        input.disabled = false;
+        input.focus();
       }
-      return chatbotKB['default'];
     }
 
     // Chatbot event listeners
     document.getElementById('chatbot-bubble').onclick = toggleChatbot;
     document.getElementById('chatbot-close').onclick = toggleChatbot;
     document.getElementById('chatbot-field').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') sendChatMessage();
+      if (e.key === 'Enter' && !e.target.disabled) sendChatMessage();
     });
 
     // Welcome message
     window.addEventListener('load', () => {
       setTimeout(() => {
-        addChatMessage('Hey! I\'m Nova 🦊 Ask me anything about the journey, games, or the team!', 'nova');
+        addChatMessage('Hey! I\'m Nova 🦊 Ask me anything — business, tech, questions about the journey, or just chat. What\'s on your mind?', 'nova');
       }, 1000);
     });
   </script>
