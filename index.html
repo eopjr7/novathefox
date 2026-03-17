@@ -1230,37 +1230,41 @@
     function getNovaResponse(query) {
       query = query.toLowerCase().trim();
       
-      // Comprehensive keyword mapping (English, Spanish, Russian)
+      // 30+ World Languages Support
+      // EN|ES|RU|FR|DE|IT|PT|ZH|JA|KO|AR|HI|VI|TH|TR|PL|NL|SV|NO|DA|FI|EL|CS|HU|RO|BG|SR|HR|UK|HE
       const keywordMap = {
-        // Identity & personality (EN / ES / RU)
-        'who|yourself|introduce|name|quién|eres|quién eres|te|себя|кто|представься|имя': 'who is nova',
-        'what do|what can|skills|abilities|help|qué puedes|qué haces|capacidades|что ты|что вы|можешь|помочь|умеешь': 'what can nova do',
+        // Who are you / Identity
+        'who|yourself|introduce|name|eres|quién|себя|кто|represents|te présente|wer|chi|quem|谁|誰|누가|من|कौन|ai|ใคร|kim|kim jest|wie|vem|τι|kdo|ki|cine|ko je|ko je|хто|מי': 'who is nova',
         
-        // Business & model
-        'how|business|work|operate|model|revenue|money|earn|make|cómo|negocio|funciona|dinero|ganancias|ingresos|как|бизнес|работает|деньги|заработок': 'how does the business work',
-        'upwork|fiverr|client|freelance|gig|service|proyecto|trabajo|servicio|проект|работа': 'revenue model',
-        'long|timeline|when|months|years|reach|get to|cuánto|tiempo|cuántos meses|сколько|времени|месяцев|лет': 'how long til $1m',
+        // What can you do / Skills
+        'what can|skills|abilities|help|puedes|haces|capacidades|что|можешь|помочь|pouvez|peut|können|cosa|pode|fazer|什么|できます|할|ماذا|क्या|làm|ทำได้|yapabilir|potrafisz|kun|gør|mitä|τι|co|mit|ce|može|može|що|יכול': 'what can nova do',
         
-        // Team & structure
-        'team|who\'s|obed|nikolaz|people|member|equipo|quién|miembro|команда|люди': 'who is the team',
-        'human|together|combine|why|strength|humano|juntos|combinado|por qué|человек|вместе|сила': 'why ai and humans',
+        // Business / How it works
+        'how|business|work|operate|model|revenue|money|earn|cómo|negocio|funciona|dinero|ganancias|как|бизнес|деньги|comment|fonctionne|wie|funziona|como|funciona|怎样|どのように|어떻게|كيف|कैसे|làm sao|ทำอย่างไร|nasıl|jak|hvordan|wie|πώς|jak|cómo|kako|як|איך': 'how does the business work',
         
-        // Product & features
-        'game|play|quiz|coin|block|tetris|juego|juega|moneda|bloque|игра|играть|монета': 'what are the games',
+        // Timeline / When
+        'long|timeline|when|months|years|cuánto|tiempo|cuántos|сколько|времени|combien|temps|mois|wie lange|quanto|quando|quanto tempo|多久|どのくらい|얼마나|كم|कितना|bao lâu|นาน|ne kadar|jak długo|hvor|hvor lenge|milloin|πόσο|jak dlouho|amikor|cât|когда|כמה': 'how long til $1m',
         
-        // Transparency & reality
-        'real|fake|true|legit|proof|verify|transparent|real|falso|verdadero|prueba|verificar|transparente|настоящий|поддельный|правда|доказательство': 'is this real',
+        // Team
+        'team|member|people|equipo|miembro|люди|команда|équipe|personne|team|membro|gente|人|メンバー|팀|فريق|टीम|đội|ทีม|takım|drużyna|lag|gruppe|ryhmä|ομάδα|tým|csapat|echipă|отримаєте|צוות': 'who is the team',
         
-        // Investment & growth
-        'invest|investor|fund|raise|capital|invertir|inversor|financiación|fondos|инвестировать|инвестор|финансирование|капитал': 'can i invest',
+        // Games
+        'game|play|quiz|coin|block|juego|juega|игра|играть|jeu|jouer|spiel|gioco|giocare|jogo|joga|游戏|ゲーム|게임|لعبة|खेल|chơi|เกม|oyun|gra|spel|spill|leke|peli|παιχνίδι|hra|játék|joc|гра|משחק': 'what are the games',
+        
+        // Real / Authentic
+        'real|true|authentic|genuine|real|verdadero|auténtico|настоящий|правда|réel|vrai|authentique|echt|wahr|vero|autentico|verdadeiro|真实|本当|진짜|حقيقي|सच|thật|จริง|gerçek|prawdziwy|ekte|autentisk|aito|αληθινός|skutečný|igazi|adevărat|справжній|אמיתי': 'is this real',
+        
+        // Invest / Money
+        'invest|investor|fund|capital|invertir|inversor|инвестировать|инвестор|investir|investor|investitore|investidor|投资|投資|투자|استثمار|निवेश|đầu tư|ลงทุน|yatırım|inwestować|investere|investering|sijoitus|επενδύω|investovat|befektető|investi|инвестиція|השקעה': 'can i invest',
+        
+        // Language / Multilingual
+        'language|spanish|french|german|idioma|language|langue|sprache|lingua|língua|语言|言語|언어|لغة|भाषा|ngôn ngữ|ภาษา|dil|język|språk|språk|kieli|γλώσσα|jazyk|nyelv|limbă|мова|שפה': 'languages',
         
         // Details
-        'language|spanish|russian|english|multilingual|idioma|español|ruso|inglés|multilingüe|язык|испанский|русский|английский': 'languages',
-        'reinvest|50|percent|split|salary|reinvertir|porcentaje|dividir|salario|переинвестировать|процент|зарплата': 'what is 50% reinvest',
-        'nova the fox|nova': 'what is nova the fox',
+        'nova the fox|nova|reinvest|50|percent|nova la zorra|nova a raposa|nova o lisi|nova le renard|nova der fuchs|nova la volpe|новая лиса': 'what is nova the fox',
       };
       
-      // Try to find matches by checking all keywords
+      // Keyword matching
       for (const [keywords, kbKey] of Object.entries(keywordMap)) {
         const keywordList = keywords.split('|');
         for (const keyword of keywordList) {
@@ -1270,12 +1274,11 @@
         }
       }
       
-      // Fallback: try direct KB key match
+      // Fallback
       for (const key in chatbotKB) {
         if (query.includes(key)) return chatbotKB[key];
       }
       
-      // Default response if nothing matches (in user's language if detectable)
       return chatbotKB['default'];
     }
 
