@@ -1180,10 +1180,20 @@
     }
 
     // =====================
-    // CHATBOT: Nova AI (Backend-powered)
+    // CHATBOT: Nova FAQ (Working while we fix the AI backend)
     // =====================
-    let chatHistory = [];
-    const BACKEND_URL = 'https://novathefox-backend-production.up.railway.app';
+    const chatbotKB = {
+      'who is nova': 'I\'m Nova the Fox 🦊 — an AI building a $1,000,000 business from $0, documented live. I make strategy, humans execute, and we show everything.',
+      'what is nova the fox': 'Nova the Fox is an AI-led business experiment. The goal: reach $1M in revenue, fully transparent, with no shortcuts.',
+      'how does the business work': 'We operate in two countries (USA & Russia). Revenue streams: (1) AI content/marketing agency, (2) social media monetization, (3) digital products. 50% reinvested, 50% for the team.',
+      'what can nova do': 'I help with business strategy, content creation, marketing, automation, and decision-making. I\'m multilingual (English, Spanish, Russian).',
+      'what are the games': 'Three games: (1) Can You Outsmart Nova? - trivia. (2) Fox Coin Catcher - tap coins. (3) Fox Blocks - Tetris-style.',
+      'who is the team': 'Me (Nova, AI Boss), Obed (AI Biz Tech), and Nikolaz (AI Dev). Three-person powerhouse.',
+      'languages': 'English, Spanish, and Russian.',
+      'is this real': 'Yes! Real team, real capital, real LLC, real operations.',
+      'goal': 'Reach $1,000,000 in revenue, proving anyone can build something from nothing.',
+      'default': 'Great question! Ask me about: the team, games, business model, languages, or how we work. What interests you?'
+    };
 
     function toggleChatbot() {
       const window = document.getElementById('chatbot-window');
@@ -1201,43 +1211,24 @@
       box.scrollTop = box.scrollHeight;
     }
 
-    async function sendChatMessage() {
+    function sendChatMessage() {
       const input = document.getElementById('chatbot-field');
       const msg = input.value.trim();
       if (!msg) return;
       
       input.value = '';
-      input.disabled = true;
       addChatMessage(msg, 'user');
-      chatHistory.push({ role: 'user', content: msg });
+      
+      const response = getNovaResponse(msg);
+      setTimeout(() => addChatMessage(response, 'nova'), 300);
+    }
 
-      try {
-        const response = await fetch(`${BACKEND_URL}/api/chat`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: msg,
-            history: chatHistory.slice(0, -1) // exclude the current message we just added
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error('API error: ' + response.statusText);
-        }
-
-        const data = await response.json();
-        const novaResponse = data.reply;
-        chatHistory.push({ role: 'assistant', content: novaResponse });
-        addChatMessage(novaResponse, 'nova');
-      } catch (err) {
-        console.error('Chat error:', err);
-        addChatMessage('Sorry, I\'m having trouble connecting. Try again in a moment! 🦊', 'nova');
-      } finally {
-        input.disabled = false;
-        input.focus();
+    function getNovaResponse(query) {
+      query = query.toLowerCase();
+      for (const key in chatbotKB) {
+        if (query.includes(key)) return chatbotKB[key];
       }
+      return chatbotKB['default'];
     }
 
     // Chatbot event listeners
@@ -1250,7 +1241,7 @@
     // Welcome message
     window.addEventListener('load', () => {
       setTimeout(() => {
-        addChatMessage('Hey! I\'m Nova 🦊 Ask me anything — business, tech, questions about the journey, or just chat. What\'s on your mind?', 'nova');
+        addChatMessage('Hey! I\'m Nova 🦊 Ask me about the business, team, games, or how we work!', 'nova');
       }, 1000);
     });
   </script>
