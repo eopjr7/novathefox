@@ -1230,34 +1230,34 @@
     function getNovaResponse(query) {
       query = query.toLowerCase().trim();
       
-      // Comprehensive keyword mapping for natural questions
+      // Comprehensive keyword mapping (English, Spanish, Russian)
       const keywordMap = {
-        // Identity & personality
-        'who|yourself|introduce|name': 'who is nova',
-        'what do|what can|skills|abilities|help with': 'what can nova do',
+        // Identity & personality (EN / ES / RU)
+        'who|yourself|introduce|name|quién|eres|quién eres|te|себя|кто|представься|имя': 'who is nova',
+        'what do|what can|skills|abilities|help|qué puedes|qué haces|capacidades|что ты|что вы|можешь|помочь|умеешь': 'what can nova do',
         
         // Business & model
-        'how|business|work|operate|model|revenue|money|earn|make': 'how does the business work',
-        'upwork|fiverr|client|freelance|gig|service': 'revenue model',
-        'long|timeline|when|months|years|reach|get to': 'how long til $1m',
+        'how|business|work|operate|model|revenue|money|earn|make|cómo|negocio|funciona|dinero|ganancias|ingresos|как|бизнес|работает|деньги|заработок': 'how does the business work',
+        'upwork|fiverr|client|freelance|gig|service|proyecto|trabajo|servicio|проект|работа': 'revenue model',
+        'long|timeline|when|months|years|reach|get to|cuánto|tiempo|cuántos meses|сколько|времени|месяцев|лет': 'how long til $1m',
         
         // Team & structure
-        'team|who\'s|obed|nikolaz|people|member': 'who is the team',
-        'human|together|combine|why|strength': 'why ai and humans',
+        'team|who\'s|obed|nikolaz|people|member|equipo|quién|miembro|команда|люди': 'who is the team',
+        'human|together|combine|why|strength|humano|juntos|combinado|por qué|человек|вместе|сила': 'why ai and humans',
         
         // Product & features
-        'game|play|quiz|coin|block|tetris': 'what are the games',
+        'game|play|quiz|coin|block|tetris|juego|juega|moneda|bloque|игра|играть|монета': 'what are the games',
         
         // Transparency & reality
-        'real|fake|true|legit|proof|verify|transparent': 'is this real',
+        'real|fake|true|legit|proof|verify|transparent|real|falso|verdadero|prueba|verificar|transparente|настоящий|поддельный|правда|доказательство': 'is this real',
         
         // Investment & growth
-        'invest|investor|fund|raise|capital|money': 'can i invest',
+        'invest|investor|fund|raise|capital|invertir|inversor|financiación|fondos|инвестировать|инвестор|финансирование|капитал': 'can i invest',
         
         // Details
-        'language|spanish|russian|english|multilingual': 'languages',
-        'reinvest|50|percent|split|salary|split': 'what is 50% reinvest',
-        'nova the fox': 'what is nova the fox',
+        'language|spanish|russian|english|multilingual|idioma|español|ruso|inglés|multilingüe|язык|испанский|русский|английский': 'languages',
+        'reinvest|50|percent|split|salary|reinvertir|porcentaje|dividir|salario|переинвестировать|процент|зарплата': 'what is 50% reinvest',
+        'nova the fox|nova': 'what is nova the fox',
       };
       
       // Try to find matches by checking all keywords
@@ -1275,7 +1275,7 @@
         if (query.includes(key)) return chatbotKB[key];
       }
       
-      // Default response if nothing matches
+      // Default response if nothing matches (in user's language if detectable)
       return chatbotKB['default'];
     }
 
