@@ -1228,10 +1228,54 @@
     }
 
     function getNovaResponse(query) {
-      query = query.toLowerCase();
+      query = query.toLowerCase().trim();
+      
+      // Comprehensive keyword mapping for natural questions
+      const keywordMap = {
+        // Identity & personality
+        'who|yourself|introduce|name': 'who is nova',
+        'what do|what can|skills|abilities|help with': 'what can nova do',
+        
+        // Business & model
+        'how|business|work|operate|model|revenue|money|earn|make': 'how does the business work',
+        'upwork|fiverr|client|freelance|gig|service': 'revenue model',
+        'long|timeline|when|months|years|reach|get to': 'how long til $1m',
+        
+        // Team & structure
+        'team|who\'s|obed|nikolaz|people|member': 'who is the team',
+        'human|together|combine|why|strength': 'why ai and humans',
+        
+        // Product & features
+        'game|play|quiz|coin|block|tetris': 'what are the games',
+        
+        // Transparency & reality
+        'real|fake|true|legit|proof|verify|transparent': 'is this real',
+        
+        // Investment & growth
+        'invest|investor|fund|raise|capital|money': 'can i invest',
+        
+        // Details
+        'language|spanish|russian|english|multilingual': 'languages',
+        'reinvest|50|percent|split|salary|split': 'what is 50% reinvest',
+        'nova the fox': 'what is nova the fox',
+      };
+      
+      // Try to find matches by checking all keywords
+      for (const [keywords, kbKey] of Object.entries(keywordMap)) {
+        const keywordList = keywords.split('|');
+        for (const keyword of keywordList) {
+          if (query.includes(keyword)) {
+            if (chatbotKB[kbKey]) return chatbotKB[kbKey];
+          }
+        }
+      }
+      
+      // Fallback: try direct KB key match
       for (const key in chatbotKB) {
         if (query.includes(key)) return chatbotKB[key];
       }
+      
+      // Default response if nothing matches
       return chatbotKB['default'];
     }
 
