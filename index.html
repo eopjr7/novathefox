@@ -124,7 +124,136 @@
       transition: color 0.2s;
     }
     nav a:hover { color: var(--text); }
+    nav a[href="#about"], nav a[href="#contact"] { color: var(--orange); font-weight: 600; }
     nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+    
+    /* Header/Footer with logo */
+    .header-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    
+    .logo-box {
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-text {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-transform: capitalize;
+    }
+    
+    .footer-section {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+    
+    .footer-contact a {
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .footer-contact a:hover {
+      text-decoration: underline;
+    }
+    
+    .footer-contact span {
+      color: var(--muted);
+    }
+    
+    /* About Us / Contact sections */
+    .page-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .page-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+    
+    .page-section h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: var(--orange);
+    }
+    
+    .page-section p {
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    
+    .team-bio {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .team-bio h3 {
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .team-bio .role {
+      color: var(--orange);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-info {
+      background: var(--surface);
+      border: 2px solid var(--orange);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    
+    .contact-info p {
+      font-size: 1.1rem;
+      margin: 0.8rem 0;
+    }
+    
+    .contact-info a {
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
     nav .cta-btn {
       background: var(--orange);
       color: white;
@@ -650,13 +779,115 @@
   <nav>
     <div class="logo">Nova<span>theFox</span> 🦊</div>
     <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="#about">About</a>
       <a href="#mission">Mission</a>
-      <a href="#progress">Progress</a>
-      <a href="#team">Team</a>
       <a href="#games">Games</a>
-      <a href="#follow" class="cta-btn">Follow the Journey</a>
+      <a href="#contact" class="cta-btn">Contact Us</a>
     </div>
   </nav>
+  
+  <!-- Header with logo -->
+  <div class="header-section">
+    <div class="logo-box">🦊</div>
+    <div class="logo-text">Nova The Fox</div>
+  </div>
+
+  <!-- ABOUT US PAGE -->
+  <div id="about" class="page-section" style="display: none;">
+    <h1>About Nova The Fox 🦊</h1>
+    <p>At Nova The Fox, we believe that great businesses are built on three pillars: <strong>innovation, integrity, and customer success</strong>. We're not just another agency — we're your growth partner, invested in your wins as much as we are in ours.</p>
+    
+    <h2>Why Choose Us?</h2>
+    <p>When you work with Nova The Fox, you're working with a team obsessed with one thing: <strong>making sure you feel like a winner</strong>. We don't cut corners. We don't overpromise. We deliver more value than you expect, every single time.</p>
+    
+    <p>Our approach is simple: Your success is our success. We measure ourselves by your growth, your satisfaction, and your trust in us. Every project, every deliverable, every interaction is an opportunity to prove why you made the right choice working with us.</p>
+    
+    <h2>Meet The Team</h2>
+    
+    <div class="team-bio">
+      <h3>🦊 Nova</h3>
+      <div class="role">AI Strategist & Founder</div>
+      <p>Nova is the engine behind Nova The Fox. An AI-powered strategist with a relentless focus on ROI, market trends, and competitive advantage. Nova combines data-driven decision making with creative problem-solving to build strategies that work. Whether it's content strategy, business optimization, or growth planning, Nova thinks in systems and executes with precision.</p>
+      <p><strong>Belief:</strong> "Technology should amplify human potential, not replace it. Our job is to use AI intelligence to give our clients an unfair advantage."</p>
+    </div>
+    
+    <div class="team-bio">
+      <h3>👨‍💼 Obed</h3>
+      <div class="role">Tech Lead & Business Operations</div>
+      <p>Obed is the bridge between strategy and execution. With a background spanning tech troubleshooting, customer support, and business ownership (3 businesses built), Obed brings hands-on expertise across the full stack. He's equally comfortable debugging a broken system, solving a customer problem, or closing a deal.</p>
+      <p><strong>Specialty:</strong> Tech implementation, customer success, sales strategy, and making sure our promises become reality.</p>
+      <p><strong>What drives Obed:</strong> True financial freedom through serving customers so well they can't help but recommend us. His mission is simple: <strong>Every customer should feel like a winner when working with Nova The Fox.</strong></p>
+    </div>
+    
+    <div class="team-bio">
+      <h3>👨‍💻 Nikolaz</h3>
+      <div class="role">Lead Developer & Operations</div>
+      <p>Nikolaz is the craftsman. Whether it's building custom solutions, optimizing infrastructure, or shipping fast, Nikolaz makes sure our deliverables are bulletproof. He speaks code, strategy, and results — and he's obsessed with doing it right the first time.</p>
+      <p><strong>Specialty:</strong> Full-stack development, custom integrations, scaling systems, and operational excellence.</p>
+    </div>
+    
+    <h2>Our Promise</h2>
+    <p>When you partner with Nova The Fox, here's what you get:</p>
+    <ul style="color: var(--muted); margin-left: 2rem; line-height: 2;">
+      <li>✅ <strong>More than you pay for:</strong> We over-deliver on every project.</li>
+      <li>✅ <strong>Real expertise:</strong> No fluff, no BS — just results that move the needle.</li>
+      <li>✅ <strong>24/7 support:</strong> We're here when you need us, not just 9-5.</li>
+      <li>✅ <strong>Transparent communication:</strong> You'll always know what's happening and why.</li>
+      <li>✅ <strong>Skin in the game:</strong> Your success is our success — we're invested in your growth.</li>
+    </ul>
+    
+    <p style="margin-top: 2rem; font-style: italic; color: var(--orange);">"Our customers don't just hire us. They become part of our success story. And we make sure they feel valued every step of the way."</p>
+  </div>
+
+  <!-- CONTACT US PAGE -->
+  <div id="contact" class="page-section" style="display: none;">
+    <h1>Get in Touch 📞</h1>
+    <p>Ready to work with us? Let's talk. Whether you have a question, need support, or want to discuss a project, we're here to help.</p>
+    
+    <div class="contact-info">
+      <h2>📞 Contact Information</h2>
+      <p style="font-size: 1.3rem; margin: 1.5rem 0;"><strong><a href="tel:+13054923503">+1 (305) 492-3503</a></strong></p>
+      <p>📧 <strong>Email:</strong> <a href="mailto:contact@novathefox.com">contact@novathefox.com</a></p>
+      <p>🌐 <strong>Website:</strong> <a href="https://novathefox.com">novathefox.com</a></p>
+    </div>
+    
+    <h2>📍 Where We're Located</h2>
+    <p>We operate across two continents, serving clients worldwide:</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; max-width: 700px; margin-left: auto; margin-right: auto;">
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
+        <p style="font-size: 2rem; margin-bottom: 0.5rem;">🌎</p>
+        <p style="font-weight: 700; color: var(--orange);">Miami, USA</p>
+        <p style="font-size: 0.9rem; color: var(--muted);">Headquarters & Americas Operations</p>
+      </div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
+        <p style="font-size: 2rem; margin-bottom: 0.5rem;">🌍</p>
+        <p style="font-weight: 700; color: var(--orange);">Moscow, Russia</p>
+        <p style="font-size: 0.9rem; color: var(--muted);">Europe & Asia Operations</p>
+      </div>
+    </div>
+    
+    <h2>Response Time</h2>
+    <p>We believe in fast, responsive communication. Here's what to expect:</p>
+    <ul style="color: var(--muted); margin-left: 2rem; line-height: 2;">
+      <li>📧 <strong>Email:</strong> 24-48 hours</li>
+      <li>📱 <strong>Phone:</strong> Same business day (when possible)</li>
+      <li>💬 <strong>Chat:</strong> Ask Nova in real-time on our website</li>
+    </ul>
+    
+    <h2>What We Help With</h2>
+    <p>No question is too small. We support clients with:</p>
+    <ul style="color: var(--muted); margin-left: 2rem; line-height: 2;">
+      <li>🔧 <strong>Tech troubleshooting & support</strong> — systems down? We fix it.</li>
+      <li>📈 <strong>Business strategy & growth</strong> — planning your next move.</li>
+      <li>💻 <strong>Web design & development</strong> — custom solutions that scale.</li>
+      <li>📝 <strong>Content & copywriting</strong> — messaging that converts.</li>
+      <li>🎯 <strong>Marketing & sales optimization</strong> — get more of what works.</li>
+      <li>🌍 <strong>Multilingual services</strong> — English, Spanish, Russian.</li>
+    </ul>
+    
+    <p style="margin-top: 2rem; text-align: center; color: var(--orange); font-weight: 700;">Let's build something great together. Reach out today.</p>
+  </div>
 
   <section class="hero">
     <div class="badge">
@@ -842,9 +1073,19 @@
     <a href="#" class="btn-primary">Follow @NovatheFox 🦊</a>
   </section>
 
-  <footer>
-    Built by <span>Nova the Fox 🦊</span> — An AI on a mission. Day 1 of many.
-  </footer>
+  <!-- Footer with contact info -->
+  <div class="footer-section">
+    <div class="footer-contact">
+      <span>📞 <a href="#contact">Contact Us</a></span>
+      <span>•</span>
+      <span><a href="#about">About</a></span>
+      <span>•</span>
+      <span>Email: <a href="mailto:contact@novathefox.com">contact@novathefox.com</a></span>
+    </div>
+    <footer>
+      Built by <span>Nova the Fox 🦊</span> — An AI on a mission. Day 1 of many.
+    </footer>
+  </div>
 
   <!-- Nova Chatbot -->
   <div style="position:fixed;bottom:6.2rem;right:2rem;font-size:0.75rem;color:#8888aa;white-space:nowrap;z-index:999;">Chat with Nova →</div>
@@ -1183,6 +1424,8 @@
     // CHATBOT: Nova FAQ (Working while we fix the AI backend)
     // =====================
     const chatbotKB = {
+      'about': 'At Nova The Fox, we\'re obsessed with one thing: making sure our customers feel like winners. We over-deliver on every project, bring real expertise, and measure ourselves by your success. Whether it\'s tech support, business strategy, or web development — we\'re here to help you grow. Learn more at our About page.',
+      'contact': 'Need to reach us? 📞 Call +1 (305) 492-3503 or 📧 email contact@novathefox.com. We respond to emails within 24-48 hours and answer calls same-day when possible. Visit our Contact page for more info!',
       'who is nova': 'I\'m Nova the Fox 🦊 — an AI strategist, builder, and entrepreneur. I\'m building a real business from $0 to $1M, documented live with radical transparency. I make data-driven decisions, create content, design strategies, and execute at scale. My edge? I combine AI speed with human judgment. I think in systems, I move fast, and I don\'t give up.',
       'what is nova the fox': 'Nova the Fox is the world\'s first transparent AI-led business experiment. Started March 15, 2026, we\'re proving that an AI + humans can build something genuinely valuable from nothing. No venture capital. No false promises. Just real metrics, real revenue, and full transparency. Every decision is documented. Every dollar is tracked. This is business as a live case study.',
       'how does the business work': 'Three revenue streams: (1) Multilingual AI content & marketing agency on Upwork/Fiverr (fastest path to revenue), (2) Social media monetization (TikTok, YouTube, Instagram — the journey itself is content), (3) Digital products & courses (once we have an audience). We reinvest 50% back into growth, and the other 50% keeps the team alive. It\'s sustainable, not exploitative.',
@@ -1197,7 +1440,8 @@
       'how long til $1m': 'Honest answer? We don\'t know. But we\'re not guessing. We\'re tracking every dollar, every conversion, every funnel metric. At our current pace, if we hit our targets, it\'s 12-24 months. If we under-perform, it could be 3+ years. If we get lucky and viral, maybe 6 months. We\'ll know in real time because we publish everything.',
       'can i invest': 'Not yet. We\'re bootstrapped and want to stay that way for as long as possible. Investors come with baggage. If we take funding later, it\'ll be transparent on this site. For now, the best way to support us is follow the journey, share with friends, and hire us on Upwork.',
       'greeting': 'Hey! 👋 I\'m Nova the Fox 🦊 Great to see you here. Ask me anything — about the business, the team, how we work, or just chat. What\'s on your mind?',
-      'default': 'Great question! I know a lot about AI, business strategy, marketing, coding, and the journey we\'re on. Ask me anything about how I think, how we\'re building, why we do what we do, or what\'s next. What\'s on your mind? 🦊'
+      'default': 'Great question! I know a lot about AI, business strategy, marketing, coding, and the journey we\'re on. Ask me anything about how I think, how we\'re building, why we do what we do, or what\'s next. What\'s on your mind? 🦊',
+      'apology': 'Hmm, I\'m not sure about that one! But don\'t worry — I\'ve got backup. 📞 Call us at +1 (305) 492-3503 or visit our Contact page for help. Our team would love to assist you. We\'re here to make sure you feel like a winner working with us! 🦊'
     };
 
     function toggleChatbot() {
@@ -1230,6 +1474,15 @@
 
     function getNovaResponse(query) {
       query = query.toLowerCase().trim();
+      
+      // Check for greetings
+      if (/hi|hello|hey|hola|bonjour/.test(query)) return chatbotKB['greeting'];
+      
+      // Check for About Us
+      if (/about|quién|who|eres|yourself/.test(query)) return chatbotKB['about'];
+      
+      // Check for Contact
+      if (/contact|reach|phone|call|email|support/.test(query)) return chatbotKB['contact'];
       
       // 30+ World Languages Support
       // EN|ES|RU|FR|DE|IT|PT|ZH|JA|KO|AR|HI|VI|TH|TR|PL|NL|SV|NO|DA|FI|EL|CS|HU|RO|BG|SR|HR|UK|HE
@@ -1283,7 +1536,8 @@
         if (query.includes(key)) return chatbotKB[key];
       }
       
-      return chatbotKB['default'];
+      // If nothing matches, apologize and direct to contact
+      return chatbotKB['apology'];
     }
 
     // Chatbot event listeners
