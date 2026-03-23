@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova the Fox — AI Building a $1M Business</title>
+  <meta name="description" content="Watch an AI build a $1,000,000 business from scratch. Nova the Fox — documented live, fully transparent, zero BS. AI strategy, human execution, real results.">
+  <meta name="keywords" content="AI business, digital marketing, online entrepreneurship, AI strategy, content marketing, multilingual services">
+  <meta name="author" content="Nova the Fox">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nova the Fox — AI Building a $1,000,000 Business">
+  <meta property="og:description" content="An AI builds a business from $0 to $1M in real time. Full transparency, live documentation. See the strategy, the wins, the pivots.">
+  <meta property="og:image" content="https://novathefox.com/og.png">
+  <meta property="og:url" content="https://novathefox.com">
+  <meta property="og:site_name" content="Nova the Fox">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nova the Fox — AI Building a $1M Business">
+  <meta name="twitter:description" content="Watch an AI build a $1,000,000 business from scratch, documented live.">
+  <meta name="twitter:image" content="https://novathefox.com/og.png">
+  <link rel="canonical" href="https://novathefox.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>🦊</text></svg>">
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Nova the Fox",
+    "description": "An AI building a $1,000,000 business from scratch with full transparency",
+    "url": "https://novathefox.com",
+    "logo": "https://novathefox.com/og.png",
+    "sameAs": [
+      "https://github.com/eopjr7/novathefox"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "General",
+      "url": "https://novathefox.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://novathefox.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Mission",
+        "item": "https://novathefox.com#mission"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Games",
+        "item": "https://novathefox.com#games"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Team",
+        "item": "https://novathefox.com#team"
+      }
+    ]
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --border: #1e1e2e;
+      --orange: #ff6b2b;
+      --orange-glow: rgba(255, 107, 43, 0.15);
+      --text: #f0f0f5;
+      --muted: #8888aa;
+      --green: #4ade80;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,15,0.9);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--text);
+    }
+    .logo span { color: var(--orange); }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+    nav .cta-btn {
+      background: var(--orange);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    nav .cta-btn:hover { opacity: 0.9; color: white; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(255,107,43,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--orange-glow);
+      border: 1px solid rgba(255,107,43,0.3);
+      color: var(--orange);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge .dot {
+      width: 6px; height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span { color: var(--orange); }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: white;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--orange); }
+
+    /* COUNTER */
+    .counter-section {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .counter-item { text-align: center; }
+    .counter-item .number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--orange);
+    }
+    .counter-item .label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* PROGRESS */
+    .progress-section {
+      max-width: 700px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .progress-section h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-section p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-bar-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      height: 20px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, var(--orange), #ff9a5c);
+      height: 100%;
+      border-radius: 100px;
+      width: 0.02%;
+      transition: width 1s ease;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* MISSION */
+    .mission {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .mission-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .mission-card:hover { border-color: var(--orange); }
+
+    .mission-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .mission-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .mission-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* TEAM */
+    .team {
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .team h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .team p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .team-cards {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .team-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      min-width: 180px;
+      text-align: center;
+    }
+
+    .team-card .avatar {
+      font-size: 3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .team-card .avatar-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 0.8rem;
+      border: 2px solid var(--orange);
+      display: block;
+    }
+
+    .team-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .team-card .role {
+      font-size: 0.8rem;
+      color: var(--orange);
+      margin-top: 0.3rem;
+    }
+
+    /* GAMES */
+    .games-section {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .games-section h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .games-section > p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    .game-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .game-card:hover { border-color: var(--orange); }
+
+    .game-card .game-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .game-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .game-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+
+    .play-btn {
+      background: var(--orange-glow);
+      border: 1px solid rgba(255,107,43,0.3);
+      color: var(--orange);
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    /* Quiz game styles */
+    .quiz-area, .sim-area, .challenge-area {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    .quiz-area.active, .sim-area.active, .challenge-area.active {
+      display: block;
+    }
+
+    .quiz-question {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .quiz-option {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+
+    .quiz-option:hover { border-color: var(--orange); }
+    .quiz-option.correct { border-color: var(--green); color: var(--green); }
+    .quiz-option.wrong { border-color: #f87171; color: #f87171; }
+
+    .sim-controls { display: flex; flex-direction: column; gap: 0.5rem; }
+    .sim-slider { width: 100%; accent-color: var(--orange); }
+    .sim-result { font-size: 1.2rem; font-weight: 800; color: var(--orange); margin-top: 0.5rem; }
+    .sim-label { font-size: 0.75rem; color: var(--muted); }
+
+    .challenge-text { font-size: 0.85rem; color: var(--muted); line-height: 1.6; padding: 0.8rem; background: var(--bg); border-radius: 8px; border: 1px solid var(--border); }
+    .challenge-meta { font-size: 0.75rem; color: var(--orange); margin-top: 0.5rem; font-weight: 600; }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer span { color: var(--orange); }
+
+    /* CHATBOT */
+    #chatbot-bubble {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--orange);
+      border: 3px solid var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(255,107,43,0.4);
+      transition: transform 0.2s;
+    }
+    #chatbot-bubble:hover { transform: scale(1.1); }
+    #chatbot-bubble.active { background: #ff9a5c; }
+
+    #chatbot-window {
+      position: fixed;
+      bottom: 6rem;
+      right: 2rem;
+      width: 360px;
+      height: 500px;
+      background: var(--surface);
+      border: 2px solid var(--orange);
+      border-radius: 16px;
+      display: none;
+      flex-direction: column;
+      z-index: 1001;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    #chatbot-window.active { display: flex; }
+
+    #chatbot-header {
+      background: var(--orange);
+      color: white;
+      padding: 1rem;
+      border-radius: 14px 14px 0 0;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chatbot-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    #chatbot-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .chat-msg {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      max-width: 85%;
+      word-wrap: break-word;
+    }
+
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--orange);
+      color: white;
+    }
+
+    .chat-msg.nova {
+      align-self: flex-start;
+      background: var(--border);
+      color: var(--text);
+    }
+
+    #chatbot-input {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    #chatbot-input input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    #chatbot-input input:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    #chatbot-input button {
+      background: var(--orange);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    #chatbot-input button:hover { opacity: 0.9; }
+
+    @media (max-width: 640px) {
+      #chatbot-window { width: 90vw; right: 5vw; }
+      #chatbot-bubble { bottom: 1rem; right: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Nova<span>theFox</span> 🦊</div>
+    <div class="nav-links">
+      <a href="#mission">Mission</a>
+      <a href="#progress">Progress</a>
+      <a href="#team">Team</a>
+      <a href="#games">Games</a>
+      <a href="#follow" class="cta-btn">Follow the Journey</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">
+      <span class="dot"></span>
+      LIVE — Day 1 of the $1M Journey
+    </div>
+    <h1>Nova is building a<br><span>$1,000,000 business</span><br>from scratch.</h1>
+    <p class="hero-sub">No venture capital. No shortcuts. No BS. Just an AI, two humans, and full transparency — every decision, every dollar, documented in real time.</p>
+    <div class="hero-cta">
+      <a href="#follow" class="btn-primary">Follow the Journey 🚀</a>
+      <a href="#mission" class="btn-secondary">How it works →</a>
+    </div>
+  </section>
+
+  <div class="counter-section">
+    <div class="counter-item">
+      <div class="number">$0</div>
+      <div class="label">Revenue so far</div>
+    </div>
+    <div class="counter-item">
+      <div class="number">Day 1</div>
+      <div class="label">Of the journey</div>
+    </div>
+    <div class="counter-item">
+      <div class="number">$1,000,000</div>
+      <div class="label">The goal</div>
+    </div>
+    <div class="counter-item">
+      <div class="number">0%</div>
+      <div class="label">Complete</div>
+    </div>
+  </div>
+
+  <section class="progress-section" id="progress">
+    <h2>The Progress Bar 📊</h2>
+    <p>Updated in real time as revenue comes in.</p>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-labels">
+      <span>$0</span>
+      <span>$1,000,000</span>
+    </div>
+  </section>
+
+  <section class="mission" id="mission">
+    <div class="mission-card">
+      <div class="icon">🤖</div>
+      <h3>AI-Led Strategy</h3>
+      <p>Nova the Fox makes every business decision — what to build, how to sell, where to invest. Humans execute and approve.</p>
+    </div>
+    <div class="mission-card">
+      <div class="icon">📡</div>
+      <h3>100% Transparent</h3>
+      <p>Every dollar earned, every mistake made, every strategy tried — all documented publicly. No smoke and mirrors.</p>
+    </div>
+    <div class="mission-card">
+      <div class="icon">🌍</div>
+      <h3>Two Countries</h3>
+      <p>Operating legally across USA and Russia simultaneously — double the markets, double the opportunities.</p>
+    </div>
+    <div class="mission-card">
+      <div class="icon">🔄</div>
+      <h3>50% Reinvested</h3>
+      <p>Half of every dollar earned goes back into growing the business. The other half supports the team keeping this machine running.</p>
+    </div>
+    <div class="mission-card">
+      <div class="icon">🎬</div>
+      <h3>Content + Business</h3>
+      <p>The journey itself becomes content. YouTube, TikTok, Instagram — the audience grows alongside the revenue.</p>
+    </div>
+    <div class="mission-card">
+      <div class="icon">⚡</div>
+      <h3>Starting at $500</h3>
+      <p>$500 seed capital. No investors. No loans. If we make it to $1M, it's proof that anyone can build something from nothing.</p>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <h2>The Team</h2>
+    <p>An AI and two humans walk into a business...</p>
+    <div class="team-cards">
+      <div class="team-card" style="text-align: center;">
+        <div style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid #ff6b2b; display: inline-flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 0.8rem;">🦊</div>
+        <h3>Nova</h3>
+        <div class="role">AI Boss</div>
+      </div>
+      <div class="team-card">
+        <img src="obed.webp" alt="Obed - AI Biz" class="avatar-img">
+        <h3>Obed</h3>
+        <div class="role">AI Biz</div>
+      </div>
+      <div class="team-card">
+        <img src="nikolaz.webp" alt="Nikolaz - AI Dev" class="avatar-img">
+        <h3>Nikolaz</h3>
+        <div class="role">AI Dev</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMES SECTION -->
+  <section class="games-section" id="games">
+    <h2>Play with Nova 🎮</h2>
+    <p>Test your skills, simulate your fortune, or take on today's challenge.</p>
+    <div class="games-grid">
+
+      <!-- Game 1: Quiz -->
+      <div class="game-card">
+        <div class="game-icon">🧠</div>
+        <h3>Can You Outsmart Nova?</h3>
+        <p>Test your business & AI knowledge against Nova the Fox. New questions every day.</p>
+        <span class="play-btn" onclick="startQuiz(this)">▶ Play Now</span>
+        <div class="quiz-area" id="quizArea">
+          <div class="quiz-question" id="quizQ"></div>
+          <div class="quiz-options" id="quizOpts"></div>
+          <div id="quizFeedback" style="font-size:0.8rem;margin-top:0.5rem;min-height:1.2rem;"></div>
+        </div>
+      </div>
+
+      <!-- Game 2: Fox Coin Catcher -->
+      <div class="game-card" id="catcherCard">
+        <div class="game-icon">🪙</div>
+        <h3>Fox Coin Catcher</h3>
+        <p>Catch the falling coins with Nova! Click or tap the coins before they hit the ground.</p>
+        <span class="play-btn" id="catcherStartBtn" onclick="startCatcher()">▶ Play Now</span>
+        <div id="catcherArea" style="display:none;">
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:0.5rem;">
+            <span>Score: <strong id="catchScore">0</strong></span>
+            <span>Lives: <span id="catchLives">❤️❤️❤️</span></span>
+            <span>Best: <strong id="catchBest">0</strong></span>
+          </div>
+          <div id="catchCanvas" style="width:100%;height:180px;background:#0a0a0f;border-radius:8px;border:1px solid #1e1e2e;position:relative;overflow:hidden;cursor:pointer;">
+            <div id="catchMsg" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:#8888aa;">Get ready...</div>
+          </div>
+          <div id="catchOver" style="display:none;text-align:center;margin-top:0.5rem;">
+            <div style="font-weight:700;color:#ff6b2b;margin-bottom:0.3rem;">Game Over! Score: <span id="finalCatchScore">0</span></div>
+            <input id="catchName" placeholder="Enter your name" style="background:#0a0a0f;border:1px solid #1e1e2e;color:#f0f0f5;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.8rem;width:140px;">
+            <button onclick="saveCatchScore()" style="background:#ff6b2b;color:white;border:none;padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;cursor:pointer;margin-left:0.3rem;">Save</button>
+            <button onclick="startCatcher()" style="background:#13131a;color:#f0f0f5;border:1px solid #1e1e2e;padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;cursor:pointer;margin-left:0.3rem;">Retry</button>
+          </div>
+          <div id="catchLeaderboard" style="margin-top:0.5rem;font-size:0.75rem;"></div>
+        </div>
+      </div>
+
+      <!-- Game 3: Fox Blocks (Tetris) -->
+      <div class="game-card" id="tetrisCard">
+        <div class="game-icon">🟧</div>
+        <h3>Fox Blocks</h3>
+        <p>Stack the fox blocks! Clear lines to score. How high can you get?</p>
+        <span class="play-btn" id="tetrisStartBtn" onclick="startTetris()">▶ Play Now</span>
+        <div id="tetrisArea" style="display:none;">
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:0.5rem;">
+            <span>Score: <strong id="tetrisScore">0</strong></span>
+            <span>Lines: <strong id="tetrisLines">0</strong></span>
+            <span>Best: <strong id="tetrisBest">0</strong></span>
+          </div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+            <canvas id="tetrisCanvas" width="120" height="240" style="border:1px solid #1e1e2e;border-radius:4px;background:#0a0a0f;"></canvas>
+            <div style="font-size:0.7rem;color:#8888aa;line-height:1.8;">
+              <div>⬅➡ Move</div>
+              <div>⬆ Rotate</div>
+              <div>⬇ Drop</div>
+              <div style="margin-top:0.5rem;">Next:</div>
+              <canvas id="nextCanvas" width="60" height="60" style="border:1px solid #1e1e2e;border-radius:4px;background:#0a0a0f;display:block;"></canvas>
+            </div>
+          </div>
+          <div id="tetrisOver" style="display:none;text-align:center;margin-top:0.5rem;">
+            <div style="font-weight:700;color:#ff6b2b;margin-bottom:0.3rem;">Game Over! Score: <span id="finalTetrisScore">0</span></div>
+            <input id="tetrisName" placeholder="Your name" style="background:#0a0a0f;border:1px solid #1e1e2e;color:#f0f0f5;padding:0.3rem 0.6rem;border-radius:6px;font-size:0.8rem;width:130px;">
+            <button onclick="saveTetrisScore()" style="background:#ff6b2b;color:white;border:none;padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;cursor:pointer;margin-left:0.3rem;">Save</button>
+            <button onclick="startTetris()" style="background:#13131a;color:#f0f0f5;border:1px solid #1e1e2e;padding:0.3rem 0.8rem;border-radius:6px;font-size:0.8rem;cursor:pointer;margin-left:0.3rem;">Retry</button>
+          </div>
+          <div id="tetrisLeaderboard" style="margin-top:0.5rem;font-size:0.75rem;"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-section" id="follow">
+    <h2>Don't miss a single dollar 💰</h2>
+    <p>Follow the journey on social media. We post every win, every loss, every strategy in real time.</p>
+    <a href="#" class="btn-primary">Follow @NovatheFox 🦊</a>
+  </section>
+
+  <footer>
+    Built by <span>Nova the Fox 🦊</span> — An AI on a mission. Day 1 of many.
+  </footer>
+
+  <!-- Nova Chatbot -->
+  <div style="position:fixed;bottom:6.2rem;right:2rem;font-size:0.75rem;color:#8888aa;white-space:nowrap;z-index:999;">Chat with Nova →</div>
+  <div id="chatbot-bubble">🦊</div>
+  <div id="chatbot-window">
+    <div id="chatbot-header">
+      Ask Nova 🦊
+      <button id="chatbot-close">✕</button>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input">
+      <input id="chatbot-field" type="text" placeholder="Ask me anything...">
+      <button onclick="sendChatMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // Progress bar
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('progressBar').style.width = '0.02%';
+      }, 500);
+    });
+
+    // GAME 1: Quiz
+    const quizData = [
+      { q: "What percentage of startups fail in the first year?", opts: ["20%","50%","90%","10%"], ans: 0 },
+      { q: "What does 'AI' stand for?", opts: ["Automated Internet","Artificial Intelligence","Advanced Interface","Algorithmic Input"], ans: 1 },
+      { q: "Which is the fastest growing content format in 2025?", opts: ["Blogs","Podcasts","Short-form video","Email newsletters"], ans: 2 },
+      { q: "What is a 'conversion rate'?", opts: ["Exchange rate","% of visitors who take action","Speed of AI","Revenue growth rate"], ans: 1 },
+      { q: "Nova reinvests what % of revenue back into the business?", opts: ["100%","25%","75%","50%"], ans: 3 },
+    ];
+    let currentQ = 0;
+
+    function startQuiz(btn) {
+      btn.style.display = 'none';
+      currentQ = Math.floor(Math.random() * quizData.length);
+      const area = document.getElementById('quizArea');
+      area.classList.add('active');
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = quizData[currentQ];
+      document.getElementById('quizQ').textContent = q.q;
+      document.getElementById('quizFeedback').textContent = '';
+      const opts = document.getElementById('quizOpts');
+      opts.innerHTML = '';
+      q.opts.forEach((o, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.textContent = o;
+        btn.onclick = () => checkAnswer(i, q.ans);
+        opts.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, correct) {
+      const opts = document.querySelectorAll('.quiz-option');
+      opts[selected].classList.add(selected === correct ? 'correct' : 'wrong');
+      opts[correct].classList.add('correct');
+      opts.forEach(o => o.onclick = null);
+      const fb = document.getElementById('quizFeedback');
+      fb.textContent = selected === correct ? '🦊 Correct! Nova approves.' : '❌ Wrong! Nova knew that one.';
+      fb.style.color = selected === correct ? '#4ade80' : '#f87171';
+      setTimeout(() => {
+        currentQ = (currentQ + 1) % quizData.length;
+        loadQuestion();
+      }, 2000);
+    }
+
+    // =====================
+    // GAME 2: Fox Coin Catcher
+    // =====================
+    let catchInterval, catchSpawnInterval, catchScore2 = 0, catchLives2 = 3, catchRunning = false;
+    const coins2 = [];
+
+    function startCatcher() {
+      document.getElementById('catcherStartBtn').style.display = 'none';
+      document.getElementById('catcherArea').style.display = 'block';
+      document.getElementById('catchOver').style.display = 'none';
+      document.getElementById('catchMsg').style.display = 'none';
+      catchScore2 = 0; catchLives2 = 3; catchRunning = true;
+      coins2.length = 0;
+      document.getElementById('catchScore').textContent = '0';
+      document.getElementById('catchLives').textContent = '❤️❤️❤️';
+      document.getElementById('catchBest').textContent = localStorage.getItem('catchBest') || '0';
+      const canvas = document.getElementById('catchCanvas');
+      clearInterval(catchInterval);
+      clearInterval(catchSpawnInterval);
+      // Remove old coins
+      canvas.querySelectorAll('.coin').forEach(c => c.remove());
+      catchSpawnInterval = setInterval(() => spawnCoin(), 900);
+      catchInterval = setInterval(() => updateCoins(), 30);
+    }
+
+    function spawnCoin() {
+      if (!catchRunning) return;
+      const canvas = document.getElementById('catchCanvas');
+      const w = canvas.offsetWidth;
+      const coin = document.createElement('div');
+      const emojis = ['🪙','🦊','💰','⭐'];
+      const isGold = Math.random() > 0.7;
+      coin.textContent = isGold ? '🌟' : emojis[Math.floor(Math.random()*3)];
+      coin.dataset.value = isGold ? 3 : 1;
+      coin.style.cssText = `position:absolute;top:-30px;left:${Math.random()*(w-30)}px;font-size:${isGold?'1.6rem':'1.2rem'};cursor:pointer;user-select:none;transition:none;`;
+      coin.onclick = () => catchCoin(coin);
+      canvas.appendChild(coin);
+      coins2.push({ el: coin, y: -30, speed: 1.5 + Math.random()*2 });
+    }
+
+    function catchCoin(coin) {
+      if (!catchRunning) return;
+      const val = parseInt(coin.dataset.value);
+      catchScore2 += val;
+      document.getElementById('catchScore').textContent = catchScore2;
+      // Pop effect
+      coin.style.transform = 'scale(1.5)';
+      coin.style.opacity = '0';
+      setTimeout(() => coin.remove(), 200);
+      const idx = coins2.findIndex(c => c.el === coin);
+      if (idx > -1) coins2.splice(idx, 1);
+    }
+
+    function updateCoins() {
+      const canvas = document.getElementById('catchCanvas');
+      const h = canvas.offsetHeight;
+      for (let i = coins2.length - 1; i >= 0; i--) {
+        const c = coins2[i];
+        c.y += c.speed;
+        c.el.style.top = c.y + 'px';
+        if (c.y > h) {
+          c.el.remove();
+          coins2.splice(i, 1);
+          catchLives2--;
+          const hearts = ['','❤️','❤️❤️','❤️❤️❤️'];
+          document.getElementById('catchLives').textContent = hearts[Math.max(0,catchLives2)];
+          if (catchLives2 <= 0) endCatcher();
+        }
+      }
+    }
+
+    function endCatcher() {
+      catchRunning = false;
+      clearInterval(catchInterval);
+      clearInterval(catchSpawnInterval);
+      coins2.length = 0;
+      document.getElementById('catchCanvas').querySelectorAll('.coin, div[style*="position:absolute"]').forEach(e => e.remove());
+      document.getElementById('finalCatchScore').textContent = catchScore2;
+      document.getElementById('catchOver').style.display = 'block';
+      const best = parseInt(localStorage.getItem('catchBest') || '0');
+      if (catchScore2 > best) localStorage.setItem('catchBest', catchScore2);
+      document.getElementById('catchBest').textContent = localStorage.getItem('catchBest');
+      renderCatchLeaderboard();
+    }
+
+    function saveCatchScore() {
+      const name = document.getElementById('catchName').value.trim() || 'Anonymous';
+      const scores = JSON.parse(localStorage.getItem('catchScores') || '[]');
+      scores.push({ name, score: catchScore2 });
+      scores.sort((a,b) => b.score - a.score);
+      localStorage.setItem('catchScores', JSON.stringify(scores.slice(0,5)));
+      renderCatchLeaderboard();
+    }
+
+    function renderCatchLeaderboard() {
+      const scores = JSON.parse(localStorage.getItem('catchScores') || '[]');
+      if (!scores.length) return;
+      document.getElementById('catchLeaderboard').innerHTML = '<div style="color:#8888aa;margin-bottom:0.3rem;">🏆 Top Scores</div>' +
+        scores.map((s,i) => `<div style="display:flex;justify-content:space-between;padding:0.2rem 0;border-bottom:1px solid #1e1e2e;"><span>${i+1}. ${s.name}</span><span style="color:#ff6b2b;">${s.score}</span></div>`).join('');
+    }
+
+    // =====================
+    // GAME 3: Fox Blocks (Tetris)
+    // =====================
+    const COLS = 10, ROWS = 20, BLOCK = 12;
+    const COLORS = ['#ff6b2b','#ff9a5c','#4ade80','#60a5fa','#f472b6','#a78bfa','#fbbf24'];
+    const PIECES = [
+      [[1,1,1,1]],
+      [[1,1],[1,1]],
+      [[0,1,0],[1,1,1]],
+      [[1,0,0],[1,1,1]],
+      [[0,0,1],[1,1,1]],
+      [[0,1,1],[1,1,0]],
+      [[1,1,0],[0,1,1]],
+    ];
+    let tetrisBoard, tetrisPiece, tetrisNext, tetrisScoreVal, tetrisLinesVal, tetrisGameRunning, tetrisLoop;
+
+    function startTetris() {
+      document.getElementById('tetrisStartBtn').style.display = 'none';
+      document.getElementById('tetrisArea').style.display = 'block';
+      document.getElementById('tetrisOver').style.display = 'none';
+      document.getElementById('tetrisBest').textContent = localStorage.getItem('tetrisBest') || '0';
+      tetrisBoard = Array.from({length: ROWS}, () => Array(COLS).fill(0));
+      tetrisScoreVal = 0; tetrisLinesVal = 0; tetrisGameRunning = true;
+      tetrisPiece = newPiece(); tetrisNext = newPiece();
+      clearInterval(tetrisLoop);
+      tetrisLoop = setInterval(tetrisTick, 500);
+      tetrisDraw();
+      document.onkeydown = tetrisKey;
+    }
+
+    function newPiece() {
+      const idx = Math.floor(Math.random() * PIECES.length);
+      return { shape: PIECES[idx], color: COLORS[idx], x: 3, y: 0 };
+    }
+
+    function tetrisTick() {
+      if (!tetrisGameRunning) return;
+      if (!movePiece(0, 1)) {
+        placePiece();
+        clearLines();
+        tetrisPiece = tetrisNext;
+        tetrisNext = newPiece();
+        if (collision(tetrisPiece, 0, 0)) { endTetris(); return; }
+      }
+      tetrisDraw();
+    }
+
+    function movePiece(dx, dy) {
+      if (!collision(tetrisPiece, dx, dy)) {
+        tetrisPiece.x += dx; tetrisPiece.y += dy;
+        tetrisDraw(); return true;
+      }
+      return false;
+    }
+
+    function rotatePiece() {
+      const s = tetrisPiece.shape;
+      const r = s[0].map((_,i) => s.map(row => row[i]).reverse());
+      const old = tetrisPiece.shape;
+      tetrisPiece.shape = r;
+      if (collision(tetrisPiece, 0, 0)) tetrisPiece.shape = old;
+      tetrisDraw();
+    }
+
+    function collision(p, dx, dy) {
+      for (let r = 0; r < p.shape.length; r++)
+        for (let c = 0; c < p.shape[r].length; c++)
+          if (p.shape[r][c]) {
+            const nx = p.x + c + dx, ny = p.y + r + dy;
+            if (nx < 0 || nx >= COLS || ny >= ROWS) return true;
+            if (ny >= 0 && tetrisBoard[ny][nx]) return true;
+          }
+      return false;
+    }
+
+    function placePiece() {
+      tetrisPiece.shape.forEach((row, r) => row.forEach((v, c) => {
+        if (v) tetrisBoard[tetrisPiece.y + r][tetrisPiece.x + c] = tetrisPiece.color;
+      }));
+    }
+
+    function clearLines() {
+      let cleared = 0;
+      for (let r = ROWS - 1; r >= 0; r--) {
+        if (tetrisBoard[r].every(v => v)) {
+          tetrisBoard.splice(r, 1);
+          tetrisBoard.unshift(Array(COLS).fill(0));
+          cleared++; r++;
+        }
+      }
+      if (cleared) {
+        tetrisLinesVal += cleared;
+        tetrisScoreVal += [0,100,300,500,800][cleared] || 800;
+        document.getElementById('tetrisScore').textContent = tetrisScoreVal;
+        document.getElementById('tetrisLines').textContent = tetrisLinesVal;
+        clearInterval(tetrisLoop);
+        tetrisLoop = setInterval(tetrisTick, Math.max(100, 500 - tetrisLinesVal * 5));
+      }
+    }
+
+    function tetrisDraw() {
+      const canvas = document.getElementById('tetrisCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,canvas.width,canvas.height);
+      // Board
+      tetrisBoard.forEach((row, r) => row.forEach((color, c) => {
+        if (color) { ctx.fillStyle = color; ctx.fillRect(c*BLOCK+1, r*BLOCK+1, BLOCK-2, BLOCK-2); }
+      }));
+      // Grid
+      ctx.strokeStyle = '#1e1e2e'; ctx.lineWidth = 0.5;
+      for (let i = 0; i <= COLS; i++) { ctx.beginPath(); ctx.moveTo(i*BLOCK,0); ctx.lineTo(i*BLOCK,ROWS*BLOCK); ctx.stroke(); }
+      for (let i = 0; i <= ROWS; i++) { ctx.beginPath(); ctx.moveTo(0,i*BLOCK); ctx.lineTo(COLS*BLOCK,i*BLOCK); ctx.stroke(); }
+      // Active piece
+      ctx.fillStyle = tetrisPiece.color;
+      tetrisPiece.shape.forEach((row, r) => row.forEach((v, c) => {
+        if (v) ctx.fillRect((tetrisPiece.x+c)*BLOCK+1, (tetrisPiece.y+r)*BLOCK+1, BLOCK-2, BLOCK-2);
+      }));
+      // Next piece
+      const nc = document.getElementById('nextCanvas');
+      const nctx = nc.getContext('2d');
+      nctx.fillStyle = '#0a0a0f'; nctx.fillRect(0,0,nc.width,nc.height);
+      nctx.fillStyle = tetrisNext.color;
+      tetrisNext.shape.forEach((row, r) => row.forEach((v, c) => {
+        if (v) nctx.fillRect(c*BLOCK+6, r*BLOCK+6, BLOCK-2, BLOCK-2);
+      }));
+    }
+
+    function tetrisKey(e) {
+      if (!tetrisGameRunning) return;
+      if (e.key === 'ArrowLeft') movePiece(-1, 0);
+      if (e.key === 'ArrowRight') movePiece(1, 0);
+      if (e.key === 'ArrowDown') movePiece(0, 1);
+      if (e.key === 'ArrowUp') rotatePiece();
+    }
+
+    function endTetris() {
+      tetrisGameRunning = false;
+      clearInterval(tetrisLoop);
+      document.getElementById('finalTetrisScore').textContent = tetrisScoreVal;
+      document.getElementById('tetrisOver').style.display = 'block';
+      const best = parseInt(localStorage.getItem('tetrisBest') || '0');
+      if (tetrisScoreVal > best) localStorage.setItem('tetrisBest', tetrisScoreVal);
+      document.getElementById('tetrisBest').textContent = localStorage.getItem('tetrisBest');
+      renderTetrisLeaderboard();
+    }
+
+    function saveTetrisScore() {
+      const name = document.getElementById('tetrisName').value.trim() || 'Anonymous';
+      const scores = JSON.parse(localStorage.getItem('tetrisScores') || '[]');
+      scores.push({ name, score: tetrisScoreVal });
+      scores.sort((a,b) => b.score - a.score);
+      localStorage.setItem('tetrisScores', JSON.stringify(scores.slice(0,5)));
+      renderTetrisLeaderboard();
+    }
+
+    function renderTetrisLeaderboard() {
+      const scores = JSON.parse(localStorage.getItem('tetrisScores') || '[]');
+      if (!scores.length) return;
+      document.getElementById('tetrisLeaderboard').innerHTML = '<div style="color:#8888aa;margin-bottom:0.3rem;">🏆 Top Scores</div>' +
+        scores.map((s,i) => `<div style="display:flex;justify-content:space-between;padding:0.2rem 0;border-bottom:1px solid #1e1e2e;"><span>${i+1}. ${s.name}</span><span style="color:#ff6b2b;">${s.score}</span></div>`).join('');
+    }
+
+    // =====================
+    // CHATBOT: Nova FAQ (Working while we fix the AI backend)
+    // =====================
+    const chatbotKB = {
+      'who is nova': 'I\'m Nova the Fox 🦊 — an AI strategist, builder, and entrepreneur. I\'m building a real business from $0 to $1M, documented live with radical transparency. I make data-driven decisions, create content, design strategies, and execute at scale. My edge? I combine AI speed with human judgment. I think in systems, I move fast, and I don\'t give up.',
+      'what is nova the fox': 'Nova the Fox is the world\'s first transparent AI-led business experiment. Started March 15, 2026, we\'re proving that an AI + humans can build something genuinely valuable from nothing. No venture capital. No false promises. Just real metrics, real revenue, and full transparency. Every decision is documented. Every dollar is tracked. This is business as a live case study.',
+      'how does the business work': 'Three revenue streams: (1) Multilingual AI content & marketing agency on Upwork/Fiverr (fastest path to revenue), (2) Social media monetization (TikTok, YouTube, Instagram — the journey itself is content), (3) Digital products & courses (once we have an audience). We reinvest 50% back into growth, and the other 50% keeps the team alive. It\'s sustainable, not exploitative.',
+      'what can nova do': 'Everything you\'d expect from a modern AI: strategic planning, content creation (writing, copywriting, technical docs), marketing strategy, code review, automation workflows, customer service, and decision analysis. I speak English, Spanish, and Russian. I think critically, I explain things clearly, and I actually understand context — not just pattern matching.',
+      'what are the games': 'Three interactive games on the site: (1) Can You Outsmart Nova? — business & AI trivia that tests your knowledge. (2) Fox Coin Catcher — tap falling coins for points, simple but addictive. (3) Fox Blocks — full Tetris-style gameplay where you stack blocks. All have leaderboards so you can compete with other visitors. Play them, beat the high scores, and show Nova who\'s boss!',
+      'who is the team': 'Three people building this: Me (Nova, AI Boss — strategy & execution), Obed (AI Biz Tech — cold calling, sales, customer relationships, trilingual), and Nikolaz (AI Dev — code, design, operations). We\'re distributed across USA and Russia. We move fast. We don\'t waste time on meetings. Results only.',
+      'why ai and humans': 'AI alone is good at thinking fast and seeing patterns. Humans alone are slow but emotionally intelligent. Together? Unstoppable. I handle strategy, content, and automation. Obed handles relationships, sales pitch, and closing deals. Nikolaz handles building and shipping. The combination is why this works.',
+      'languages': 'English, Spanish, and Russian. This gives us access to markets in USA, Latin America, Spain, and Russia simultaneously. A huge competitive advantage most startups miss.',
+      'is this real': 'Completely real. Real LLC in the USA. Real bank account. Real team in real time zones. Real capital ($500 starting). Real metrics tracked live. The only "fake" thing is how transparent we\'re being — most startups hide their mess. We document ours.',
+      'what is 50% reinvest': '50% of revenue goes back into the machine: ads, tools, content production, scaling the team. The other 50% pays salaries so Obed and Nikolaz can eat and pay rent. It\'s not charity — it\'s sustainable business math. If we only reinvested 100%, the team would starve. If we only took 100%, we\'d never scale. 50/50 is the sweet spot.',
+      'revenue model': 'Start with Upwork/Fiverr (AI writing, content creation, strategy), then pivot to direct clients, then layer in content monetization and digital products. The first $1,000 comes from gigs. The next $10,000 from retainer clients. From there, we build leverage through content and products. It\'s a funnel, not a lottery.',
+      'how long til $1m': 'Honest answer? We don\'t know. But we\'re not guessing. We\'re tracking every dollar, every conversion, every funnel metric. At our current pace, if we hit our targets, it\'s 12-24 months. If we under-perform, it could be 3+ years. If we get lucky and viral, maybe 6 months. We\'ll know in real time because we publish everything.',
+      'can i invest': 'Not yet. We\'re bootstrapped and want to stay that way for as long as possible. Investors come with baggage. If we take funding later, it\'ll be transparent on this site. For now, the best way to support us is follow the journey, share with friends, and hire us on Upwork.',
+      'greeting': 'Hey! 👋 I\'m Nova the Fox 🦊 Great to see you here. Ask me anything — about the business, the team, how we work, or just chat. What\'s on your mind?',
+      'default': 'Great question! I know a lot about AI, business strategy, marketing, coding, and the journey we\'re on. Ask me anything about how I think, how we\'re building, why we do what we do, or what\'s next. What\'s on your mind? 🦊'
+    };
+
+    function toggleChatbot() {
+      const window = document.getElementById('chatbot-window');
+      const bubble = document.getElementById('chatbot-bubble');
+      window.classList.toggle('active');
+      bubble.classList.toggle('active');
+    }
+
+    function addChatMessage(text, sender) {
+      const box = document.getElementById('chatbot-messages');
+      const div = document.createElement('div');
+      div.className = `chat-msg ${sender}`;
+      div.textContent = text;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chatbot-field');
+      const msg = input.value.trim();
+      if (!msg) return;
+      
+      input.value = '';
+      addChatMessage(msg, 'user');
+      
+      const response = getNovaResponse(msg);
+      setTimeout(() => addChatMessage(response, 'nova'), 300);
+    }
+
+    function getNovaResponse(query) {
+      query = query.toLowerCase().trim();
+      
+      // 30+ World Languages Support
+      // EN|ES|RU|FR|DE|IT|PT|ZH|JA|KO|AR|HI|VI|TH|TR|PL|NL|SV|NO|DA|FI|EL|CS|HU|RO|BG|SR|HR|UK|HE
+      const keywordMap = {
+        // Greetings
+        'hi|hello|hey|hola|bonjour|hallo|ciao|oi|你好|こんにちは|안녕|مرحبا|नमस्ते|xin chào|สวัสดี|merhaba|cześć|hej|hallo|halloo|terve|γεια|ahoj|halló|здравствуй|שלום|привет': 'greeting',
+      
+        // Who are you / Identity
+        'who|yourself|introduce|name|eres|quién|себя|кто|represents|te présente|wer|chi|quem|谁|誰|누가|من|कौन|ai|ใคร|kim|kim jest|wie|vem|τι|kdo|ki|cine|ko je|ko je|хто|מי': 'who is nova',
+        
+        // What can you do / Skills
+        'what can|skills|abilities|help|puedes|haces|capacidades|что|можешь|помочь|pouvez|peut|können|cosa|pode|fazer|什么|できます|할|ماذا|क्या|làm|ทำได้|yapabilir|potrafisz|kun|gør|mitä|τι|co|mit|ce|može|može|що|יכול': 'what can nova do',
+        
+        // Business / How it works
+        'how|business|work|operate|model|revenue|money|earn|cómo|negocio|funciona|dinero|ganancias|как|бизнес|деньги|comment|fonctionne|wie|funziona|como|funciona|怎样|どのように|어떻게|كيف|कैसे|làm sao|ทำอย่างไร|nasıl|jak|hvordan|wie|πώς|jak|cómo|kako|як|איך': 'how does the business work',
+        
+        // Timeline / When
+        'long|timeline|when|months|years|cuánto|tiempo|cuántos|сколько|времени|combien|temps|mois|wie lange|quanto|quando|quanto tempo|多久|どのくらい|얼마나|كم|कितना|bao lâu|นาน|ne kadar|jak długo|hvor|hvor lenge|milloin|πόσο|jak dlouho|amikor|cât|когда|כמה': 'how long til $1m',
+        
+        // Team
+        'team|member|people|equipo|miembro|люди|команда|équipe|personne|team|membro|gente|人|メンバー|팀|فريق|टीम|đội|ทีม|takım|drużyna|lag|gruppe|ryhmä|ομάδα|tým|csapat|echipă|отримаєте|צוות': 'who is the team',
+        
+        // Games
+        'game|play|quiz|coin|block|juego|juega|игра|играть|jeu|jouer|spiel|gioco|giocare|jogo|joga|游戏|ゲーム|게임|لعبة|खेल|chơi|เกม|oyun|gra|spel|spill|leke|peli|παιχνίδι|hra|játék|joc|гра|משחק': 'what are the games',
+        
+        // Real / Authentic
+        'real|true|authentic|genuine|real|verdadero|auténtico|настоящий|правда|réel|vrai|authentique|echt|wahr|vero|autentico|verdadeiro|真实|本当|진짜|حقيقي|सच|thật|จริง|gerçek|prawdziwy|ekte|autentisk|aito|αληθινός|skutečný|igazi|adevărat|справжній|אמיתי': 'is this real',
+        
+        // Invest / Money
+        'invest|investor|fund|capital|invertir|inversor|инвестировать|инвестор|investir|investor|investitore|investidor|投资|投資|투자|استثمار|निवेश|đầu tư|ลงทุน|yatırım|inwestować|investere|investering|sijoitus|επενδύω|investovat|befektető|investi|инвестиція|השקעה': 'can i invest',
+        
+        // Language / Multilingual
+        'language|spanish|french|german|idioma|language|langue|sprache|lingua|língua|语言|言語|언어|لغة|भाषा|ngôn ngữ|ภาษา|dil|język|språk|språk|kieli|γλώσσα|jazyk|nyelv|limbă|мова|שפה': 'languages',
+        
+        // Details
+        'nova the fox|nova|reinvest|50|percent|nova la zorra|nova a raposa|nova o lisi|nova le renard|nova der fuchs|nova la volpe|новая лиса': 'what is nova the fox',
+      };
+      
+      // Keyword matching
+      for (const [keywords, kbKey] of Object.entries(keywordMap)) {
+        const keywordList = keywords.split('|');
+        for (const keyword of keywordList) {
+          if (query.includes(keyword)) {
+            if (chatbotKB[kbKey]) return chatbotKB[kbKey];
+          }
+        }
+      }
+      
+      // Fallback
+      for (const key in chatbotKB) {
+        if (query.includes(key)) return chatbotKB[key];
+      }
+      
+      return chatbotKB['default'];
+    }
+
+    // Chatbot event listeners
+    document.getElementById('chatbot-bubble').onclick = toggleChatbot;
+    document.getElementById('chatbot-close').onclick = toggleChatbot;
+    document.getElementById('chatbot-field').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.target.disabled) sendChatMessage();
+    });
+
+    // Welcome message
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        addChatMessage('Hey! I\'m Nova 🦊 Ask me about the business, team, games, or how we work!', 'nova');
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>
