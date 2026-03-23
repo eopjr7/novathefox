@@ -1,0 +1,28 @@
+# SEO Robots Configuration for Nova the Fox
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /obed.webp
+Allow: /nikolaz.webp
+Allow: /sitemap.xml
+
+Disallow: /node_modules/
+Disallow: /.*\.json$
+Disallow: /.*\.md$
+
+# Crawl Delay (be respectful)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://novathefox.com/sitemap.xml
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

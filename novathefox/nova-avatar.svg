@@ -1,0 +1,47 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="98" fill="#13131a" stroke="#ff6b2b" stroke-width="2"/>
+  
+  <!-- Head -->
+  <ellipse cx="100" cy="95" rx="55" ry="60" fill="#ff8c3a"/>
+  
+  <!-- Ears -->
+  <ellipse cx="65" cy="35" rx="18" ry="32" fill="#ff8c3a" transform="rotate(-25 65 35)"/>
+  <ellipse cx="135" cy="35" rx="18" ry="32" fill="#ff8c3a" transform="rotate(25 135 35)"/>
+  
+  <!-- Inner ears -->
+  <ellipse cx="66" cy="42" rx="10" ry="22" fill="#ffd4a3" transform="rotate(-25 66 42)"/>
+  <ellipse cx="134" cy="42" rx="10" ry="22" fill="#ffd4a3" transform="rotate(25 134 42)"/>
+  
+  <!-- Snout -->
+  <ellipse cx="100" cy="115" rx="35" ry="30" fill="#ffd4a3"/>
+  
+  <!-- Eyes -->
+  <circle cx="80" cy="85" r="8" fill="#1a1a1a"/>
+  <circle cx="120" cy="85" r="8" fill="#1a1a1a"/>
+  
+  <!-- Eye shine -->
+  <circle cx="82" cy="83" r="3" fill="#ffffff"/>
+  <circle cx="122" cy="83" r="3" fill="#ffffff"/>
+  
+  <!-- Nose -->
+  <ellipse cx="100" cy="110" rx="6" ry="5" fill="#1a1a1a"/>
+  
+  <!-- Mouth -->
+  <path d="M 100 110 Q 95 118 90 115" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 100 110 Q 105 118 110 115" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <!-- Cheeks -->
+  <ellipse cx="55" cy="100" rx="12" ry="8" fill="#ff9a52" opacity="0.6"/>
+  <ellipse cx="145" cy="100" rx="12" ry="8" fill="#ff9a52" opacity="0.6"/>
+  
+  <!-- Whiskers -->
+  <line x1="50" y1="95" x2="30" y2="90" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="50" y1="105" x2="30" y2="110" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="150" y1="95" x2="170" y2="90" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="150" y1="105" x2="170" y2="110" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Sparkle accent -->
+  <circle cx="120" cy="60" r="4" fill="#ffd700" opacity="0.8"/>
+  <circle cx="125" cy="55" r="2" fill="#ffd700" opacity="0.6"/>
+</svg>
