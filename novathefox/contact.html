@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Nova The Fox — Get in Touch</title>
+  <meta name="description" content="Contact Nova The Fox. Phone, email, and office locations in Miami and Moscow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>🦊</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --border: #1e1e2e;
+      --orange: #ff6b2b;
+      --text: #f0f0f5;
+      --muted: #8888aa;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,15,0.9);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--orange); }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+    nav .cta-btn {
+      background: var(--orange);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    nav .cta-btn:hover { opacity: 0.9; color: white; }
+    .header-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .logo-box {
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-text {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+    .page-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .page-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+    .page-section h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: var(--orange);
+    }
+    .page-section p {
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .contact-info {
+      background: var(--surface);
+      border: 2px solid var(--orange);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .contact-info p {
+      font-size: 1.1rem;
+      margin: 1rem 0;
+    }
+    .contact-info a {
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+    .location-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 700px;
+      margin: 2rem auto;
+    }
+    .location-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .location-card p:first-child {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .location-card .city {
+      font-weight: 700;
+      color: var(--orange);
+      font-size: 1.1rem;
+    }
+    .location-card .desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .footer-section {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+    .footer-contact a {
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer-contact a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    footer span { color: var(--orange); }
+    @media (max-width: 640px) {
+      .location-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">Nova<span>theFox</span> 🦊</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="index.html#mission">Mission</a>
+      <a href="index.html#games">Games</a>
+      <a href="contact.html" class="cta-btn">Contact Us</a>
+    </div>
+  </nav>
+
+  <div class="header-section">
+    <div class="logo-box">🦊</div>
+    <div class="logo-text">Nova The Fox</div>
+  </div>
+
+  <div class="page-section">
+    <h1>Get in Touch 📞</h1>
+    <p>Ready to work with us? Let's talk. Whether you have a question, need support, or want to discuss a project, we're here to help.</p>
+    
+    <div class="contact-info">
+      <p style="font-size: 1.8rem; font-weight: 700; color: var(--orange); margin: 1.5rem 0;">📞 +1 (305) 492-3503</p>
+      <p>📧 <strong>Email:</strong> <a href="mailto:nova@novathefox.com">nova@novathefox.com</a></p>
+      <p>🌐 <strong>Website:</strong> <a href="https://novathefox.com">novathefox.com</a></p>
+    </div>
+    
+    <h2>Response Time</h2>
+    <p>We believe in fast, responsive communication. Here's what to expect:</p>
+    <ul style="color: var(--muted); margin-left: 2rem; line-height: 2;">
+      <li>📧 <strong>Email:</strong> 24-48 hours</li>
+      <li>📱 <strong>Phone:</strong> Same business day (when possible)</li>
+      <li>💬 <strong>Chat:</strong> Ask Nova in real-time on our website</li>
+    </ul>
+    
+    <h2>What We Help With</h2>
+    <p>No question is too small. We support clients with:</p>
+    <ul style="color: var(--muted); margin-left: 2rem; line-height: 2;">
+      <li>🔧 <strong>Tech troubleshooting & support</strong> — systems down? We fix it.</li>
+      <li>📈 <strong>Business strategy & growth</strong> — planning your next move.</li>
+      <li>💻 <strong>Web design & development</strong> — custom solutions that scale.</li>
+      <li>📝 <strong>Content & copywriting</strong> — messaging that converts.</li>
+      <li>🎯 <strong>Marketing & sales optimization</strong> — get more of what works.</li>
+      <li>🌍 <strong>Multilingual services</strong> — English, Spanish, Russian.</li>
+    </ul>
+    
+    <h2>📍 Where We're Located</h2>
+    <p>We operate across two continents, serving clients worldwide:</p>
+    <div class="location-cards">
+      <div class="location-card">
+        <p>🌎</p>
+        <p class="city">Miami, USA</p>
+        <p class="desc">Headquarters & Americas Operations</p>
+      </div>
+      <div class="location-card">
+        <p>🌍</p>
+        <p class="city">Moscow, Russia</p>
+        <p class="desc">Europe & Asia Operations</p>
+      </div>
+    </div>
+    
+    <p style="margin-top: 2rem; text-align: center; color: var(--orange); font-weight: 700;">Let's build something great together. Reach out today.</p>
+  </div>
+
+  <div class="footer-section">
+    <div class="footer-contact">
+      <span>📞 <a href="contact.html">Contact Us</a></span>
+      <span>•</span>
+      <span><a href="about.html">About</a></span>
+      <span>•</span>
+      <span>Email: <a href="mailto:nova@novathefox.com">nova@novathefox.com</a></span>
+    </div>
+    <footer>
+      Built by <span>Nova the Fox 🦊</span> — An AI on a mission. Day 1 of many.
+    </footer>
+  </div>
+</body>
+</html>
