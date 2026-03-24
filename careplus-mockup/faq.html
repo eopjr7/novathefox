@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - CarePlus Home Care</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f1419;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1f2e 0%, #0f1419 100%);
+            padding: 1rem 0;
+            border-bottom: 2px solid #ff6b35;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b35;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "❤️";
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #1a1f2e 0%, #2d3142 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid #ff6b35;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-hero p {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+
+        .faq-category h2 {
+            font-size: 1.5rem;
+            color: #ff6b35;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #ff6b35;
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, #1a1f2e 0%, #252d3d 100%);
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1f2e 0%, #252d3d 100%);
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #252d3d 0%, #2d3642 100%);
+        }
+
+        .faq-question h3 {
+            color: #ff6b35;
+            font-size: 1.1rem;
+            text-align: left;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #ff6b35;
+            margin-left: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle.open {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.open {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .faq-answer strong {
+            color: #ff6b35;
+        }
+
+        footer {
+            background: #0a0e14;
+            padding: 2rem;
+            text-align: center;
+            color: #808080;
+            border-top: 2px solid #ff6b35;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #ff6b35;
+            text-decoration: none;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8555 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            color: #0f1419;
+            margin-top: 3rem;
+        }
+
+        .cta-box h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-box p {
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            background: #0f1419;
+            color: #ff6b35;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #1a1f2e;
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .faq-toggle {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">CarePlus</a>
+            <div>
+                <a href="index.html#services">Services</a>
+                <a href="services.html">Details</a>
+                <a href="index.html">Home</a>
+                <a href="index.html" class="cta-button">Get Started</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to common questions about our services and care options</p>
+    </section>
+
+    <div class="content">
+        <div class="faq-category">
+            <h2>About Our Services</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What areas do you serve in Milwaukee?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We provide care throughout Milwaukee and surrounding areas including Shorewood, Wauwatosa, Brookfield, Elm Grove, Waukesha, Menomonee Falls, and more. If you're not sure if we serve your area, <strong>chat with our AI assistant or call us at (414) 585-0083</strong>.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Do you offer 24/7 care?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We offer overnight care, live-in care, and round-the-clock arrangements. Our flexible scheduling allows us to match your family's specific needs, whether that's a few hours a week or full-time 24/7 support.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Are your caregivers background-checked and trained?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. All our caregivers undergo <strong>thorough background checks, drug screening, and reference verification</strong>. Many are certified nursing assistants (CNAs) or have specialized training in dementia care, post-surgery care, and more.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Is your care RN supervised?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. All care plans are developed and overseen by licensed Registered Nurses (RNs). This ensures medical safety and personalized care that adapts to your loved one's changing health needs.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2>Pricing & Insurance</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How much does home care cost?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Rates vary based on service type:</strong></p>
+                    <p>• Personal Care: $25-$35/hour<br>
+                    • Overnight Care: $150-$250/night<br>
+                    • Live-In Care: $2,500-$4,500/month<br>
+                    • Dementia Care: $30-$50/hour</p>
+                    <p>These are average ranges. <strong>Schedule a free assessment to get a personalized quote</strong> for your situation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Do you accept insurance or Medicaid?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We work with several insurance plans and Medicaid programs. However, many families use <strong>private pay</strong> for flexibility and choice. Our care specialists can discuss payment options and help you explore benefits you may qualify for. <strong>Call us to discuss your specific situation</strong>.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Is there a minimum number of hours I need to book?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We're flexible! Minimum hours vary depending on the service. Some families start with just a few hours per week for companionship or light help, while others need full-time care. Our specialists will work with you to create an arrangement that fits your needs and budget.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2>Getting Started</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I schedule a free assessment?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>It's easy! You can:</p>
+                    <p>• <strong>Call us:</strong> (414) 585-0083<br>
+                    • <strong>Use our AI chat:</strong> Available 24/7 on the homepage<br>
+                    • <strong>Fill out a contact form:</strong> We'll reach out within 2 hours</p>
+                    <p>During the assessment, we'll understand your loved one's needs, discuss care options, and provide a personalized care plan.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How quickly can you start providing care?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>In most cases, we can <strong>begin care within 3-5 business days</strong>. For urgent situations (post-hospital discharge, sudden caregiving need), we may be able to arrange care even faster. <strong>Ask about our emergency care options</strong>.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I meet my caregiver before they start?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We believe the relationship between your loved one and their caregiver is crucial. Before care begins, you'll meet your assigned caregiver and have the opportunity to ensure it's a good fit. If you'd prefer a different caregiver, we can arrange that.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What if I'm not satisfied with the care?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Your satisfaction is our priority. If you're not happy with your caregiver or care plan, <strong>contact us immediately</strong>. We'll work to resolve the issue or arrange a different caregiver at no additional cost. We're committed to your loved one's well-being.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2>Specialized Care</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Do you have caregivers trained in dementia care?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes. We have <strong>specialized caregivers trained in Alzheimer's and dementia care</strong>. They understand behavioral challenges, memory loss, and use evidence-based techniques to provide comfort and safety. We offer both part-time and live-in dementia care options.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can you help with post-surgery recovery?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. Our post-surgery care includes wound care support, mobility assistance, medication management, and coordination with your healthcare team. We help ensure smooth recovery right in your home.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Do you provide care for veterans?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We specialize in veteran care and understand the unique needs and benefits available to veterans. <strong>Ask us about VA benefits, Aid & Attendance programs, and veteran-specific support</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h3>Still Have Questions?</h3>
+            <p>Our AI assistant is available 24/7, or speak with a care specialist right now.</p>
+            <button class="cta-button">💬 Chat with AI Assistant</button>
+            <p style="margin-top: 1rem; font-size: 0.95rem;">Phone: (414) 585-0083</p>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>CarePlus Home Care</strong></p>
+        <p>Professional RN-Supervised Care in Milwaukee & Surrounding Areas</p>
+        <p style="margin-top: 1rem;">
+            <a href="index.html">Home</a> | 
+            <a href="services.html">Services</a> | 
+            <a href="#">Contact</a> | 
+            <a href="#">Privacy Policy</a>
+        </p>
+        <p style="margin-top: 1rem; color: #666;">© 2026 CarePlus. Licensed & Insured.</p>
+    </footer>
+
+    <script>
+        function toggleFaq(element) {
+            const question = element;
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer) {
+                    item.classList.remove('open');
+                    item.previousElementSibling.querySelector('.faq-toggle').classList.remove('open');
+                }
+            });
+
+            // Toggle current FAQ
+            answer.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

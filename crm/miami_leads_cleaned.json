@@ -1,0 +1,2166 @@
+{
+  "high_priority": [
+    {
+      "name": "Camila's Restaurante Brasileiro",
+      "category": "restaurant",
+      "phone": "+1 305-375-0992",
+      "email": "",
+      "address": "129 Southeast 1st Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "3 Chefs Chinese & Vietnamese Food",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "1800 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "La Bottega",
+      "category": "cafe",
+      "phone": "+1 305 603 1003",
+      "email": "",
+      "address": "1800 North Bayshore Drive, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Monty's",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "2550 South Bayshore Drive, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Grove Bay Grill",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "3381 Pan American Drive, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Mary's Cafeteria",
+      "category": "cafe",
+      "phone": "+1 305 443-6672",
+      "email": "",
+      "address": "2542 Southwest 27th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Akashi Japanese Restaurant",
+      "category": "restaurant",
+      "phone": "+1-305-529-9954",
+      "email": "",
+      "address": "3444 Main Hwy, Miami",
+      "has_website": false
+    },
+    {
+      "name": "La Moon",
+      "category": "restaurant",
+      "phone": "+1-305-860-6209",
+      "email": "",
+      "address": "97 Southwest 8th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Sykes Ace Hardware",
+      "category": "doityourself",
+      "phone": "+1 305-754-2556",
+      "email": "",
+      "address": "284 Northeast 79th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Wynwood Cafe",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "450 Northwest 27th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Clean Start Total Body Cleansing",
+      "category": "massage",
+      "phone": "",
+      "email": "",
+      "address": "6901 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Harry's Pizzeria",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "3918 North Miami Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Rubio's",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "3201 North Miami Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Libreri Mapou Bookstore",
+      "category": "books",
+      "phone": "",
+      "email": "",
+      "address": "5919 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Ross",
+      "category": "department_store",
+      "phone": "+1 305-576-8569",
+      "email": "",
+      "address": "3401 North Miami Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Flavorish Market",
+      "category": "convenience",
+      "phone": "",
+      "email": "",
+      "address": "7283 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Europa Car Wash & Cafe",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "6075 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Mmmm",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "2519 Northwest 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Little Bread Cuban Sandwich Co.",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "541 Southwest 12th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Ducati Miami",
+      "category": "motorcycle",
+      "phone": "",
+      "email": "",
+      "address": "2825 Northwest 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Jacalito Taqueria",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "3622 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Sedano's Supermarket",
+      "category": "supermarket",
+      "phone": "",
+      "email": "",
+      "address": "3801 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Electric Avenue - Camera/Electronics Superstore",
+      "category": "photo",
+      "phone": "+1-305-579-5998",
+      "email": "",
+      "address": "259 East Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Marazul Charters",
+      "category": "travel_agency",
+      "phone": "+1-305-559-7114",
+      "email": "",
+      "address": "771 Northwest 37th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Government Discount",
+      "category": "variety_store",
+      "phone": "",
+      "email": "",
+      "address": "3709 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The River Oyster Bar",
+      "category": "restaurant",
+      "phone": "+1 305-530-1915",
+      "email": "",
+      "address": "33 Southeast 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Siam Rice Thai and Sushi",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "7941 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Serendipity",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "421 Northwest 26th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Hannah Bella",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "2600 Northwest 5th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Bethel Fashion",
+      "category": "clothes",
+      "phone": "+1 305 573 2122",
+      "email": "",
+      "address": "2503 Northwest 5th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "ENT Summit Inc",
+      "category": "clothes",
+      "phone": "+1 305 576 2721",
+      "email": "",
+      "address": "2505 Northwest 5th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "D&M Wholesale Linen and Beauty",
+      "category": "clothes",
+      "phone": "+1 305 576 3554",
+      "email": "",
+      "address": "2501 Northwest 5th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Le Cafe de Louison",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "860 NE Northeast 79th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Smoothie King",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "248 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Tattoo & Co",
+      "category": "tattoo",
+      "phone": "+1-305-485-0770",
+      "email": "",
+      "address": "2679 Northwest 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Triple Triumph Miami",
+      "category": "car",
+      "phone": "+1-786-621-1105",
+      "email": "",
+      "address": "4751 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Ross",
+      "category": "department_store",
+      "phone": "+1 786-206-3701",
+      "email": "",
+      "address": "234 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Market",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "Coconut Grove, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Thank You Miami",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "1663 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Suite Havana Caf\u00e9",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "2609 North Miami Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Mister Block Cafe",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "2621 Northwest 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Barzola",
+      "category": "restaurant",
+      "phone": "+1-305-446-2006",
+      "email": "",
+      "address": "4860 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "G Spot",
+      "category": "restaurant",
+      "phone": "+1-786-703-8762",
+      "email": "",
+      "address": "4545 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Mr. Bing",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "56 Northwest 29th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "La Granja",
+      "category": "restaurant",
+      "phone": "+1 305-642-4517",
+      "email": "",
+      "address": "1199 Northwest 42nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Roma Bakery",
+      "category": "bakery",
+      "phone": "",
+      "email": "",
+      "address": "4897 Southwest 8th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Versailles Bakery",
+      "category": "bakery",
+      "phone": "",
+      "email": "",
+      "address": "3501 Southwest 8th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Area 31 - Epic Hotel",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "270 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Capital Grille",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "444 Brickell Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Crust",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "668 Northwest 5th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Ferraro\u2019s kitchen",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "1099 Northeast 79th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Genuine Pizza",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "2996 McFarlane Road, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Rusty Pelican",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "3201 Rickenbacker Causeway, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Jar and Fork",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "270 East Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Manna Life Food",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "80 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Soles Inc",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "3030 Grand Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Sneak Attack Miami",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "2519 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Deciem",
+      "category": "gift",
+      "phone": "+1 760 870 4893",
+      "email": "",
+      "address": "172 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Wynwood Smoke and Lounge",
+      "category": "restaurant",
+      "phone": "+1-305-394-9966",
+      "email": "",
+      "address": "320 Northwest 24th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Gramps Getaway",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "3301 Rickenbacker Causeway, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Salty Donut",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "50 Northwest 23rd Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Madrid Restaurant",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "545 Northwest 42nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "El Gladiolo Florist",
+      "category": "florist",
+      "phone": "",
+      "email": "",
+      "address": "246 Northwest 42nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Le Jeune Food Store",
+      "category": "convenience",
+      "phone": "",
+      "email": "",
+      "address": "298 Northwest 42nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Henry",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "701 South Miami Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Plumbers of miami",
+      "category": "plumber",
+      "phone": "",
+      "email": "",
+      "address": "1134 Southwest 10th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Porcelanosa",
+      "category": "kitchen",
+      "phone": "",
+      "email": "",
+      "address": "3705 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Variedades Isayana",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "1640 Northwest 17th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Safeguard Self Storage",
+      "category": "storage_rental",
+      "phone": "",
+      "email": "",
+      "address": "800 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Cricket Wireless",
+      "category": "mobile_phone",
+      "phone": "",
+      "email": "",
+      "address": "6878 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Bellacapri Italian Restaurant",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "5749 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Oportun",
+      "category": "money_lender",
+      "phone": "",
+      "email": "",
+      "address": "5753 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "SalonCentric",
+      "category": "hairdresser_supply",
+      "phone": "",
+      "email": "",
+      "address": "Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "GNC",
+      "category": "nutrition_supplements",
+      "phone": "",
+      "email": "",
+      "address": "5757 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Chicken Kitchen",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "5765 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Amscot",
+      "category": "money_lender",
+      "phone": "",
+      "email": "",
+      "address": "5763 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Giardino Gourmet Salads",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "5787 Northwest 7th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Abana Auto",
+      "category": "car_repair",
+      "phone": "",
+      "email": "",
+      "address": "222 Southwest 22nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Mi Rinconcito Mexicano",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "1961 Southwest 8th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Minimarket La Gata",
+      "category": "convenience",
+      "phone": "",
+      "email": "",
+      "address": "2187 Southwest 1st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Chavela Concept Dollar Store",
+      "category": "variety_store",
+      "phone": "",
+      "email": "",
+      "address": "1774 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Hispanic Dollar",
+      "category": "variety_store",
+      "phone": "",
+      "email": "",
+      "address": "1608 Southwest 1st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Bargain Box Thrift Shop",
+      "category": "charity",
+      "phone": "",
+      "email": "",
+      "address": "1350 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Estaci\u00f3n del Le\u00f3n",
+      "category": "convenience",
+      "phone": "",
+      "email": "",
+      "address": "1308 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Alexa's Minimarket",
+      "category": "convenience",
+      "phone": "",
+      "email": "",
+      "address": "200 Southwest 12th Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Criollo Supermarket",
+      "category": "supermarket",
+      "phone": "+1-305-649-1359",
+      "email": "",
+      "address": "1651 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Smoothie Spot",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "228 Northeast 1st Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Shoe Gallery",
+      "category": "shoes",
+      "phone": "",
+      "email": "",
+      "address": "236 Northeast 1st Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "ODDS",
+      "category": "clothes",
+      "phone": "+1-786-452-7030",
+      "email": "",
+      "address": "3850 North Miami Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Don Bailey",
+      "category": "carpet",
+      "phone": "",
+      "email": "",
+      "address": "8300 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Saint Michael Locksmith",
+      "category": "locksmith",
+      "phone": "+1-786-721-7676",
+      "email": "",
+      "address": "1630 Northwest 19th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Doughnut Break",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "1653 North Miami Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Budget Hardware",
+      "category": "doityourself",
+      "phone": "+1 305-379-5444",
+      "email": "",
+      "address": "1644 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Luh Crew",
+      "category": "tattoo",
+      "phone": "",
+      "email": "",
+      "address": "1270 Northwest 29th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "THEARSENALE",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "69 Northeast 41st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "TAG Heuer",
+      "category": "watches",
+      "phone": "",
+      "email": "",
+      "address": "3821 Northeast 1st Court, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Giorgio Armani",
+      "category": "clothes",
+      "phone": "+1 786 501 7215",
+      "email": "",
+      "address": "174 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Reformation",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "3911 Northeast 1st Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "POLIFORM",
+      "category": "yes",
+      "phone": "+1-305-573-9950",
+      "email": "",
+      "address": "4100 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Maison Margiela",
+      "category": "clothes",
+      "phone": "+1-786-718-1931",
+      "email": "",
+      "address": "3930 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "IGK SALON",
+      "category": "hairdresser",
+      "phone": "",
+      "email": "",
+      "address": "3930 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Holly Hunt",
+      "category": "yes",
+      "phone": "",
+      "email": "",
+      "address": "3833 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Warby Parker",
+      "category": "optician",
+      "phone": "",
+      "email": "",
+      "address": "80 Northeast 41st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "YOSO Sushi",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "87 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Nina & Loli",
+      "category": "yes",
+      "phone": "",
+      "email": "",
+      "address": "84 Northeast 41st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Re/done",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "99 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "CAJA CALIENTE TRUCK",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "95 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Ba&sh",
+      "category": "clothes",
+      "phone": "+1-786-803-8673",
+      "email": "",
+      "address": "106 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Omega",
+      "category": "watches",
+      "phone": "+1-786-452-1498",
+      "email": "",
+      "address": "111 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Boffi | De Padova Miami",
+      "category": "furniture",
+      "phone": "+1-786-692-9661",
+      "email": "",
+      "address": "80 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "RAG & BONE",
+      "category": "clothes",
+      "phone": "+1-786-497-5424",
+      "email": "",
+      "address": "89 Northeast 41st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Sephora",
+      "category": "cosmetics",
+      "phone": "",
+      "email": "",
+      "address": "90 Northeast 41st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "THREADCOUNT",
+      "category": "yes",
+      "phone": "+1-305-576-5500",
+      "email": "",
+      "address": "125 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Isabel Marant",
+      "category": "yes",
+      "phone": "+1-305-576-7180",
+      "email": "",
+      "address": "175 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Thom Browne",
+      "category": "clothes",
+      "phone": "+1-305-603-8287",
+      "email": "",
+      "address": "191 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Alice + Olivia",
+      "category": "clothes",
+      "phone": "+1-305-375-6056",
+      "email": "",
+      "address": "3922 Northeast 1st Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Minotti Miami",
+      "category": "yes",
+      "phone": "",
+      "email": "",
+      "address": "3801 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "LUMINAIRE LAB",
+      "category": "furniture",
+      "phone": "+1-305-576-5788",
+      "email": "",
+      "address": "3901 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Italian Luxury Design",
+      "category": "kitchen",
+      "phone": "+1-786-888-2290",
+      "email": "",
+      "address": "4 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "4141 DESIGN",
+      "category": "furniture",
+      "phone": "+1-305-572-2900",
+      "email": "",
+      "address": "32 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "bulthaup",
+      "category": "kitchen",
+      "phone": "+1-305-573-7771",
+      "email": "",
+      "address": "3805 Northeast Miami Court, Miami",
+      "has_website": false
+    },
+    {
+      "name": "LUXURY LIVING SHOWROOM",
+      "category": "furniture",
+      "phone": "+1-305-438-1660",
+      "email": "",
+      "address": "50 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "SIMONETT",
+      "category": "yes",
+      "phone": "",
+      "email": "",
+      "address": "88 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Stefano Ricci",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "120 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Louis Vuitton",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "140 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Tory Burch",
+      "category": "clothes",
+      "phone": "+1-305-573-6024",
+      "email": "",
+      "address": "170 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "WATERWORKS",
+      "category": "bathroom_furnishing",
+      "phone": "+1-305-573-7593",
+      "email": "",
+      "address": "167 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "MONTCE",
+      "category": "clothes",
+      "phone": "+1-786-615-3199",
+      "email": "",
+      "address": "3810 Northeast 1st Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Marc Jacobs",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "99 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Zadig & Voltaire",
+      "category": "clothes",
+      "phone": "+1-786-773-5183",
+      "email": "",
+      "address": "102 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Givenchy",
+      "category": "clothes",
+      "phone": "+1-305-576-6250",
+      "email": "",
+      "address": "102 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "H\u00c4STENS BEDS",
+      "category": "bed",
+      "phone": "+1-305-615-2002",
+      "email": "",
+      "address": "112 Northeast 41st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Rimowa",
+      "category": "bag",
+      "phone": "+1-305-576-2081",
+      "email": "",
+      "address": "115 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Loewe",
+      "category": "yes",
+      "phone": "",
+      "email": "",
+      "address": "112 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Oliver Peoples",
+      "category": "optician",
+      "phone": "+1-305-576-6759",
+      "email": "",
+      "address": "130 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "MONICA JAMES",
+      "category": "yes",
+      "phone": "",
+      "email": "",
+      "address": "131 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Shade Store",
+      "category": "window_blind",
+      "phone": "+1-786-577-4293",
+      "email": "",
+      "address": "135 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "LIAIGRE",
+      "category": "yes",
+      "phone": "+1-305-808-3550",
+      "email": "",
+      "address": "137 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Cartier",
+      "category": "jewelry",
+      "phone": "+1-305-864-8793",
+      "email": "",
+      "address": "147 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Herm\u00e8s",
+      "category": "clothes",
+      "phone": "+1 305-868 0118",
+      "email": "",
+      "address": "163 Northeast 39th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Simona's",
+      "category": "yes",
+      "phone": "+1-786-801-0116",
+      "email": "",
+      "address": "162 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Salvatore Ferragamo",
+      "category": "shoes",
+      "phone": "+1-305-571-1961",
+      "email": "",
+      "address": "170 Northeast 40th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "ARMANI/CASA",
+      "category": "furniture",
+      "phone": "+1-786-687-7003",
+      "email": "",
+      "address": "3820 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Chrome Hearts",
+      "category": "yes",
+      "phone": "+1-786-953-7384",
+      "email": "",
+      "address": "4025 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Miami Luxe Cars",
+      "category": "car",
+      "phone": "+1 844-344-6688",
+      "email": "",
+      "address": "660 Northwest 71st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Plant the Future",
+      "category": "florist",
+      "phone": "",
+      "email": "",
+      "address": "8484 Northeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Lucio",
+      "category": "wine",
+      "phone": "",
+      "email": "",
+      "address": "205 Northeast 82nd Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Miami Luxe Cars",
+      "category": "car",
+      "phone": "+1 844-344-6688",
+      "email": "",
+      "address": "416 Northwest 79th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "D\u014dma",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "35 Northeast 26th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Meraki Greek Bistro",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "142 Southeast 1st Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Blackbird Ordinary",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "729 Southwest 1st Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Taco Stand",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "313 Northwest 25th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "MIAM",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "2750 Northwest 3rd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Cafe Galleria",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "69 Southeast 1st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Cafe Croissant",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "1684 Southwest 22nd Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "La Colada Gourmet",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "1518 Southwest 8th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Atlantis Cafe",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "12 Northwest 1st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "La Granja",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "127 Southeast 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Arketekt by Aficionados",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "1200 Brickell Bay Drive, Miami",
+      "has_website": false
+    },
+    {
+      "name": "El Pub Restaurant",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "1548 Southwest 8th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Laid Fresh",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "240 Northwest 24th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Coin Laundry of America",
+      "category": "laundry",
+      "phone": "",
+      "email": "",
+      "address": "1663 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Yisell Bakery & Coffee",
+      "category": "bakery",
+      "phone": "+1-305-856-8141",
+      "email": "",
+      "address": "1356 , Miami",
+      "has_website": false
+    },
+    {
+      "name": "Government Center 1st Floor",
+      "category": "ticket",
+      "phone": "",
+      "email": "",
+      "address": "Northwest 1st Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Salvation Army",
+      "category": "charity",
+      "phone": "",
+      "email": "",
+      "address": "2236 Northwest 23rd Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Clive's Cafe",
+      "category": "restaurant",
+      "phone": "+1 305 757 6512",
+      "email": "",
+      "address": "5890 Northwest 2nd Avenue, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Opera House",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "1750 North Bayshore Drive, Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Daily Creative Food Co.",
+      "category": "restaurant",
+      "phone": "+1-305-573-4535",
+      "email": "",
+      "address": "2001 Biscayne Boulevard, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Adrenaline Motor Bikes Shop",
+      "category": "motorcycle",
+      "phone": "+1-305-754-9559",
+      "email": "",
+      "address": "830 Northeast 79th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "La Palma",
+      "category": "restaurant",
+      "phone": "+1-305-261-1113",
+      "email": "",
+      "address": "6091 Southwest 8th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Rincon Antioque\u00f1o",
+      "category": "restaurant",
+      "phone": "+1-305-262-1515",
+      "email": "",
+      "address": "6521 Southwest 8th Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Rey's Pizza",
+      "category": "restaurant",
+      "phone": "+1-305-856-7535",
+      "email": "",
+      "address": "2391 West Flagler Street, Miami",
+      "has_website": false
+    },
+    {
+      "name": "Montes de Oca",
+      "category": "restaurant",
+      "phone": "+1-305-567-0306",
+      "email": "",
+      "address": "5241 Southwest 8th Street, Miami",
+      "has_website": false
+    }
+  ],
+  "other": [
+    {
+      "name": "The Grove Spot",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "GreenStreet",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Barracuda",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "El Cartel Colombian Restaurant",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Wok Town",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Giardino Gourmet Salads",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "New York Bagel Deli",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Iron Sushi",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Tre Italian Bistro",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Sushi Sake",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Munchies at Brickell",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Chick'n Grill",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "La Provence French Bakery",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Au Bon Pain",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Smoothie King",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "P.F. Chang's",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Midas",
+      "category": "car_repair",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "East Side Pizza",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Jugofresh",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "west elm",
+      "category": "furniture",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Via Verdi",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Ball & Chain",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Los Amigos Supermarket",
+      "category": "supermarket",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Au Bon Pain",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Cake Thai",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Loud Girl Exchange",
+      "category": "second_hand",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "guarapo",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Miami Lashes",
+      "category": "beauty",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Lbk Shoes Corp",
+      "category": "shoes",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Wynwood Diner",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Bianchini Mercato",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Le Cafe de louison",
+      "category": "bakery",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Vapiano",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "El Taquitos",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Lulu",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Peruano",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Wet Bar",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "JC Nails",
+      "category": "beauty",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Orlando Optical",
+      "category": "optician",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "VA LA",
+      "category": "photo",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Biscayne Bay Boat Tours - Miami Aqua Tours",
+      "category": "travel_agency",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Calle Ocho",
+      "category": "convenience",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Carter's",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Marshalls",
+      "category": "department_store",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Pollos & Jarras",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Kick Off Sports Bar and Grill",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "El Nuevo Siglo",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Latin American Cuisine",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Garc\u00eda,s Seafood",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Juan Valdez Caf\u00e9",
+      "category": "coffee",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Latin American",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Museum Shop",
+      "category": "gift",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Verde",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Suviche",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Hereford Grill",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Schnitzel House",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Clos Bistro & Cafe",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Juan Valdez Caf\u00e9",
+      "category": "coffee",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Planet Smoothie",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "The Butcher Shop",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "La Province",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "OTL",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Coyo Taco",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Scotch & Soda",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Mojitobar",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Honey Tree",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Coconut Grove Farmers Market",
+      "category": "farm",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Atlantica Seafood Restaurant and Market",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Miami Motostop",
+      "category": "motorcycle",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "DOYA",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Nusr-Et",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "GNC",
+      "category": "nutrition_supplements",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "concesionaria",
+      "category": "car",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "American Social",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "GK Bistronomie",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Gramps",
+      "category": "bar",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Naomi\u2019s Garden Restaurant & Lounge",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Velvet Creme",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Laundro Mart",
+      "category": "laundry",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Chili's",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Los Nuevos Jarritos",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Fiesta Caf\u00e9 Shop",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Party City",
+      "category": "party",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Yambo",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "305 Peruvian Modern Cuisine",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Fritanga La Gata",
+      "category": "fast_food",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Upper Buena Vista",
+      "category": "mall",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "ZOI Restaurant & Lounge",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Mas por Menos Inc",
+      "category": "clothes",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Boteco",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Coffee Shop Ground Floor",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Joe & The Juice",
+      "category": "cafe",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "\u00abIl Gabbiano\u00bb",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Love Life Caf\u00e9",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Taula",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Namira",
+      "category": "convenience",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    },
+    {
+      "name": "Beaker and gray",
+      "category": "restaurant",
+      "phone": "",
+      "email": "",
+      "address": "Miami",
+      "has_website": false
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - CarePlus Home Care</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f1419;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1f2e 0%, #0f1419 100%);
+            padding: 1rem 0;
+            border-bottom: 2px solid #ff6b35;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b35;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "❤️";
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #1a1f2e 0%, #2d3142 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid #ff6b35;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-hero p {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .service-section {
+            background: linear-gradient(135deg, #1a1f2e 0%, #252d3d 100%);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 5px solid #ff6b35;
+        }
+
+        .service-section h2 {
+            font-size: 1.8rem;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .service-section p {
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+        }
+
+        .service-details {
+            background: rgba(255, 107, 53, 0.05);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .detail-item {
+            margin-bottom: 0.8rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .detail-item strong {
+            color: #ff6b35;
+            min-width: 120px;
+        }
+
+        .cta-button {
+            background: #ff6b35;
+            color: #0f1419;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            background: #ff8555;
+        }
+
+        footer {
+            background: #0a0e14;
+            padding: 2rem;
+            text-align: center;
+            color: #808080;
+            border-top: 2px solid #ff6b35;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #ff6b35;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">CarePlus</a>
+            <div>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#why">Why Us</a>
+                <a href="faq.html">FAQ</a>
+                <a href="index.html" class="cta-button">Get Started</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1>Our Care Services</h1>
+        <p>Comprehensive home care solutions tailored to your family's needs</p>
+    </section>
+
+    <div class="content">
+        <div class="service-section">
+            <h2>🛁 Personal Care Services</h2>
+            <p>Our caregivers provide compassionate assistance with daily living activities, helping your loved one maintain dignity and independence.</p>
+            <div class="service-details">
+                <div class="detail-item">
+                    <strong>Includes:</strong>
+                    <div>Bathing, dressing, grooming, toileting, medication reminders, meal prep, light housekeeping</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Availability:</strong>
+                    <div>Hourly, daily, or full-time arrangements</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Cost Range:</strong>
+                    <div>$25-$35/hour (depends on service level)</div>
+                </div>
+                <button class="cta-button">Learn More & Schedule Assessment</button>
+            </div>
+        </div>
+
+        <div class="service-section">
+            <h2>🧠 Alzheimer's & Dementia Care</h2>
+            <p>Specialized care for clients with memory loss and cognitive decline. Our trained caregivers use proven techniques to provide comfort and safety.</p>
+            <div class="service-details">
+                <div class="detail-item">
+                    <strong>Includes:</strong>
+                    <div>Behavioral support, memory activities, safety monitoring, structured routines, family counseling</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Availability:</strong>
+                    <div>24-hour care, live-in options available</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Cost Range:</strong>
+                    <div>$30-$50/hour (specialized training included)</div>
+                </div>
+                <button class="cta-button">Discuss Dementia Care Options</button>
+            </div>
+        </div>
+
+        <div class="service-section">
+            <h2>🌙 Overnight Care Services</h2>
+            <p>Professional overnight companions provide peace of mind for families needing nighttime support and monitoring.</p>
+            <div class="service-details">
+                <div class="detail-item">
+                    <strong>Includes:</strong>
+                    <div>Overnight monitoring, fall prevention, medication assistance, mobility help, emergency response</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Duration:</strong>
+                    <div>10 PM - 6 AM (or custom schedule)</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Cost Range:</strong>
+                    <div>$150-$250 per night</div>
+                </div>
+                <button class="cta-button">Get Overnight Care Pricing</button>
+            </div>
+        </div>
+
+        <div class="service-section">
+            <h2>🏠 Live-In Care</h2>
+            <p>Full-time, in-home care with a dedicated caregiver living with your loved one. Perfect for those needing 24/7 support.</p>
+            <div class="service-details">
+                <div class="detail-item">
+                    <strong>Includes:</strong>
+                    <div>All personal care, meal prep, medication management, transportation, housekeeping, companionship</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Duration:</strong>
+                    <div>24/7 live-in arrangement</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Cost Range:</strong>
+                    <div>$2,500-$4,500/month (depends on location & care needs)</div>
+                </div>
+                <button class="cta-button">Explore Live-In Options</button>
+            </div>
+        </div>
+
+        <div class="service-section">
+            <h2>🏥 Post-Hospital & Recovery Care</h2>
+            <p>Specialized care during recovery from surgery or illness. We work with your healthcare team to ensure proper rehabilitation.</p>
+            <div class="service-details">
+                <div class="detail-item">
+                    <strong>Includes:</strong>
+                    <div>Wound care support, mobility assistance, physical therapy coordination, medical equipment help, pain management</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Availability:</strong>
+                    <div>Short-term or long-term arrangements</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Cost Range:</strong>
+                    <div>$28-$40/hour</div>
+                </div>
+                <button class="cta-button">Schedule Recovery Care Consultation</button>
+            </div>
+        </div>
+
+        <div class="service-section">
+            <h2>❤️ Companion Care & Engagement</h2>
+            <p>Social engagement and companionship to reduce isolation and support mental well-being. Often the most valued service by families.</p>
+            <div class="service-details">
+                <div class="detail-item">
+                    <strong>Includes:</strong>
+                    <div>Conversation & engagement, outings & errands, hobby activities, appointment transportation, social support</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Availability:</strong>
+                    <div>Flexible hourly or daily schedules</div>
+                </div>
+                <div class="detail-item">
+                    <strong>Cost Range:</strong>
+                    <div>$20-$30/hour</div>
+                </div>
+                <button class="cta-button">Arrange Companion Care</button>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin-top: 3rem; margin-bottom: 2rem; font-size: 1.8rem; color: #ffffff;">Ready to Get Started?</h2>
+        <div style="text-align: center; background: linear-gradient(135deg, #ff6b35 0%, #ff8555 100%); padding: 2rem; border-radius: 8px; color: #0f1419;">
+            <h3 style="margin-bottom: 1rem;">Get a Free Care Assessment Today</h3>
+            <p style="margin-bottom: 1.5rem;">No obligation. Our specialists will help you find the perfect care solution for your loved one.</p>
+            <button style="background: #0f1419; color: #ff6b35; padding: 1rem 2.5rem; border: none; border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer;">
+                📞 (414) 585-0083 — Call Now
+            </button>
+            <p style="margin-top: 1rem; font-size: 0.95rem;">Or use our 24/7 AI chat assistant on the homepage</p>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>CarePlus Home Care</strong></p>
+        <p>Professional RN-Supervised Care in Milwaukee & Surrounding Areas</p>
+        <p style="margin-top: 1rem;">
+            <a href="index.html">Home</a> | 
+            <a href="#">Contact</a> | 
+            <a href="#">Privacy Policy</a>
+        </p>
+        <p style="margin-top: 1rem; color: #666;">© 2026 CarePlus. Licensed & Insured.</p>
+    </footer>
+</body>
+</html>

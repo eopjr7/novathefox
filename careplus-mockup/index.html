@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarePlus - Professional Home Care Services in Milwaukee</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f1419;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1a1f2e 0%, #0f1419 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            border-bottom: 2px solid #ff6b35;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b35;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "❤️";
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        .cta-button {
+            background: #ff6b35;
+            color: #0f1419;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #ff8555;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1f2e 0%, #2d3142 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid #ff6b35;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: #0f1419;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: #ff8555;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ff6b35;
+            padding: 1rem 2.5rem;
+            border: 2px solid #ff6b35;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #ff6b35;
+            color: #0f1419;
+        }
+
+        /* Why Choose Us */
+        .why-choose {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+        }
+
+        .why-choose h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #1a1f2e 0%, #252d3d 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: linear-gradient(135deg, #1a1f2e 0%, #0f1419 100%);
+            padding: 4rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+
+        .services-list {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-item {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 1.5rem;
+            border-radius: 5px;
+            border: 1px solid #ff6b35;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 107, 53, 0.2);
+        }
+
+        .service-item h3 {
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+
+        /* AI Chatbot Section */
+        .chatbot-section {
+            background: linear-gradient(135deg, #252d3d 0%, #1a1f2e 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 2px dashed #ff6b35;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .chatbot-section h2 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .chatbot-demo {
+            background: #0f1419;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #ff6b35;
+            font-family: 'Courier New', monospace;
+        }
+
+        .chatbot-message {
+            text-align: left;
+            margin: 0.5rem 0;
+        }
+
+        .bot-msg {
+            color: #ff6b35;
+            margin-bottom: 0.3rem;
+        }
+
+        .user-msg {
+            color: #7dd3fc;
+            margin-left: 2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #1a1f2e 0%, #252d3d 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-text {
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            color: #ff6b35;
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8555 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #0f1419;
+        }
+
+        .final-cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .final-cta-btn {
+            background: #0f1419;
+            color: #ff6b35;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .final-cta-btn:hover {
+            background: #1a1f2e;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0e14;
+            padding: 2rem;
+            text-align: center;
+            color: #808080;
+            border-top: 2px solid #ff6b35;
+        }
+
+        footer a {
+            color: #ff6b35;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 0;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">CarePlus</a>
+            <div>
+                <a href="#services">Services</a>
+                <a href="#why">Why Us</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact" class="cta-button">Get Started</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Compassionate Home Care for Your Loved Ones</h1>
+            <p>24/7 Professional Care Services in Milwaukee & Surrounding Areas</p>
+            <p style="font-size: 0.95rem; color: #888; margin-bottom: 1.5rem;">Serving families for over 10+ years with trusted, reliable care</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">📞 Get Free Assessment</button>
+                <button class="btn-secondary">💬 Chat with AI Assistant</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose" id="why">
+        <h2>Why Choose CarePlus?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>RN Supervised</h3>
+                <p>Licensed nurses oversee all care plans with personalized attention</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🕐</div>
+                <h3>24/7 Availability</h3>
+                <p>Round-the-clock care options including overnight & live-in services</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered Support</h3>
+                <p>Ask questions anytime—instant answers to common care inquiries</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Vetted Caregivers</h3>
+                <p>Background checks, training certifications, and careful screening</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Flexible Pricing</h3>
+                <p>Options for hourly, daily, weekly, or full-time care arrangements</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">❤️</div>
+                <h3>Family-Focused</h3>
+                <p>We treat every client like family, with compassion & professional care</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <h2>Our Services</h2>
+        <div class="services-list">
+            <div class="service-item">
+                <h3>Personal Care</h3>
+                <p>Bathing, dressing, grooming, toileting assistance</p>
+            </div>
+            <div class="service-item">
+                <h3>Alzheimer's Care</h3>
+                <p>Specialized memory care & dementia support</p>
+            </div>
+            <div class="service-item">
+                <h3>Overnight Care</h3>
+                <p>Night companion & monitoring services</p>
+            </div>
+            <div class="service-item">
+                <h3>Live-In Care</h3>
+                <p>Full-time in-home care & companionship</p>
+            </div>
+            <div class="service-item">
+                <h3>Post-Surgery Care</h3>
+                <p>Recovery & rehabilitation assistance</p>
+            </div>
+            <div class="service-item">
+                <h3>Companion Care</h3>
+                <p>Social engagement & daily activity support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbot Showcase -->
+    <section class="chatbot-section">
+        <h2>🤖 Always Available — Ask Our AI Assistant</h2>
+        <p style="color: #b0b0b0; margin-bottom: 1rem;">24/7 Support Without Waiting</p>
+        <div class="chatbot-demo">
+            <div class="chatbot-message">
+                <div class="bot-msg">🤖 CarePlus AI Assistant: How can I help you today?</div>
+            </div>
+            <div class="chatbot-message">
+                <div class="user-msg">👤 What's the cost for overnight care?</div>
+            </div>
+            <div class="chatbot-message">
+                <div class="bot-msg">🤖 Overnight care typically ranges from $150-$250 per night, depending on service level. Would you like to book a free assessment?</div>
+            </div>
+            <div class="chatbot-message">
+                <div class="user-msg">👤 Do you serve Wauwatosa?</div>
+            </div>
+            <div class="chatbot-message">
+                <div class="bot-msg">🤖 Yes! We serve Milwaukee, Wauwatosa, Shorewood, Brookfield, and surrounding areas. Let me connect you with a care specialist.</div>
+            </div>
+        </div>
+        <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">💡 The AI handles 40% of inquiries instantly, so your team focuses on real clients</p>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>What Families Say</h2>
+        <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"CarePlus changed our lives. Mom's caregiver is not only professional but truly cares. We sleep well knowing she's in good hands."</p>
+            <p class="testimonial-author">— Sarah M., Milwaukee</p>
+        </div>
+        <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"Finding overnight care was stressful. CarePlus made it simple, and their AI chatbot answered questions instantly. Highly recommend!"</p>
+            <p class="testimonial-author">— David & Jennifer L., Brookfield</p>
+        </div>
+        <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"The vetting process is thorough, the staff is responsive, and Dad gets the exact care he needs. Best decision we made."</p>
+            <p class="testimonial-author">— Robert C., Wauwatosa</p>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" id="contact">
+        <h2>Let's Get Your Loved One the Care They Deserve</h2>
+        <p>Free 15-minute consultation with our care specialists</p>
+        <button class="final-cta-btn">📞 Schedule Your Assessment</button>
+        <p style="margin-top: 1rem; font-size: 0.95rem;">Or chat with our AI assistant 24/7 using the button on this page</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>CarePlus Home Care</strong></p>
+        <p>Milwaukee, WI | (414) 585-0083</p>
+        <p style="margin-top: 1rem;">
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Contact Us</a>
+        </p>
+        <p style="margin-top: 1rem; color: #666;">© 2026 CarePlus. Licensed & Insured. RN Supervised Care.</p>
+    </footer>
+</body>
+</html>

@@ -142,6 +142,7 @@ tr:hover td{background:var(--accent-glow)}
     </div>
     <div class="header-actions">
       <button class="btn btn-secondary" onclick="exportCSV()">⬇ Export CSV</button>
+      <button class="btn btn-secondary" onclick="if(confirm('Load 50 sample Miami leads? This will replace your current data.')){localStorage.removeItem(STORAGE_KEY);seedDefaultLeads();renderStats();renderLeads();}">🔄 Load Sample Data</button>
       <button class="btn btn-primary" onclick="openModal()">＋ Add Lead</button>
     </div>
   </header>
@@ -531,7 +532,7 @@ document.addEventListener('keydown', e => {
 // Seed default leads on first load
 function seedDefaultLeads() {
   const existing = localStorage.getItem(STORAGE_KEY);
-  if (existing && JSON.parse(existing).length > 0) return;
+  if (existing) { try { if (JSON.parse(existing).length > 0) return; } catch(e){} }
 
   const seed = [
     {id:genId(),name:"Camila's Restaurante Brasileiro",category:"Restaurant",phone:"+1 305-375-0992",email:"",social:"",address:"129 Southeast 1st Avenue, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — Brazilian cuisine",notes:"Source: OpenStreetMap data. Verify contact info.",dateAdded:"2026-03-24"},
