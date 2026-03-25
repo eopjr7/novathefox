@@ -134,6 +134,27 @@ tr:hover td{background:var(--accent-glow)}
   .toolbar{flex-direction:column}
   .search-box{min-width:100%}
 }
+/* Website badge link */
+.website-badge-link{text-decoration:none;cursor:pointer;transition:opacity .15s}
+.website-badge-link:hover{opacity:.8;text-decoration:underline}
+
+/* Photo count clickable */
+.photo-count-link{cursor:pointer;color:var(--text);transition:color .15s;text-decoration:none}
+.photo-count-link:hover{color:var(--accent2)}
+
+/* Lightbox */
+.lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1200;align-items:center;justify-content:center;flex-direction:column;padding:1rem}
+.lightbox-overlay.active{display:flex}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;font-size:2rem;padding:.5rem 1rem;cursor:pointer;border-radius:var(--radius-sm);transition:background .15s}
+.lightbox-nav:hover{background:rgba(255,255,255,.3)}
+.lightbox-nav.prev{left:1rem}
+.lightbox-nav.next{right:1rem}
+.lightbox-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:.5rem}
+.lightbox-label{color:var(--text2);font-size:.85rem;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.lightbox-img{max-width:90vw;max-height:70vh;border-radius:var(--radius);object-fit:contain}
+.lightbox-counter{color:var(--text3);font-size:.8rem;margin-top:.75rem}
+.lightbox-empty{color:var(--text3);font-size:1rem;text-align:center;padding:2rem}
+
 @media(max-width:480px){
   html{font-size:14px}
   .container{padding:.75rem}
@@ -263,10 +284,14 @@ tr:hover td{background:var(--accent-glow)}
           </div>
           <div class="form-group">
             <label>Website Status *</label>
-            <select id="fWebsite" required>
+            <select id="fWebsite" required onchange="toggleWebsiteUrl()">
               <option value="No Website">No Website</option>
               <option value="Has Website">Has Website</option>
             </select>
+          </div>
+          <div class="form-group" id="websiteUrlGroup" style="display:none">
+            <label>Website URL</label>
+            <input type="url" id="fWebsiteUrl" placeholder="https://example.com">
           </div>
           <div class="form-group">
             <label>Contact Status *</label>
@@ -327,6 +352,17 @@ tr:hover td{background:var(--accent-glow)}
       <button class="btn btn-secondary" onclick="closeDetail()">Close</button>
     </div>
   </div>
+</div>
+
+<!-- Photo Lightbox -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav prev" onclick="lightboxNav(-1)">&#8592;</button>
+  <button class="lightbox-nav next" onclick="lightboxNav(1)">&#8594;</button>
+  <div class="lightbox-label" id="lightboxLabel"></div>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+  <div class="lightbox-empty" id="lightboxEmpty" style="display:none">No photos available</div>
 </div>
 
 <div class="toast-container" id="toasts"></div>
@@ -464,8 +500,8 @@ function renderLeads() {
       <td>${esc(l.category || '—')}</td>
       <td>${l.phone ? '<a href="tel:' + esc(l.phone) + '">' + esc(l.phone) + '</a>' : '—'}</td>
       <td class="truncate">${l.email ? '<a href="mailto:' + esc(l.email) + '">' + esc(l.email) + '</a>' : '—'}</td>
-      <td><span class="website-badge ${l.website === 'No Website' ? 'website-no' : 'website-yes'}">${esc(l.website)}</span></td>
-      <td style="white-space:nowrap;font-size:.8rem">${photoCount}/5 📷</td>
+      <td>${l.website === 'Has Website' && l.websiteUrl ? '<a href="' + esc(l.websiteUrl) + '" target="_blank" class="website-badge-link"><span class="website-badge website-yes">' + esc(l.website) + '</span></a>' : '<span class="website-badge ' + (l.website === 'No Website' ? 'website-no' : 'website-yes') + '">' + esc(l.website) + '</span>'}</td>
+      <td style="white-space:nowrap;font-size:.8rem"><span class="photo-count-link" onclick="openLightbox('${l.id}')">${photoCount}/5 📷</span></td>
       <td style="white-space:nowrap;font-size:.8rem">${ratingDisplay}</td>
       <td><span class="status-badge ${statusClass(l.status)}">${esc(l.status)}</span></td>
       <td style="white-space:nowrap;font-size:.8rem;color:var(--text2)">${l.dateAdded ? new Date(l.dateAdded).toLocaleDateString() : '—'}</td>
@@ -496,6 +532,8 @@ function openModal(lead) {
   document.getElementById('fPhotoInterior').value = lead ? (lead.photoInterior||'') : '';
   document.getElementById('fPhotoOther').value = lead ? (lead.photoOther||'') : '';
   document.getElementById('fWebsite').value = lead ? lead.website : 'No Website';
+  document.getElementById('fWebsiteUrl').value = lead ? (lead.websiteUrl||'') : '';
+  toggleWebsiteUrl();
   document.getElementById('fStatus').value = lead ? lead.status : 'New';
   document.getElementById('fRating').value = lead && lead.rating ? lead.rating : '';
   document.getElementById('fReviews').value = lead && lead.reviews ? lead.reviews : '';
@@ -526,6 +564,7 @@ function saveLead(e) {
     photoInterior: document.getElementById('fPhotoInterior').value.trim(),
     photoOther: document.getElementById('fPhotoOther').value.trim(),
     website: document.getElementById('fWebsite').value,
+    websiteUrl: document.getElementById('fWebsiteUrl').value.trim(),
     status: document.getElementById('fStatus').value,
     rating: document.getElementById('fRating').value ? parseFloat(document.getElementById('fRating').value) : '',
     reviews: document.getElementById('fReviews').value ? parseInt(document.getElementById('fReviews').value) : '',
@@ -567,7 +606,7 @@ function viewLead(id) {
       ${field('Phone', l.phone)}
       ${field('Email', l.email)}
       ${field('Address', l.address)}
-      <div style="margin-bottom:.5rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">Website Status</span><br><span class="website-badge ${l.website === 'No Website' ? 'website-no' : 'website-yes'}">${esc(l.website)}</span></div>
+      <div style="margin-bottom:.5rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">Website Status</span><br>${l.website === 'Has Website' && l.websiteUrl ? '<a href="' + esc(l.websiteUrl) + '" target="_blank" class="website-badge-link"><span class="website-badge website-yes">' + esc(l.website) + '</span></a> <a href="' + esc(l.websiteUrl) + '" target="_blank" style="font-size:.8rem">' + esc(l.websiteUrl) + '</a>' : '<span class="website-badge ' + (l.website === 'No Website' ? 'website-no' : 'website-yes') + '">' + esc(l.website) + '</span>'}</div>
       <div style="margin-bottom:.5rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">Contact Status</span><br><span class="status-badge ${statusClass(l.status)}">${esc(l.status)}</span></div>
       ${parseFloat(l.rating) > 0 ? '<div style="margin-bottom:.5rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">Google Rating</span><br>⭐ ' + parseFloat(l.rating).toFixed(1) + (parseInt(l.reviews) > 0 ? ' (' + parseInt(l.reviews) + ' reviews)' : '') + '</div>' : ''}
     </div>
@@ -586,6 +625,7 @@ function viewLead(id) {
     ${field('Description', l.description)}
     ${field('Notes', l.notes)}
     ${field('Date Added', l.dateAdded ? new Date(l.dateAdded).toLocaleString() : '')}
+    ${l.address ? '<div style="margin-top:1rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">📍 Location</span><div style="margin-top:.5rem;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)"><iframe width="100%" height="250" frameborder="0" style="border:0;border-radius:var(--radius)" src="https://maps.google.com/maps?q=' + encodeURIComponent(l.address) + '&output=embed" allowfullscreen></iframe></div></div>' : ''}
   `;
   document.getElementById('detailModal').classList.add('active');
 }
@@ -633,7 +673,11 @@ document.getElementById('confirmDialog').addEventListener('click', e => { if (e.
 
 // Escape key
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeModal(); closeDetail(); closeConfirm(); }
+  if (e.key === 'Escape') { closeModal(); closeDetail(); closeConfirm(); closeLightbox(); }
+  if (document.getElementById('lightboxOverlay').classList.contains('active')) {
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+  }
 });
 
 // Seed default leads on first load
@@ -642,46 +686,105 @@ function seedDefaultLeads() {
   if (existing) { try { if (JSON.parse(existing).length > 0) return; } catch(e){} }
 
   const seed = [
-    {id:genId(),name:"Camila's Restaurante Brasileiro",category:"Restaurant",phone:"",email:"",address:"129 SE 1st Ave, Miami, FL",social:"",website:"No Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Brazilian cuisine in downtown Miami",notes:"Limited online presence. Needs manual Google Maps lookup.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"3 Chefs Chinese & Vietnamese Food",category:"Restaurant",phone:"",email:"",address:"1800 Biscayne Blvd Ste 105, Miami, FL 33132",social:"",website:"No Website",status:"New",rating:3.2,reviews:305,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Chinese & Vietnamese cuisine. 305 Yelp reviews, 471 Grubhub reviews",notes:"No website, uses delivery platforms only. Unclaimed Yelp profile. Potential lead.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"La Bottega on the Bay",category:"Cafe",phone:"",email:"",address:"1800 N Bayshore Dr, Miami, FL 33132",social:"facebook.com/labottegaonthebay",website:"No Website",status:"New",rating:0,reviews:20,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cafe on Biscayne Bay with Facebook presence",notes:"Website labottegaonthebay.com is dead (DNS fail). Active on Facebook. HOT LEAD for web rebuild.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Monty's Raw Bar",category:"Restaurant",phone:"+1-305-854-7997",email:"",address:"2550 S Bayshore Dr, Miami, FL 33133",social:"instagram.com/montysrawbar",website:"Has Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Iconic Coconut Grove seafood spot, est. 1969. Live music, boat mooring",notes:"Has website: montysrawbar.com + Instagram. Lower priority.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Grove Bay Grill",category:"Restaurant",phone:"+1-305-285-8853",email:"",address:"3381 Pan American Dr, Coconut Grove, FL 33133",social:"",website:"Has Website",status:"New",rating:3.6,reviews:135,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Seafood restaurant near Vizcaya Museum. Mixed reviews",notes:"3.6 stars, 135 TripAdvisor reviews. Has a website but URL unconfirmed.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Mary's Cafeteria",category:"Cafe",phone:"+1-305-443-6672",email:"",address:"2542 SW 27th Ave, Miami, FL",social:"",website:"No Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Small local cafeteria",notes:"Limited online presence. Potential lead — small businesses without web presence need digital services.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Akashi Japanese Restaurant",category:"Restaurant",phone:"+1-305-529-9954",email:"",address:"3444 Main Hwy, Miami, FL 33133",social:"",website:"No Website",status:"New",rating:3.7,reviews:79,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Sushi restaurant in Coconut Grove. Also has South Miami location",notes:"3.7 stars, 79 reviews. Unclaimed Birdeye profile. No website — hot lead.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"La Moon Restaurant",category:"Restaurant",phone:"+1-305-860-6209",email:"",address:"97 SW 8th St, Miami, FL 33130",social:"",website:"No Website",status:"New",rating:0,reviews:135,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Colombian/Venezuelan restaurant. Burgers, arepas, empanadas",notes:"135 reviews, affordable prices ($1.85-$32.50). No website, uses delivery platforms. Potential lead.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Sykes Ace Hardware",category:"Hardware Store",phone:"+1-305-754-2556",email:"",address:"284 NE 79th St, Miami, FL",social:"",website:"Has Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Ace Hardware franchise in Little River area",notes:"Has Ace store page: acehardware.com/store-details/14523. Franchise, lower priority.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Wynwood Cafe",category:"Cafe",phone:"+1-305-576-1105",email:"",address:"450 NW 27th St, Miami, FL 33127",social:"",website:"No Website",status:"New",rating:0,reviews:20,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Art cafe in Wynwood. Sandwiches, salads, smoothies, 150+ tea tins",notes:"No website. Hot lead for web/digital services.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Libreri Mapou Bookstore",category:"Bookstore",phone:"+1-305-757-9922",email:"",address:"5919 NE 2nd Ave, Miami, FL",social:"facebook.com/librerimapou",website:"Has Website",status:"New",rating:4.6,reviews:87,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"First Haitian-Caribbean bookstore in FL. Little Haiti landmark",notes:"4.6 stars, 87 reviews. Has mapoubooks.com + Facebook (600+ followers).",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Europa Car Wash & Cafe",category:"Cafe",phone:"+1-305-754-2357",email:"",address:"6075 Biscayne Blvd, Miami, FL",social:"instagram.com/europacafe_miami, facebook.com/europamiami",website:"No Website",status:"New",rating:4.3,reviews:383,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Family-owned coffeehouse + car wash inside Chevron station. Est. 2008",notes:"4.3 stars, 383 reviews! Uses Instagram as primary 'website'. HOT LEAD — successful but no real website.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Little Bread Cuban Sandwich Co.",category:"Restaurant",phone:"+1-786-420-2672",email:"",address:"541 SW 12th Ave, Miami, FL",social:"instagram.com/lilbreadmiami, facebook.com/p/Little-Bread-Cuban-Sandwich-Co-Little-Havana-100066754361215",website:"Has Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cuban sandwich shop in Little Havana. Featured in Eater Miami & Miami New Times",notes:"Has lilbread.com. Facebook 1.8K+ followers. Owner: Alberto Cabrera.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Jacalito Taqueria Mexicana",category:"Restaurant",phone:"+1-305-443-1336",email:"",address:"3622 W Flagler St, Miami, FL",social:"instagram.com/jacalito_taqueria",website:"Has Website",status:"New",rating:4.4,reviews:1587,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Mexican restaurant. 4.7/5 on Uber Eats, featured in Miami Herald",notes:"4.4 stars, 1,587 reviews! Has jacalito1.miami.com. Multiple phone numbers.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Marazul Charters",category:"Travel Agency",phone:"+1-305-559-7114",email:"",address:"785 NW 37th Ave, Miami, FL",social:"instagram.com/marazulmiami, facebook.com/marazulmiami",website:"Has Website",status:"New",rating:0,reviews:306,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cuba travel agency. 306 Google reviews",notes:"Has marazul.com. Not BBB accredited. Also: 800-993-9667 toll-free.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"The River Oyster Bar",category:"Restaurant",phone:"+1-305-530-1915",email:"",address:"33 SE 7th St Suite 100, Miami, FL",social:"instagram.com/riveroysterbar, facebook.com/RiverOysterBar",website:"Has Website",status:"New",rating:4.5,reviews:2038,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Fresh oysters, seafood in Brickell. $1.50 happy hour oysters",notes:"4.5 stars, 2,038 reviews. Has therivermiami.com. Facebook 53.7K followers. Resy reservations.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Siam Rice Thai and Sushi",category:"Restaurant",phone:"+1-305-758-0516",email:"",address:"7941 Biscayne Blvd, Miami, FL 33138",social:"",website:"Has Website",status:"New",rating:4.4,reviews:829,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Thai & sushi restaurant. Online ordering available",notes:"4.4 stars, 829 reviews. Has siamricemiami.com.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Tattoo & Co",category:"Tattoo Studio",phone:"+1-305-485-0770",email:"",address:"3449 NE 1st Ave Unit 110, Miami, FL 33137",social:"instagram.com/tattooandco",website:"Has Website",status:"New",rating:4.6,reviews:296,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Tattoo shop in Midtown Miami (relocated from Wynwood)",notes:"4.6 stars, 296 reviews. Has tattooandco.com. Address updated per Google Maps.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Thank You Miami",category:"Restaurant",phone:"+1-305-342-1208",email:"",address:"1701 W Flagler St #101, Miami, FL 33135",social:"instagram.com/thankyoumiami",website:"Has Website",status:"New",rating:4.9,reviews:716,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cocina & Beer House. Comedy, karaoke, open mic. LGBTQ+ friendly, Latino-owned",notes:"4.9 stars, 716 reviews! Has thankyoumiami.com.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Suite Habana Cafe",category:"Cafe",phone:"",email:"",address:"2609 N Miami Ave, Miami, FL 33127",social:"instagram.com/suitehabanacafe",website:"Has Website",status:"New",rating:4.8,reviews:705,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cuban coffee shop. Women-owned, Latino-owned, LGBTQ+ friendly",notes:"4.8 stars, 705 reviews. Has suite-habana-cafe.myshopify.com (basic Shopify). Could use a real website upgrade.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Barzola Restaurante Ecuatoriano",category:"Restaurant",phone:"+1-305-446-2006",email:"",address:"4860 NW 7th St, Miami, FL",social:"instagram.com/barzolarestaurant",website:"Has Website",status:"New",rating:3.7,reviews:1212,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Ecuadorian restaurant since 1987. Also has Pembroke Pines location",notes:"3.7 stars, 1,212 reviews. Has barzolarestaurantmiami.com.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"La Granja Le Jeune",category:"Restaurant",phone:"+1-305-642-4517",email:"",address:"1199 NW 42nd Ave, Miami, FL",social:"instagram.com/lagranjarestaurants, facebook.com/lagranjarestaurants",website:"Has Website",status:"New",rating:4.2,reviews:2096,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Peruvian rotisserie chicken chain near MIA airport",notes:"4.2 stars, 2,096 reviews. Has lagranjarestaurants.com. Chain — lower priority.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Roma Bakery & Cafe",category:"Bakery",phone:"+1-305-446-0433",email:"",address:"4897 SW 8th St, Miami, FL",social:"instagram.com/romabakerycafe, facebook.com/romabakerycafe",website:"No Website",status:"New",rating:4.3,reviews:1032,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Pastries, Italian sandwiches, gelato at Granada Plaza. Open since early morning",notes:"🔥 HOT LEAD! 4.3 stars, 1,032 reviews, NO WEBSITE! Orders via Clover only. Active Instagram & Facebook. Prime target.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Versailles Bakery",category:"Bakery",phone:"+1-305-441-2500",email:"",address:"3501 SW 8th St, Miami, FL",social:"",website:"Has Website",status:"New",rating:4.2,reviews:121,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Bakery counter of the iconic Versailles Cuban restaurant. Famous ventanita",notes:"4.2 stars, 121 reviews. Part of versaillesrestaurant.com. Iconic brand.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Ferraro's Kitchen",category:"Restaurant",phone:"+1-786-534-2136",email:"",address:"1099 NE 79th St, Miami, FL",social:"facebook.com/ferraroskitchen",website:"Has Website",status:"New",rating:4.7,reviews:859,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Upscale Italian by Chef Igor Ferraro. #1 Italian in Miami on TripAdvisor",notes:"4.7 stars, 859 reviews. Has ferraroskitchen.com. OpenTable reservations.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Rusty Pelican Miami",category:"Restaurant",phone:"+1-305-361-3818",email:"",address:"3201 Rickenbacker Causeway, Key Biscayne, FL",social:"instagram.com/rustypelicanmiami, facebook.com/rustypelicanmiami, tiktok.com/@rustypelicanmiami",website:"Has Website",status:"New",rating:4.1,reviews:20879,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Iconic waterfront seafood. Sunset & skyline views. Private dining",notes:"4.1 stars, 20,879 reviews! Has therustypelican.com. Major brand.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Manna Life Food",category:"Restaurant",phone:"+1-786-717-5060",email:"",address:"2616 NW 5th Ave, Miami, FL",social:"instagram.com/mannalifefood, facebook.com/mannalifefood",website:"Has Website",status:"New",rating:4.6,reviews:2310,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Plant-based, Kosher fast casual. Vegan croissants, pizza, sushi. Relocated",notes:"4.6 stars, 2,310 reviews. Has mannalifefood.com. Address updated to new location.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Wynwood Smoke and Lounge",category:"Bar",phone:"+1-786-362-6550",email:"",address:"320 NW 24th St, Miami, FL 33127",social:"instagram.com/smokewynwood, facebook.com/smokewynwood",website:"Has Website",status:"New",rating:4.3,reviews:433,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Hookah bar with full liquor in Wynwood",notes:"4.3 stars, 433 reviews. Has smokewynwood.com.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"The Salty Donut",category:"Bakery",phone:"+1-305-639-8501",email:"",address:"50 NW 24th St Ste 107, Miami, FL 33127",social:"instagram.com/thesaltydonut, facebook.com/TheSaltyDonut",website:"Has Website",status:"New",rating:4.5,reviews:4523,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Artisan 24-hour brioche donuts. Multiple national locations",notes:"4.5 stars, 4,523 reviews! Has saltydonut.com. Major brand.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Madrid Tapas Y Vinos",category:"Restaurant",phone:"+1-786-391-2471",email:"",address:"525 NW 42nd Ave, Miami, FL 33126",social:"instagram.com/madridtapasyvinos, facebook.com/madridtapasyvinos",website:"Has Website",status:"New",rating:4.5,reviews:1971,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Spanish tapas with live flamenco. Extensive wine list",notes:"4.5 stars, 1,971 reviews. Has madridtapasyvinos.com. OpenTable reservations.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"The Henry",category:"Restaurant",phone:"+1-786-471-0070",email:"",address:"701 S Miami Ave Ste 131-B, Miami, FL 33131",social:"",website:"Has Website",status:"New",rating:4.3,reviews:867,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"American restaurant in Brickell City Centre. Fox Restaurant Concepts chain",notes:"4.3 stars, 867 reviews. Has thehenryrestaurant.com. Chain — lower priority.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Plumbers of Miami",category:"Plumber",phone:"+1-305-861-1080",email:"",address:"1134 SW 10th St, Miami, FL",social:"",website:"Has Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Plumbing service. Redirects to New England Plumbing Miami",notes:"Very low presence. miami-plumbers.com redirects. Not on Google Maps or Yelp.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Saint Michael Locksmith",category:"Locksmith",phone:"+1-786-721-7676",email:"",address:"1630 NW 19th St, Miami, FL",social:"",website:"No Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"24-hour locksmith service",notes:"No website, no Google Maps listing. Found on Yahoo Local only. Potential lead but hard to contact.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Budget Hardware",category:"Hardware Store",phone:"+1-305-379-5444",email:"",address:"1644 NE 2nd Ave, Miami, FL",social:"",website:"No Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Small independent hardware store",notes:"Zero online presence. May be closed or very small. Needs in-person verification.",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Clive's Cafe",category:"Restaurant",phone:"+1-305-757-6512",email:"",address:"5890 NW 2nd Ave, Miami, FL 33127",social:"",website:"Has Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Jamaican restaurant in Little Haiti. 2 locations",notes:"Has clivescafe.com. Second location: 14537 NW 7th Ave (786-773-5104).",dateAdded:"2026-03-25"},
-    {id:genId(),name:"Adrenaline Motor Bikes Shop",category:"Motorcycle Shop",phone:"+1-305-754-9559",email:"",address:"830 NE 79th St, Miami, FL",social:"",website:"No Website",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Motorcycle shop",notes:"Zero online presence. May be closed. Needs in-person verification.",dateAdded:"2026-03-25"}
+    {id:genId(),name:"Camila's Restaurante Brasileiro",category:"Restaurant",phone:"",email:"",address:"129 SE 1st Ave, Miami, FL",social:"",website:"No Website",websiteUrl:"",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Brazilian cuisine in downtown Miami",notes:"Limited online presence. Needs manual Google Maps lookup.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"3 Chefs Chinese & Vietnamese Food",category:"Restaurant",phone:"",email:"",address:"1800 Biscayne Blvd Ste 105, Miami, FL 33132",social:"",website:"No Website",websiteUrl:"",status:"New",rating:3.2,reviews:305,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Chinese & Vietnamese cuisine. 305 Yelp reviews, 471 Grubhub reviews",notes:"No website, uses delivery platforms only. Unclaimed Yelp profile. Potential lead.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"La Bottega on the Bay",category:"Cafe",phone:"",email:"",address:"1800 N Bayshore Dr, Miami, FL 33132",social:"facebook.com/labottegaonthebay",website:"No Website",websiteUrl:"",status:"New",rating:0,reviews:20,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cafe on Biscayne Bay with Facebook presence",notes:"Website labottegaonthebay.com is dead (DNS fail). Active on Facebook. HOT LEAD for web rebuild.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Monty's Raw Bar",category:"Restaurant",phone:"+1-305-854-7997",email:"",address:"2550 S Bayshore Dr, Miami, FL 33133",social:"instagram.com/montysrawbar",website:"Has Website",websiteUrl:"https://montysrawbar.com",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Iconic Coconut Grove seafood spot, est. 1969. Live music, boat mooring",notes:"Has website: montysrawbar.com + Instagram. Lower priority.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Grove Bay Grill",category:"Restaurant",phone:"+1-305-285-8853",email:"",address:"3381 Pan American Dr, Coconut Grove, FL 33133",social:"",website:"Has Website",websiteUrl:"",status:"New",rating:3.6,reviews:135,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Seafood restaurant near Vizcaya Museum. Mixed reviews",notes:"3.6 stars, 135 TripAdvisor reviews. Has a website but URL unconfirmed.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Mary's Cafeteria",category:"Cafe",phone:"+1-305-443-6672",email:"",address:"2542 SW 27th Ave, Miami, FL",social:"",website:"No Website",websiteUrl:"",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Small local cafeteria",notes:"Limited online presence. Potential lead — small businesses without web presence need digital services.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Akashi Japanese Restaurant",category:"Restaurant",phone:"+1-305-529-9954",email:"",address:"3444 Main Hwy, Miami, FL 33133",social:"",website:"No Website",websiteUrl:"",status:"New",rating:3.7,reviews:79,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Sushi restaurant in Coconut Grove. Also has South Miami location",notes:"3.7 stars, 79 reviews. Unclaimed Birdeye profile. No website — hot lead.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"La Moon Restaurant",category:"Restaurant",phone:"+1-305-860-6209",email:"",address:"97 SW 8th St, Miami, FL 33130",social:"",website:"No Website",websiteUrl:"",status:"New",rating:0,reviews:135,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Colombian/Venezuelan restaurant. Burgers, arepas, empanadas",notes:"135 reviews, affordable prices ($1.85-$32.50). No website, uses delivery platforms. Potential lead.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Sykes Ace Hardware",category:"Hardware Store",phone:"+1-305-754-2556",email:"",address:"284 NE 79th St, Miami, FL",social:"",website:"Has Website",websiteUrl:"https://acehardware.com/store-details/14523",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Ace Hardware franchise in Little River area",notes:"Has Ace store page: acehardware.com/store-details/14523. Franchise, lower priority.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Wynwood Cafe",category:"Cafe",phone:"+1-305-576-1105",email:"",address:"450 NW 27th St, Miami, FL 33127",social:"",website:"No Website",websiteUrl:"",status:"New",rating:0,reviews:20,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Art cafe in Wynwood. Sandwiches, salads, smoothies, 150+ tea tins",notes:"No website. Hot lead for web/digital services.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Libreri Mapou Bookstore",category:"Bookstore",phone:"+1-305-757-9922",email:"",address:"5919 NE 2nd Ave, Miami, FL",social:"facebook.com/librerimapou",website:"Has Website",websiteUrl:"https://mapoubooks.com",status:"New",rating:4.6,reviews:87,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"First Haitian-Caribbean bookstore in FL. Little Haiti landmark",notes:"4.6 stars, 87 reviews. Has mapoubooks.com + Facebook (600+ followers).",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Europa Car Wash & Cafe",category:"Cafe",phone:"+1-305-754-2357",email:"",address:"6075 Biscayne Blvd, Miami, FL",social:"instagram.com/europacafe_miami, facebook.com/europamiami",website:"No Website",websiteUrl:"",status:"New",rating:4.3,reviews:383,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Family-owned coffeehouse + car wash inside Chevron station. Est. 2008",notes:"4.3 stars, 383 reviews! Uses Instagram as primary 'website'. HOT LEAD — successful but no real website.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Little Bread Cuban Sandwich Co.",category:"Restaurant",phone:"+1-786-420-2672",email:"",address:"541 SW 12th Ave, Miami, FL",social:"instagram.com/lilbreadmiami, facebook.com/p/Little-Bread-Cuban-Sandwich-Co-Little-Havana-100066754361215",website:"Has Website",websiteUrl:"https://lilbread.com",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cuban sandwich shop in Little Havana. Featured in Eater Miami & Miami New Times",notes:"Has lilbread.com. Facebook 1.8K+ followers. Owner: Alberto Cabrera.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Jacalito Taqueria Mexicana",category:"Restaurant",phone:"+1-305-443-1336",email:"",address:"3622 W Flagler St, Miami, FL",social:"instagram.com/jacalito_taqueria",website:"Has Website",websiteUrl:"https://jacalito1.miami.com",status:"New",rating:4.4,reviews:1587,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Mexican restaurant. 4.7/5 on Uber Eats, featured in Miami Herald",notes:"4.4 stars, 1,587 reviews! Has jacalito1.miami.com. Multiple phone numbers.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Marazul Charters",category:"Travel Agency",phone:"+1-305-559-7114",email:"",address:"785 NW 37th Ave, Miami, FL",social:"instagram.com/marazulmiami, facebook.com/marazulmiami",website:"Has Website",websiteUrl:"https://marazul.com",status:"New",rating:0,reviews:306,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cuba travel agency. 306 Google reviews",notes:"Has marazul.com. Not BBB accredited. Also: 800-993-9667 toll-free.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"The River Oyster Bar",category:"Restaurant",phone:"+1-305-530-1915",email:"",address:"33 SE 7th St Suite 100, Miami, FL",social:"instagram.com/riveroysterbar, facebook.com/RiverOysterBar",website:"Has Website",websiteUrl:"https://therivermiami.com",status:"New",rating:4.5,reviews:2038,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Fresh oysters, seafood in Brickell. $1.50 happy hour oysters",notes:"4.5 stars, 2,038 reviews. Has therivermiami.com. Facebook 53.7K followers. Resy reservations.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Siam Rice Thai and Sushi",category:"Restaurant",phone:"+1-305-758-0516",email:"",address:"7941 Biscayne Blvd, Miami, FL 33138",social:"",website:"Has Website",websiteUrl:"https://siamricemiami.com",status:"New",rating:4.4,reviews:829,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Thai & sushi restaurant. Online ordering available",notes:"4.4 stars, 829 reviews. Has siamricemiami.com.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Tattoo & Co",category:"Tattoo Studio",phone:"+1-305-485-0770",email:"",address:"3449 NE 1st Ave Unit 110, Miami, FL 33137",social:"instagram.com/tattooandco",website:"Has Website",websiteUrl:"https://tattooandco.com",status:"New",rating:4.6,reviews:296,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Tattoo shop in Midtown Miami (relocated from Wynwood)",notes:"4.6 stars, 296 reviews. Has tattooandco.com. Address updated per Google Maps.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Thank You Miami",category:"Restaurant",phone:"+1-305-342-1208",email:"",address:"1701 W Flagler St #101, Miami, FL 33135",social:"instagram.com/thankyoumiami",website:"Has Website",websiteUrl:"https://thankyoumiami.com",status:"New",rating:4.9,reviews:716,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cocina & Beer House. Comedy, karaoke, open mic. LGBTQ+ friendly, Latino-owned",notes:"4.9 stars, 716 reviews! Has thankyoumiami.com.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Suite Habana Cafe",category:"Cafe",phone:"",email:"",address:"2609 N Miami Ave, Miami, FL 33127",social:"instagram.com/suitehabanacafe",website:"Has Website",websiteUrl:"https://suite-habana-cafe.myshopify.com",status:"New",rating:4.8,reviews:705,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Cuban coffee shop. Women-owned, Latino-owned, LGBTQ+ friendly",notes:"4.8 stars, 705 reviews. Has suite-habana-cafe.myshopify.com (basic Shopify). Could use a real website upgrade.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Barzola Restaurante Ecuatoriano",category:"Restaurant",phone:"+1-305-446-2006",email:"",address:"4860 NW 7th St, Miami, FL",social:"instagram.com/barzolarestaurant",website:"Has Website",websiteUrl:"https://barzolarestaurantmiami.com",status:"New",rating:3.7,reviews:1212,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Ecuadorian restaurant since 1987. Also has Pembroke Pines location",notes:"3.7 stars, 1,212 reviews. Has barzolarestaurantmiami.com.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"La Granja Le Jeune",category:"Restaurant",phone:"+1-305-642-4517",email:"",address:"1199 NW 42nd Ave, Miami, FL",social:"instagram.com/lagranjarestaurants, facebook.com/lagranjarestaurants",website:"Has Website",websiteUrl:"https://lagranjarestaurants.com",status:"New",rating:4.2,reviews:2096,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Peruvian rotisserie chicken chain near MIA airport",notes:"4.2 stars, 2,096 reviews. Has lagranjarestaurants.com. Chain — lower priority.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Roma Bakery & Cafe",category:"Bakery",phone:"+1-305-446-0433",email:"",address:"4897 SW 8th St, Miami, FL",social:"instagram.com/romabakerycafe, facebook.com/romabakerycafe",website:"No Website",websiteUrl:"",status:"New",rating:4.3,reviews:1032,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Pastries, Italian sandwiches, gelato at Granada Plaza. Open since early morning",notes:"🔥 HOT LEAD! 4.3 stars, 1,032 reviews, NO WEBSITE! Orders via Clover only. Active Instagram & Facebook. Prime target.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Versailles Bakery",category:"Bakery",phone:"+1-305-441-2500",email:"",address:"3501 SW 8th St, Miami, FL",social:"",website:"Has Website",websiteUrl:"https://versaillesrestaurant.com",status:"New",rating:4.2,reviews:121,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Bakery counter of the iconic Versailles Cuban restaurant. Famous ventanita",notes:"4.2 stars, 121 reviews. Part of versaillesrestaurant.com. Iconic brand.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Ferraro's Kitchen",category:"Restaurant",phone:"+1-786-534-2136",email:"",address:"1099 NE 79th St, Miami, FL",social:"facebook.com/ferraroskitchen",website:"Has Website",websiteUrl:"https://ferraroskitchen.com",status:"New",rating:4.7,reviews:859,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Upscale Italian by Chef Igor Ferraro. #1 Italian in Miami on TripAdvisor",notes:"4.7 stars, 859 reviews. Has ferraroskitchen.com. OpenTable reservations.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Rusty Pelican Miami",category:"Restaurant",phone:"+1-305-361-3818",email:"",address:"3201 Rickenbacker Causeway, Key Biscayne, FL",social:"instagram.com/rustypelicanmiami, facebook.com/rustypelicanmiami, tiktok.com/@rustypelicanmiami",website:"Has Website",websiteUrl:"https://therustypelican.com",status:"New",rating:4.1,reviews:20879,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Iconic waterfront seafood. Sunset & skyline views. Private dining",notes:"4.1 stars, 20,879 reviews! Has therustypelican.com. Major brand.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Manna Life Food",category:"Restaurant",phone:"+1-786-717-5060",email:"",address:"2616 NW 5th Ave, Miami, FL",social:"instagram.com/mannalifefood, facebook.com/mannalifefood",website:"Has Website",websiteUrl:"https://mannalifefood.com",status:"New",rating:4.6,reviews:2310,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Plant-based, Kosher fast casual. Vegan croissants, pizza, sushi. Relocated",notes:"4.6 stars, 2,310 reviews. Has mannalifefood.com. Address updated to new location.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Wynwood Smoke and Lounge",category:"Bar",phone:"+1-786-362-6550",email:"",address:"320 NW 24th St, Miami, FL 33127",social:"instagram.com/smokewynwood, facebook.com/smokewynwood",website:"Has Website",websiteUrl:"https://smokewynwood.com",status:"New",rating:4.3,reviews:433,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Hookah bar with full liquor in Wynwood",notes:"4.3 stars, 433 reviews. Has smokewynwood.com.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"The Salty Donut",category:"Bakery",phone:"+1-305-639-8501",email:"",address:"50 NW 24th St Ste 107, Miami, FL 33127",social:"instagram.com/thesaltydonut, facebook.com/TheSaltyDonut",website:"Has Website",websiteUrl:"https://saltydonut.com",status:"New",rating:4.5,reviews:4523,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Artisan 24-hour brioche donuts. Multiple national locations",notes:"4.5 stars, 4,523 reviews! Has saltydonut.com. Major brand.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Madrid Tapas Y Vinos",category:"Restaurant",phone:"+1-786-391-2471",email:"",address:"525 NW 42nd Ave, Miami, FL 33126",social:"instagram.com/madridtapasyvinos, facebook.com/madridtapasyvinos",website:"Has Website",websiteUrl:"https://madridtapasyvinos.com",status:"New",rating:4.5,reviews:1971,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Spanish tapas with live flamenco. Extensive wine list",notes:"4.5 stars, 1,971 reviews. Has madridtapasyvinos.com. OpenTable reservations.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"The Henry",category:"Restaurant",phone:"+1-786-471-0070",email:"",address:"701 S Miami Ave Ste 131-B, Miami, FL 33131",social:"",website:"Has Website",websiteUrl:"https://thehenryrestaurant.com",status:"New",rating:4.3,reviews:867,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"American restaurant in Brickell City Centre. Fox Restaurant Concepts chain",notes:"4.3 stars, 867 reviews. Has thehenryrestaurant.com. Chain — lower priority.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Plumbers of Miami",category:"Plumber",phone:"+1-305-861-1080",email:"",address:"1134 SW 10th St, Miami, FL",social:"",website:"Has Website",websiteUrl:"https://miami-plumbers.com",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Plumbing service. Redirects to New England Plumbing Miami",notes:"Very low presence. miami-plumbers.com redirects. Not on Google Maps or Yelp.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Saint Michael Locksmith",category:"Locksmith",phone:"+1-786-721-7676",email:"",address:"1630 NW 19th St, Miami, FL",social:"",website:"No Website",websiteUrl:"",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"24-hour locksmith service",notes:"No website, no Google Maps listing. Found on Yahoo Local only. Potential lead but hard to contact.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Budget Hardware",category:"Hardware Store",phone:"+1-305-379-5444",email:"",address:"1644 NE 2nd Ave, Miami, FL",social:"",website:"No Website",websiteUrl:"",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Small independent hardware store",notes:"Zero online presence. May be closed or very small. Needs in-person verification.",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Clive's Cafe",category:"Restaurant",phone:"+1-305-757-6512",email:"",address:"5890 NW 2nd Ave, Miami, FL 33127",social:"",website:"Has Website",websiteUrl:"https://clivescafe.com",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Jamaican restaurant in Little Haiti. 2 locations",notes:"Has clivescafe.com. Second location: 14537 NW 7th Ave (786-773-5104).",dateAdded:"2026-03-25"},
+    {id:genId(),name:"Adrenaline Motor Bikes Shop",category:"Motorcycle Shop",phone:"+1-305-754-9559",email:"",address:"830 NE 79th St, Miami, FL",social:"",website:"No Website",websiteUrl:"",status:"New",rating:0,reviews:0,photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",description:"Motorcycle shop",notes:"Zero online presence. May be closed. Needs in-person verification.",dateAdded:"2026-03-25"}
   ];
 
   saveLeads(seed);
 }
+
+// Toggle website URL field visibility
+function toggleWebsiteUrl() {
+  const ws = document.getElementById('fWebsite').value;
+  document.getElementById('websiteUrlGroup').style.display = ws === 'Has Website' ? '' : 'none';
+}
+
+// Photo Lightbox
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function openLightbox(id) {
+  const l = getLeads().find(x => x.id === id);
+  if (!l) return;
+  const labels = [{label:'Front View',url:l.photoFront},{label:'Logo',url:l.photoLogo},{label:'Menu',url:l.photoMenu},{label:'Interior',url:l.photoInterior},{label:'Other',url:l.photoOther}];
+  lightboxPhotos = labels.filter(p => p.url && p.url.trim());
+  lightboxIndex = 0;
+  const overlay = document.getElementById('lightboxOverlay');
+  if (!lightboxPhotos.length) {
+    document.getElementById('lightboxImg').style.display = 'none';
+    document.getElementById('lightboxLabel').style.display = 'none';
+    document.getElementById('lightboxCounter').style.display = 'none';
+    document.getElementById('lightboxEmpty').style.display = '';
+    document.querySelector('.lightbox-nav.prev').style.display = 'none';
+    document.querySelector('.lightbox-nav.next').style.display = 'none';
+  } else {
+    document.getElementById('lightboxEmpty').style.display = 'none';
+    document.getElementById('lightboxImg').style.display = '';
+    document.getElementById('lightboxLabel').style.display = '';
+    document.getElementById('lightboxCounter').style.display = '';
+    document.querySelector('.lightbox-nav.prev').style.display = '';
+    document.querySelector('.lightbox-nav.next').style.display = '';
+    updateLightbox();
+  }
+  overlay.classList.add('active');
+}
+
+function updateLightbox() {
+  if (!lightboxPhotos.length) return;
+  const p = lightboxPhotos[lightboxIndex];
+  document.getElementById('lightboxImg').src = p.url;
+  document.getElementById('lightboxLabel').textContent = p.label;
+  document.getElementById('lightboxCounter').textContent = (lightboxIndex + 1) + ' / ' + lightboxPhotos.length;
+}
+
+function lightboxNav(dir) {
+  if (!lightboxPhotos.length) return;
+  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+  updateLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('active');
+}
+
+document.getElementById('lightboxOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
+
+// Update escape key handler to include lightbox
+document.removeEventListener('keydown', arguments.callee);
 
 // Init
 seedDefaultLeads();
