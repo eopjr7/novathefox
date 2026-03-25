@@ -56,6 +56,13 @@ header .subtitle{font-size:.8rem;color:var(--text3);margin-left:.25rem}
 .stat-card.no-website .stat-number{color:var(--orange)}
 .stat-card.photos::before{background:var(--blue)}
 .stat-card.photos .stat-number{color:var(--blue)}
+.stat-card.hot::before{background:var(--green)}
+.stat-card.hot .stat-number{color:var(--green)}
+.stat-card.avgrating::before{background:var(--yellow)}
+.stat-card.avgrating .stat-number{color:var(--yellow)}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{color:var(--text)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
 
 /* Toolbar */
 .toolbar{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
@@ -68,7 +75,7 @@ header .subtitle{font-size:.8rem;color:var(--text3);margin-left:.25rem}
 
 /* Table */
 .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:1000px}
+table{width:100%;border-collapse:collapse;min-width:1100px}
 th{padding:.7rem .75rem;text-align:left;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);background:var(--surface2);border-bottom:1px solid var(--border);white-space:nowrap}
 td{padding:.65rem .75rem;border-bottom:1px solid var(--border);font-size:.85rem;vertical-align:top}
 tr:last-child td{border-bottom:none}
@@ -184,6 +191,7 @@ tr:hover td{background:var(--accent-glow)}
           <th>Email</th>
           <th>Website</th>
           <th>Photos</th>
+          <th class="sortable" onclick="toggleRatingSort()">Rating <span id="ratingSortIcon">▼</span></th>
           <th>Status</th>
           <th>Date Added</th>
           <th>Actions</th>
@@ -270,6 +278,14 @@ tr:hover td{background:var(--accent-glow)}
               <option value="Not Interested">Not Interested</option>
             </select>
           </div>
+          <div class="form-group">
+            <label>Google Rating</label>
+            <input type="number" id="fRating" step="0.1" min="1" max="5" placeholder="e.g. 4.5">
+          </div>
+          <div class="form-group">
+            <label>Review Count</label>
+            <input type="number" id="fReviews" min="0" placeholder="e.g. 247">
+          </div>
           <div class="form-group full">
             <label>Description</label>
             <textarea id="fDesc" placeholder="Brief description of the business…"></textarea>
@@ -341,11 +357,19 @@ function renderStats() {
   const byStatus = { New: 0, Contacted: 0, Interested: 0, Closed: 0, 'Not Interested': 0 };
   let noWebsite = 0;
   let hasPhotos = 0;
+  let hotLeads = 0;
+  let ratingSum = 0;
+  let ratingCount = 0;
   leads.forEach(l => {
     if (byStatus[l.status] !== undefined) byStatus[l.status]++;
     if (l.website === 'No Website') noWebsite++;
     if ((l.photoFront||'').trim()||(l.photoLogo||'').trim()||(l.photoMenu||'').trim()||(l.photoInterior||'').trim()||(l.photoOther||'').trim()) hasPhotos++;
+    const r = parseFloat(l.rating);
+    const rv = parseInt(l.reviews);
+    if (r >= 4.0 && rv >= 50 && l.website === 'No Website') hotLeads++;
+    if (r > 0) { ratingSum += r; ratingCount++; }
   });
+  const avgRating = ratingCount > 0 ? (ratingSum / ratingCount).toFixed(1) : '—';
   document.getElementById('stats').innerHTML = `
     <div class="stat-card total"><div class="stat-number">${total}</div><div class="stat-label">Total Leads</div></div>
     <div class="stat-card new"><div class="stat-number">${byStatus.New}</div><div class="stat-label">New</div></div>
@@ -355,6 +379,8 @@ function renderStats() {
     <div class="stat-card not-interested"><div class="stat-number">${byStatus['Not Interested']}</div><div class="stat-label">Not Interested</div></div>
     <div class="stat-card no-website"><div class="stat-number">${noWebsite}</div><div class="stat-label">No Website</div></div>
     <div class="stat-card photos"><div class="stat-number">${hasPhotos}/${total}</div><div class="stat-label">Has Photos</div></div>
+    <div class="stat-card hot"><div class="stat-number">${hotLeads}</div><div class="stat-label">Hot Leads 🔥</div></div>
+    <div class="stat-card avgrating"><div class="stat-number">⭐ ${avgRating}</div><div class="stat-label">Avg Rating</div></div>
   `;
 }
 
@@ -366,6 +392,13 @@ function updateCategoryFilter() {
   const cur = sel.value;
   sel.innerHTML = '<option value="">All Categories</option>' + cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
   sel.value = cur;
+}
+
+let ratingSortActive = false;
+function toggleRatingSort() {
+  ratingSortActive = !ratingSortActive;
+  document.getElementById('ratingSortIcon').textContent = ratingSortActive ? '▼' : '▽';
+  renderLeads();
 }
 
 function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
@@ -396,7 +429,11 @@ function renderLeads() {
   if (websiteF) leads = leads.filter(l => l.website === websiteF);
   if (catF) leads = leads.filter(l => l.category === catF);
 
-  leads.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+  if (ratingSortActive) {
+    leads.sort((a, b) => (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0));
+  } else {
+    leads.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+  }
 
   const tbody = document.getElementById('leadsBody');
   const empty = document.getElementById('emptyState');
@@ -408,22 +445,36 @@ function renderLeads() {
   }
   empty.style.display = 'none';
 
-  tbody.innerHTML = leads.map(l => `
-    <tr>
-      <td><strong style="cursor:pointer;color:var(--accent2)" onclick="viewLead('${l.id}')">${esc(l.name)}</strong>${l.address ? '<br><span style="font-size:.76rem;color:var(--text3)">' + esc(l.address) + '</span>' : ''}</td>
+  tbody.innerHTML = leads.map(l => {
+    const hasPhone = (l.phone||'').trim();
+    const hasEmail = (l.email||'').trim();
+    const hasRating = parseFloat(l.rating) > 0;
+    const photoCount = [l.photoFront,l.photoLogo,l.photoMenu,l.photoInterior,l.photoOther].filter(v=>v&&v.trim()).length;
+    let dotColor, dotTitle;
+    if (hasPhone && hasEmail && hasRating && photoCount >= 1) {
+      dotColor = '#00cec9'; dotTitle = 'Complete data';
+    } else if (hasPhone || hasEmail || hasRating || photoCount > 0) {
+      dotColor = '#fdcb6e'; dotTitle = 'Incomplete data';
+    } else {
+      dotColor = '#ff7675'; dotTitle = 'Minimal data';
+    }
+    const ratingDisplay = hasRating ? `⭐ ${parseFloat(l.rating).toFixed(1)}${parseInt(l.reviews) > 0 ? ' (' + parseInt(l.reviews) + ')' : ''}` : '—';
+    return `<tr>
+      <td><span class="dot" style="background:${dotColor}" title="${dotTitle}"></span><strong style="cursor:pointer;color:var(--accent2)" onclick="viewLead('${l.id}')">${esc(l.name)}</strong>${l.address ? '<br><span style="font-size:.76rem;color:var(--text3);margin-left:14px;display:inline-block">' + esc(l.address) + '</span>' : ''}</td>
       <td>${esc(l.category || '—')}</td>
       <td>${l.phone ? '<a href="tel:' + esc(l.phone) + '">' + esc(l.phone) + '</a>' : '—'}</td>
       <td class="truncate">${l.email ? '<a href="mailto:' + esc(l.email) + '">' + esc(l.email) + '</a>' : '—'}</td>
       <td><span class="website-badge ${l.website === 'No Website' ? 'website-no' : 'website-yes'}">${esc(l.website)}</span></td>
-      <td style="white-space:nowrap;font-size:.8rem">${(function(){const pf=[l.photoFront,l.photoLogo,l.photoMenu,l.photoInterior,l.photoOther];const c=pf.filter(v=>v&&v.trim()).length;return c+'/5 📷';})()} </td>
+      <td style="white-space:nowrap;font-size:.8rem">${photoCount}/5 📷</td>
+      <td style="white-space:nowrap;font-size:.8rem">${ratingDisplay}</td>
       <td><span class="status-badge ${statusClass(l.status)}">${esc(l.status)}</span></td>
       <td style="white-space:nowrap;font-size:.8rem;color:var(--text2)">${l.dateAdded ? new Date(l.dateAdded).toLocaleDateString() : '—'}</td>
       <td><div class="actions-cell">
         <button class="btn btn-secondary btn-sm btn-icon" title="Edit" onclick="editLead('${l.id}')">✎</button>
         <button class="btn btn-danger btn-sm btn-icon" title="Delete" onclick="deleteLead('${l.id}')">✕</button>
       </div></td>
-    </tr>
-  `).join('');
+    </tr>`;
+  }).join('');
 
   renderStats();
   updateCategoryFilter();
@@ -446,6 +497,8 @@ function openModal(lead) {
   document.getElementById('fPhotoOther').value = lead ? (lead.photoOther||'') : '';
   document.getElementById('fWebsite').value = lead ? lead.website : 'No Website';
   document.getElementById('fStatus').value = lead ? lead.status : 'New';
+  document.getElementById('fRating').value = lead && lead.rating ? lead.rating : '';
+  document.getElementById('fReviews').value = lead && lead.reviews ? lead.reviews : '';
   document.getElementById('fDesc').value = lead ? lead.description : '';
   document.getElementById('fNotes').value = lead ? lead.notes : '';
   document.getElementById('leadModal').classList.add('active');
@@ -474,6 +527,8 @@ function saveLead(e) {
     photoOther: document.getElementById('fPhotoOther').value.trim(),
     website: document.getElementById('fWebsite').value,
     status: document.getElementById('fStatus').value,
+    rating: document.getElementById('fRating').value ? parseFloat(document.getElementById('fRating').value) : '',
+    reviews: document.getElementById('fReviews').value ? parseInt(document.getElementById('fReviews').value) : '',
     description: document.getElementById('fDesc').value.trim(),
     notes: document.getElementById('fNotes').value.trim(),
   };
@@ -514,6 +569,7 @@ function viewLead(id) {
       ${field('Address', l.address)}
       <div style="margin-bottom:.5rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">Website Status</span><br><span class="website-badge ${l.website === 'No Website' ? 'website-no' : 'website-yes'}">${esc(l.website)}</span></div>
       <div style="margin-bottom:.5rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">Contact Status</span><br><span class="status-badge ${statusClass(l.status)}">${esc(l.status)}</span></div>
+      ${parseFloat(l.rating) > 0 ? '<div style="margin-bottom:.5rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">Google Rating</span><br>⭐ ' + parseFloat(l.rating).toFixed(1) + (parseInt(l.reviews) > 0 ? ' (' + parseInt(l.reviews) + ' reviews)' : '') + '</div>' : ''}
     </div>
     ${socialLinks ? `<div style="margin-bottom:.5rem"><span style="color:var(--text3);font-size:.75rem;text-transform:uppercase;letter-spacing:.03em">Social Media</span><br>${socialLinks}</div>` : ''}
     ${(function(){
@@ -586,56 +642,56 @@ function seedDefaultLeads() {
   if (existing) { try { if (JSON.parse(existing).length > 0) return; } catch(e){} }
 
   const seed = [
-    {id:genId(),name:"Camila's Restaurante Brasileiro",category:"Restaurant",phone:"+1 305-375-0992",email:"",social:"",address:"129 Southeast 1st Avenue, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — Brazilian cuisine",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"3 Chefs Chinese & Vietnamese Food",category:"Restaurant",phone:"",email:"",social:"",address:"1800 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — Chinese & Vietnamese",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"La Bottega",category:"Cafe",phone:"+1 305 603 1003",email:"",social:"",address:"1800 North Bayshore Drive, Miami",website:"No Website",status:"New",description:"Local cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Monty's",category:"Restaurant",phone:"",email:"",social:"",address:"2550 South Bayshore Drive, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — waterfront dining",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Grove Bay Grill",category:"Bar & Grill",phone:"",email:"",social:"",address:"3381 Pan American Drive, Miami",website:"No Website",status:"New",description:"Local bar & grill in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Mary's Cafeteria",category:"Cafe",phone:"+1 305 443-6672",email:"",social:"",address:"2542 Southwest 27th Avenue, Miami",website:"No Website",status:"New",description:"Local cafeteria in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Akashi Japanese Restaurant",category:"Restaurant",phone:"+1-305-529-9954",email:"",social:"",address:"3444 Main Hwy, Miami",website:"No Website",status:"New",description:"Local Japanese restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"La Moon",category:"Restaurant",phone:"+1-305-860-6209",email:"",social:"",address:"97 Southwest 8th Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Sykes Ace Hardware",category:"Hardware Store",phone:"+1 305-754-2556",email:"",social:"",address:"284 Northeast 79th Street, Miami",website:"No Website",status:"New",description:"Local hardware store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Wynwood Cafe",category:"Cafe",phone:"",email:"",social:"",address:"450 Northwest 27th Street, Miami",website:"No Website",status:"New",description:"Local cafe in Miami — Wynwood area",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Clean Start Total Body Cleansing",category:"Wellness",phone:"",email:"",social:"",address:"6901 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local wellness center in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Harry's Pizzeria",category:"Restaurant",phone:"",email:"",social:"",address:"3918 North Miami Avenue, Miami",website:"No Website",status:"New",description:"Local pizzeria in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Libreri Mapou Bookstore",category:"Bookstore",phone:"",email:"",social:"",address:"5919 Northeast 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local bookstore in Miami — Haitian literature",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Flavorish Market",category:"Convenience Store",phone:"",email:"",social:"",address:"7283 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local market in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Europa Car Wash & Cafe",category:"Cafe",phone:"",email:"",social:"",address:"6075 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local car wash & cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Little Bread Cuban Sandwich Co.",category:"Restaurant",phone:"",email:"",social:"",address:"541 Southwest 12th Avenue, Miami",website:"No Website",status:"New",description:"Local Cuban sandwich shop in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Jacalito Taqueria",category:"Fast Food",phone:"",email:"",social:"",address:"3622 West Flagler Street, Miami",website:"No Website",status:"New",description:"Local taqueria in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Electric Avenue - Camera/Electronics Superstore",category:"Electronics Store",phone:"+1-305-579-5998",email:"",social:"",address:"259 East Flagler Street, Miami",website:"No Website",status:"New",description:"Local electronics store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Marazul Charters",category:"Travel Agency",phone:"+1-305-559-7114",email:"",social:"",address:"771 Northwest 37th Avenue, Miami",website:"No Website",status:"New",description:"Local travel agency in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"The River Oyster Bar",category:"Restaurant",phone:"+1 305-530-1915",email:"",social:"",address:"33 Southeast 7th Street, Miami",website:"No Website",status:"New",description:"Local oyster bar & seafood restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Siam Rice Thai and Sushi",category:"Restaurant",phone:"",email:"",social:"",address:"7941 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local Thai & sushi restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Hannah Bella",category:"Fashion",phone:"",email:"",social:"",address:"2600 Northwest 5th Avenue, Miami",website:"No Website",status:"New",description:"Local fashion boutique in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Bethel Fashion",category:"Fashion",phone:"+1 305 573 2122",email:"",social:"",address:"2503 Northwest 5th Avenue, Miami",website:"No Website",status:"New",description:"Local fashion store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"D&M Wholesale Linen and Beauty",category:"Fashion",phone:"+1 305 576 3554",email:"",social:"",address:"2501 Northwest 5th Avenue, Miami",website:"No Website",status:"New",description:"Local wholesale linen & beauty store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Le Cafe de Louison",category:"Cafe",phone:"",email:"",social:"",address:"860 NE Northeast 79th Street, Miami",website:"No Website",status:"New",description:"Local cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Tattoo & Co",category:"Tattoo Studio",phone:"+1-305-485-0770",email:"",social:"",address:"2679 Northwest 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local tattoo studio in Miami — Wynwood area",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Triple Triumph Miami",category:"Auto Dealer",phone:"+1-786-621-1105",email:"",social:"",address:"4751 West Flagler Street, Miami",website:"No Website",status:"New",description:"Local auto dealer in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Thank You Miami",category:"Restaurant",phone:"",email:"",social:"",address:"1663 West Flagler Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Suite Havana Café",category:"Cafe",phone:"",email:"",social:"",address:"2609 North Miami Avenue, Miami",website:"No Website",status:"New",description:"Local Cuban cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Mister Block Cafe",category:"Cafe",phone:"",email:"",social:"",address:"2621 Northwest 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local cafe in Miami — Wynwood area",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Barzola",category:"Restaurant",phone:"+1-305-446-2006",email:"",social:"",address:"4860 Northwest 7th Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Mr. Bing",category:"Cafe",phone:"",email:"",social:"",address:"56 Northwest 29th Street, Miami",website:"No Website",status:"New",description:"Local cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"La Granja",category:"Restaurant",phone:"+1 305-642-4517",email:"",social:"",address:"1199 Northwest 42nd Avenue, Miami",website:"No Website",status:"New",description:"Local Peruvian restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Roma Bakery",category:"Bakery",phone:"",email:"",social:"",address:"4897 Southwest 8th Street, Miami",website:"No Website",status:"New",description:"Local bakery in Miami — Calle Ocho",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Versailles Bakery",category:"Bakery",phone:"",email:"",social:"",address:"3501 Southwest 8th Street, Miami",website:"No Website",status:"New",description:"Local bakery in Miami — Little Havana landmark",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Crust",category:"Restaurant",phone:"",email:"",social:"",address:"668 Northwest 5th Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Ferraro's Kitchen",category:"Restaurant",phone:"",email:"",social:"",address:"1099 Northeast 79th Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Genuine Pizza",category:"Restaurant",phone:"",email:"",social:"",address:"2996 McFarlane Road, Miami",website:"No Website",status:"New",description:"Local pizzeria in Miami — Coconut Grove",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Rusty Pelican",category:"Restaurant",phone:"",email:"",social:"",address:"3201 Rickenbacker Causeway, Miami",website:"No Website",status:"New",description:"Local waterfront restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Manna Life Food",category:"Restaurant",phone:"",email:"",social:"",address:"80 Northeast 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local health food restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Wynwood Smoke and Lounge",category:"Restaurant",phone:"+1-305-394-9966",email:"",social:"",address:"320 Northwest 24th Street, Miami",website:"No Website",status:"New",description:"Local smoke lounge & restaurant in Miami — Wynwood",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"The Salty Donut",category:"Bakery",phone:"",email:"",social:"",address:"50 Northwest 23rd Street, Miami",website:"No Website",status:"New",description:"Local artisan donut shop in Miami — Wynwood",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Madrid Restaurant",category:"Restaurant",phone:"",email:"",social:"",address:"545 Northwest 42nd Avenue, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"El Gladiolo Florist",category:"Florist",phone:"",email:"",social:"",address:"246 Northwest 42nd Avenue, Miami",website:"No Website",status:"New",description:"Local florist in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"The Henry",category:"Restaurant",phone:"",email:"",social:"",address:"701 South Miami Avenue, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — Brickell area",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Plumbers of Miami",category:"Plumber",phone:"",email:"",social:"",address:"1134 Southwest 10th Street, Miami",website:"No Website",status:"New",description:"Local plumbing service in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Saint Michael Locksmith",category:"Locksmith",phone:"+1-786-721-7676",email:"",social:"",address:"1630 Northwest 19th Street, Miami",website:"No Website",status:"New",description:"Local locksmith in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Budget Hardware",category:"Hardware Store",phone:"+1 305-379-5444",email:"",social:"",address:"1644 Northeast 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local hardware store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Clive's Cafe",category:"Restaurant",phone:"+1 305 757 6512",email:"",social:"",address:"5890 Northwest 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local Caribbean restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"},
-    {id:genId(),name:"Adrenaline Motor Bikes Shop",category:"Motorcycle Shop",phone:"+1-305-754-9559",email:"",social:"",address:"830 Northeast 79th Street, Miami",website:"No Website",status:"New",description:"Local motorcycle shop in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",dateAdded:"2026-03-24"}
+    {id:genId(),name:"Camila's Restaurante Brasileiro",category:"Restaurant",phone:"+1 305-375-0992",email:"",social:"",address:"129 Southeast 1st Avenue, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — Brazilian cuisine",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"3 Chefs Chinese & Vietnamese Food",category:"Restaurant",phone:"",email:"",social:"",address:"1800 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — Chinese & Vietnamese",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"La Bottega",category:"Cafe",phone:"+1 305 603 1003",email:"",social:"",address:"1800 North Bayshore Drive, Miami",website:"No Website",status:"New",description:"Local cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Monty's",category:"Restaurant",phone:"",email:"",social:"",address:"2550 South Bayshore Drive, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — waterfront dining",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Grove Bay Grill",category:"Bar & Grill",phone:"",email:"",social:"",address:"3381 Pan American Drive, Miami",website:"No Website",status:"New",description:"Local bar & grill in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Mary's Cafeteria",category:"Cafe",phone:"+1 305 443-6672",email:"",social:"",address:"2542 Southwest 27th Avenue, Miami",website:"No Website",status:"New",description:"Local cafeteria in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Akashi Japanese Restaurant",category:"Restaurant",phone:"+1-305-529-9954",email:"",social:"",address:"3444 Main Hwy, Miami",website:"No Website",status:"New",description:"Local Japanese restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"La Moon",category:"Restaurant",phone:"+1-305-860-6209",email:"",social:"",address:"97 Southwest 8th Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Sykes Ace Hardware",category:"Hardware Store",phone:"+1 305-754-2556",email:"",social:"",address:"284 Northeast 79th Street, Miami",website:"No Website",status:"New",description:"Local hardware store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Wynwood Cafe",category:"Cafe",phone:"",email:"",social:"",address:"450 Northwest 27th Street, Miami",website:"No Website",status:"New",description:"Local cafe in Miami — Wynwood area",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Clean Start Total Body Cleansing",category:"Wellness",phone:"",email:"",social:"",address:"6901 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local wellness center in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Harry's Pizzeria",category:"Restaurant",phone:"",email:"",social:"",address:"3918 North Miami Avenue, Miami",website:"No Website",status:"New",description:"Local pizzeria in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Libreri Mapou Bookstore",category:"Bookstore",phone:"",email:"",social:"",address:"5919 Northeast 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local bookstore in Miami — Haitian literature",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Flavorish Market",category:"Convenience Store",phone:"",email:"",social:"",address:"7283 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local market in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Europa Car Wash & Cafe",category:"Cafe",phone:"",email:"",social:"",address:"6075 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local car wash & cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Little Bread Cuban Sandwich Co.",category:"Restaurant",phone:"",email:"",social:"",address:"541 Southwest 12th Avenue, Miami",website:"No Website",status:"New",description:"Local Cuban sandwich shop in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Jacalito Taqueria",category:"Fast Food",phone:"",email:"",social:"",address:"3622 West Flagler Street, Miami",website:"No Website",status:"New",description:"Local taqueria in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Electric Avenue - Camera/Electronics Superstore",category:"Electronics Store",phone:"+1-305-579-5998",email:"",social:"",address:"259 East Flagler Street, Miami",website:"No Website",status:"New",description:"Local electronics store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Marazul Charters",category:"Travel Agency",phone:"+1-305-559-7114",email:"",social:"",address:"771 Northwest 37th Avenue, Miami",website:"No Website",status:"New",description:"Local travel agency in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"The River Oyster Bar",category:"Restaurant",phone:"+1 305-530-1915",email:"",social:"",address:"33 Southeast 7th Street, Miami",website:"No Website",status:"New",description:"Local oyster bar & seafood restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Siam Rice Thai and Sushi",category:"Restaurant",phone:"",email:"",social:"",address:"7941 Biscayne Boulevard, Miami",website:"No Website",status:"New",description:"Local Thai & sushi restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Hannah Bella",category:"Fashion",phone:"",email:"",social:"",address:"2600 Northwest 5th Avenue, Miami",website:"No Website",status:"New",description:"Local fashion boutique in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Bethel Fashion",category:"Fashion",phone:"+1 305 573 2122",email:"",social:"",address:"2503 Northwest 5th Avenue, Miami",website:"No Website",status:"New",description:"Local fashion store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"D&M Wholesale Linen and Beauty",category:"Fashion",phone:"+1 305 576 3554",email:"",social:"",address:"2501 Northwest 5th Avenue, Miami",website:"No Website",status:"New",description:"Local wholesale linen & beauty store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Le Cafe de Louison",category:"Cafe",phone:"",email:"",social:"",address:"860 NE Northeast 79th Street, Miami",website:"No Website",status:"New",description:"Local cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Tattoo & Co",category:"Tattoo Studio",phone:"+1-305-485-0770",email:"",social:"",address:"2679 Northwest 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local tattoo studio in Miami — Wynwood area",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Triple Triumph Miami",category:"Auto Dealer",phone:"+1-786-621-1105",email:"",social:"",address:"4751 West Flagler Street, Miami",website:"No Website",status:"New",description:"Local auto dealer in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Thank You Miami",category:"Restaurant",phone:"",email:"",social:"",address:"1663 West Flagler Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Suite Havana Café",category:"Cafe",phone:"",email:"",social:"",address:"2609 North Miami Avenue, Miami",website:"No Website",status:"New",description:"Local Cuban cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Mister Block Cafe",category:"Cafe",phone:"",email:"",social:"",address:"2621 Northwest 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local cafe in Miami — Wynwood area",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Barzola",category:"Restaurant",phone:"+1-305-446-2006",email:"",social:"",address:"4860 Northwest 7th Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Mr. Bing",category:"Cafe",phone:"",email:"",social:"",address:"56 Northwest 29th Street, Miami",website:"No Website",status:"New",description:"Local cafe in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"La Granja",category:"Restaurant",phone:"+1 305-642-4517",email:"",social:"",address:"1199 Northwest 42nd Avenue, Miami",website:"No Website",status:"New",description:"Local Peruvian restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Roma Bakery",category:"Bakery",phone:"",email:"",social:"",address:"4897 Southwest 8th Street, Miami",website:"No Website",status:"New",description:"Local bakery in Miami — Calle Ocho",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Versailles Bakery",category:"Bakery",phone:"",email:"",social:"",address:"3501 Southwest 8th Street, Miami",website:"No Website",status:"New",description:"Local bakery in Miami — Little Havana landmark",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Crust",category:"Restaurant",phone:"",email:"",social:"",address:"668 Northwest 5th Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Ferraro's Kitchen",category:"Restaurant",phone:"",email:"",social:"",address:"1099 Northeast 79th Street, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Genuine Pizza",category:"Restaurant",phone:"",email:"",social:"",address:"2996 McFarlane Road, Miami",website:"No Website",status:"New",description:"Local pizzeria in Miami — Coconut Grove",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Rusty Pelican",category:"Restaurant",phone:"",email:"",social:"",address:"3201 Rickenbacker Causeway, Miami",website:"No Website",status:"New",description:"Local waterfront restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Manna Life Food",category:"Restaurant",phone:"",email:"",social:"",address:"80 Northeast 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local health food restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Wynwood Smoke and Lounge",category:"Restaurant",phone:"+1-305-394-9966",email:"",social:"",address:"320 Northwest 24th Street, Miami",website:"No Website",status:"New",description:"Local smoke lounge & restaurant in Miami — Wynwood",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"The Salty Donut",category:"Bakery",phone:"",email:"",social:"",address:"50 Northwest 23rd Street, Miami",website:"No Website",status:"New",description:"Local artisan donut shop in Miami — Wynwood",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Madrid Restaurant",category:"Restaurant",phone:"",email:"",social:"",address:"545 Northwest 42nd Avenue, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"El Gladiolo Florist",category:"Florist",phone:"",email:"",social:"",address:"246 Northwest 42nd Avenue, Miami",website:"No Website",status:"New",description:"Local florist in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"The Henry",category:"Restaurant",phone:"",email:"",social:"",address:"701 South Miami Avenue, Miami",website:"No Website",status:"New",description:"Local restaurant in Miami — Brickell area",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Plumbers of Miami",category:"Plumber",phone:"",email:"",social:"",address:"1134 Southwest 10th Street, Miami",website:"No Website",status:"New",description:"Local plumbing service in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Saint Michael Locksmith",category:"Locksmith",phone:"+1-786-721-7676",email:"",social:"",address:"1630 Northwest 19th Street, Miami",website:"No Website",status:"New",description:"Local locksmith in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Budget Hardware",category:"Hardware Store",phone:"+1 305-379-5444",email:"",social:"",address:"1644 Northeast 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local hardware store in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Clive's Cafe",category:"Restaurant",phone:"+1 305 757 6512",email:"",social:"",address:"5890 Northwest 2nd Avenue, Miami",website:"No Website",status:"New",description:"Local Caribbean restaurant in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"},
+    {id:genId(),name:"Adrenaline Motor Bikes Shop",category:"Motorcycle Shop",phone:"+1-305-754-9559",email:"",social:"",address:"830 Northeast 79th Street, Miami",website:"No Website",status:"New",description:"Local motorcycle shop in Miami",notes:"Source: OpenStreetMap data. Verify contact info.",photoFront:"",photoLogo:"",photoMenu:"",photoInterior:"",photoOther:"",rating:0,reviews:0,dateAdded:"2026-03-24"}
   ];
 
   saveLeads(seed);
