@@ -783,9 +783,6 @@ function closeLightbox() {
 
 document.getElementById('lightboxOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
 
-// Update escape key handler to include lightbox
-document.removeEventListener('keydown', arguments.callee);
-
 // Init
 seedDefaultLeads();
 renderStats();
