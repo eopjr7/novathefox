@@ -59,6 +59,48 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.remove('active');
         }
     });
+
+    // Gallery Lightbox Functionality
+    const lightbox = document.getElementById('galleryLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const closeButton = document.querySelector('.lightbox-close');
+
+    if (lightbox) {
+        // Open lightbox on gallery item click
+        document.querySelectorAll('.gallery-expand').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const img = this.closest('.gallery-image-wrapper').querySelector('img');
+                if (img) {
+                    lightboxImage.src = img.src;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Close lightbox on close button click
+        closeButton.addEventListener('click', function() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close lightbox on background click
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
 });
 
 // Intersection Observer for fade-in animations
@@ -74,7 +116,7 @@ if ('IntersectionObserver' in window) {
         threshold: 0.1
     });
 
-    document.querySelectorAll('.service-card, .feature, .team-member, .value-item').forEach(el => {
+    document.querySelectorAll('.service-card, .feature, .team-member, .value-item, .gallery-item').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';

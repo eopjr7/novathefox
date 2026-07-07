@@ -267,6 +267,195 @@ section {
 }
 
 /* ============================================
+   GALLERY SECTION
+   ============================================ */
+
+.gallery-section {
+    background-color: var(--bg-light);
+}
+
+.gallery-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.gallery-subtitle {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.gallery-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-light);
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image-wrapper img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.gallery-expand {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-expand {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.gallery-expand:hover {
+    background-color: #d97706;
+    transform: scale(1.2);
+}
+
+.gallery-item h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    padding: 1.5rem 1.5rem 0.5rem;
+    margin: 0;
+}
+
+.gallery-item p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    padding: 0.5rem 1.5rem 1.5rem;
+    margin: 0;
+}
+
+/* ============================================
+   LIGHTBOX MODAL
+   ============================================ */
+
+.gallery-lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.gallery-lightbox.active {
+    display: flex;
+}
+
+.gallery-lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    animation: zoomIn 0.3s ease;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 2001;
+}
+
+.lightbox-close:hover {
+    color: var(--accent-color);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ============================================
    FEATURES / VALUES
    ============================================ */
 
@@ -618,7 +807,8 @@ section {
     .contact-section h2,
     .process-section h2,
     .why-contact h2,
-    .cta-section h2 {
+    .cta-section h2,
+    .gallery-section h2 {
         font-size: 1.8rem;
     }
 
@@ -627,7 +817,8 @@ section {
     .values-grid,
     .team-grid,
     .process-steps,
-    .why-grid {
+    .why-grid,
+    .gallery-grid {
         grid-template-columns: 1fr;
     }
 
@@ -650,6 +841,11 @@ section {
 
     section {
         padding: 3rem 0;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
     }
 }
 
