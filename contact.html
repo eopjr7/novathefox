@@ -1,268 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Nova The Fox — Get in Touch</title>
-  <meta name="description" content="Contact Nova The Fox. Phone, email, and office locations in Miami and Moscow.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>🦊</text></svg>">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0a0a0f;
-      --surface: #13131a;
-      --border: #1e1e2e;
-      --orange: #ff6b2b;
-      --text: #f0f0f5;
-      --muted: #8888aa;
-    }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: rgba(10,10,15,0.9);
-      backdrop-filter: blur(12px);
-      z-index: 100;
-    }
-    .logo {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .logo span { color: var(--orange); }
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: var(--text); }
-    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
-    nav .cta-btn {
-      background: var(--orange);
-      color: white;
-      padding: 0.5rem 1.2rem;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-    nav .cta-btn:hover { opacity: 0.9; color: white; }
-    .header-section {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      padding: 2rem;
-      border-bottom: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-    .logo-box {
-      font-size: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .logo-text {
-      font-family: 'Brush Script MT', cursive;
-      font-size: 1.5rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: var(--text);
-    }
-    .page-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-    .page-section h1 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      color: var(--text);
-    }
-    .page-section h2 {
-      font-size: 1.5rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      color: var(--orange);
-    }
-    .page-section p {
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-    .contact-info {
-      background: var(--surface);
-      border: 2px solid var(--orange);
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-      margin: 2rem 0;
-    }
-    .contact-info p {
-      font-size: 1.1rem;
-      margin: 1rem 0;
-    }
-    .contact-info a {
-      color: var(--orange);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
-    .location-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      max-width: 700px;
-      margin: 2rem auto;
-    }
-    .location-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .location-card p:first-child {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .location-card .city {
-      font-weight: 700;
-      color: var(--orange);
-      font-size: 1.1rem;
-    }
-    .location-card .desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .footer-section {
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-    }
-    .footer-contact {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      font-size: 0.75rem;
-      margin-bottom: 1rem;
-      color: var(--muted);
-    }
-    .footer-contact a {
-      color: var(--orange);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .footer-contact a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-    footer span { color: var(--orange); }
-    @media (max-width: 640px) {
-      .location-cards {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Nova Construction - Get your free consultation and quote.">
+    <title>Contact Us | Nova Construction</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav>
-    <a href="index.html" class="logo">Nova<span>theFox</span> 🦊</a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="index.html#mission">Mission</a>
-      <a href="index.html#games">Games</a>
-      <a href="contact.html" class="cta-btn">Contact Us</a>
-    </div>
-  </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/">Nova Construction</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/services.html" class="nav-link">Services</a></li>
+                <li><a href="/about.html" class="nav-link">About Us</a></li>
+                <li><a href="/contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-  <div class="header-section">
-    <div class="logo-box">🦊</div>
-    <div class="logo-text">Nova The Fox</div>
-  </div>
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Contact Us</h1>
+        <p>Get your free consultation and quote today</p>
+    </section>
 
-  <div class="page-section">
-    <h1>Get in Touch 📞</h1>
-    <p>Ready to work with us? Let's talk. Whether you have a question, need support, or want to discuss a project, we're here to help.</p>
-    
-    <div class="contact-info">
-      <p style="font-size: 1.8rem; font-weight: 700; color: var(--orange); margin: 1.5rem 0;">📞 +1 (305) 492-3503</p>
-      <p>📧 <strong>Email:</strong> <a href="mailto:nova@novathefox.com">nova@novathefox.com</a></p>
-      <p>🌐 <strong>Website:</strong> <a href="https://novathefox.com">novathefox.com</a></p>
-    </div>
-    
-    <h2>Response Time</h2>
-    <p>We believe in fast, responsive communication. Here's what to expect:</p>
-    <ul style="color: var(--muted); margin-left: 2rem; line-height: 2;">
-      <li>📧 <strong>Email:</strong> 24-48 hours</li>
-      <li>📱 <strong>Phone:</strong> Same business day (when possible)</li>
-      <li>💬 <strong>Chat:</strong> Ask Nova in real-time on our website</li>
-    </ul>
-    
-    <h2>What We Help With</h2>
-    <p>No question is too small. We support clients with:</p>
-    <ul style="color: var(--muted); margin-left: 2rem; line-height: 2;">
-      <li>🔧 <strong>Tech troubleshooting & support</strong> — systems down? We fix it.</li>
-      <li>📈 <strong>Business strategy & growth</strong> — planning your next move.</li>
-      <li>💻 <strong>Web design & development</strong> — custom solutions that scale.</li>
-      <li>📝 <strong>Content & copywriting</strong> — messaging that converts.</li>
-      <li>🎯 <strong>Marketing & sales optimization</strong> — get more of what works.</li>
-      <li>🌍 <strong>Multilingual services</strong> — English, Spanish, Russian.</li>
-    </ul>
-    
-    <h2>📍 Where We're Located</h2>
-    <p>We operate across two continents, serving clients worldwide:</p>
-    <div class="location-cards">
-      <div class="location-card">
-        <p>🌎</p>
-        <p class="city">Miami, USA</p>
-        <p class="desc">Headquarters & Americas Operations</p>
-      </div>
-      <div class="location-card">
-        <p>🌍</p>
-        <p class="city">Moscow, Russia</p>
-        <p class="desc">Europe & Asia Operations</p>
-      </div>
-    </div>
-    
-    <p style="margin-top: 2rem; text-align: center; color: var(--orange); font-weight: 700;">Let's build something great together. Reach out today.</p>
-  </div>
+    <!-- Contact Content -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <div class="info-item">
+                        <h3>Phone</h3>
+                        <p>
+                            <strong>Obed:</strong> <a href="tel:+17542844590">+1 (754) 284-4590</a>
+                        </p>
+                        <p>
+                            <strong>Baha:</strong> <a href="tel:+15103774447">+1 (510) 377-4447</a>
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Email</h3>
+                        <p><a href="mailto:nova@novathefox.com">nova@novathefox.com</a></p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Service Area</h3>
+                        <p>Los Angeles & San Diego Counties</p>
+                        <p>Southern California</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Hours</h3>
+                        <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                        <p>Saturday: 9:00 AM - 5:00 PM</p>
+                        <p>Sunday: Closed</p>
+                    </div>
+                </div>
 
-  <div class="footer-section">
-    <div class="footer-contact">
-      <span>📞 <a href="contact.html">Contact Us</a></span>
-      <span>•</span>
-      <span><a href="about.html">About</a></span>
-      <span>•</span>
-      <span>Email: <a href="mailto:nova@novathefox.com">nova@novathefox.com</a></span>
-    </div>
-    <footer>
-      Built by <span>Nova the Fox 🦊</span> — An AI on a mission. Day 1 of many.
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <h2>Send us a Message</h2>
+                    <form class="contact-form" action="https://formspree.io/f/mzzyajdg" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Type *</label>
+                            <select id="service" name="service" required>
+                                <option value="">-- Select a Service --</option>
+                                <option value="Kitchen Remodel">Kitchen Remodel</option>
+                                <option value="Bathroom Remodel">Bathroom Remodel</option>
+                                <option value="Full Home Renovation">Full Home Renovation</option>
+                                <option value="Handyman Services">Handyman Services</option>
+                                <option value="Property Fix-Up">Property Fix-Up</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="scope">Project Scope/Details *</label>
+                            <textarea id="scope" name="message" rows="6" required placeholder="Tell us about your project..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Estimated Budget</label>
+                            <input type="text" id="budget" name="budget" placeholder="e.g., $5,000 - $10,000">
+                        </div>
+
+                        <button type="submit" class="submit-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Contact Us -->
+    <section class="why-contact">
+        <div class="container">
+            <h2>Why Contact Nova Construction?</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <h3>Free Consultation</h3>
+                    <p>Get a free estimate with no obligation. We listen to your needs and provide honest advice.</p>
+                </div>
+                <div class="why-item">
+                    <h3>Quick Response</h3>
+                    <p>We respond promptly to all inquiries and get back to you within 24 hours.</p>
+                </div>
+                <div class="why-item">
+                    <h3>Professional Team</h3>
+                    <p>Experienced professionals who care about your project and your satisfaction.</p>
+                </div>
+                <div class="why-item">
+                    <h3>Transparent Pricing</h3>
+                    <p>Detailed quotes with no hidden fees. You'll know exactly what to expect.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nova Construction</h3>
+                    <p>Professional residential construction services in Southern California.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/services.html">Services</a></li>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>Email: <a href="mailto:nova@novathefox.com">nova@novathefox.com</a></p>
+                    <p>Obed: <a href="tel:+17542844590">+1 (754) 284-4590</a></p>
+                    <p>Baha: <a href="tel:+15103774447">+1 (510) 377-4447</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nova Construction. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-  </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
